@@ -49,8 +49,9 @@ function handleHash() {
 
     if (targetSection) {
         activateSection(targetSection);
-        window.scrollTo(0, 0);
-        // targetSection.scrollIntoView(true);
+
+        if (target?.matches('h2'))
+            window.scrollTo(0, 0);
     }
     else activateCover();
 
