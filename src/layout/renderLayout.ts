@@ -1,6 +1,7 @@
 import {append} from './append';
 import {createElement} from './createElement';
 import {getCover} from './getCover';
+import {getHeader} from './getHeader';
 import {getNav} from './getNav';
 import {getSections} from './getSections';
 
@@ -12,16 +13,9 @@ export function renderLayout() {
 
     let layout = createElement('div', 'layout');
     let body = createElement('div', 'body');
-    let header = createElement('header');
+
+    let header = getHeader(container);
     let footer = createElement('footer');
-
-    let title = container.querySelector('h1');
-
-    if (title) {
-        title.innerHTML = `<a href="#">${title.innerHTML}</a>`;
-
-        append(header, title);
-    }
 
     let [cover, installation] = getCover(container);
     let nav = getNav(container);

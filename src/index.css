@@ -91,8 +91,34 @@ header, footer {
     color: var(--c1);
     padding: 0 var(--padding-x);
 }
+
 header {
     padding: .5em var(--padding-x) .35em;
+}
+header p.actions {
+    font-size: .65rem;
+    text-transform: lowercase;
+    margin: 0;
+}
+header p.actions .sep {
+    display: none;
+}
+header p.actions a {
+    display: inline-block;
+    min-width: 6em;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    color: var(--b1);
+    background: var(--c1);
+    /*
+    border: .1em solid var(--b1-medium);
+    border-color: transparent var(--b1-medium) var(--b1-medium) transparent;
+    */
+    border-radius: .75em;
+    padding: 0 1em .05em;
+    margin: .5em 1em .5em 0;
+    box-sizing: border-box;
 }
 
 .body {
@@ -291,6 +317,9 @@ pre .hljs {
     text-align: center;
     padding: 6vh var(--padding-x) 2vh;
 }
+._cover header .actions {
+    display: none;
+}
 ._cover .body {
     color: var(--c1);
     max-width: var(--max-content-width);
@@ -404,4 +433,7 @@ pre .hljs {
 }
 ._cover footer {
     text-align: center;
+}
+._cover footer .installation {
+    font-size: 1.25em;
 }

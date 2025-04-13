@@ -1,6 +1,5 @@
 import {getBackground} from './getBackground';
-
-const packageName = 'ghstage';
+import {getConfig} from './getConfig';
 
 export function setStyles() {
     // let styles = document.querySelectorAll('link[rel="stylesheet"]');
@@ -8,11 +7,7 @@ export function setStyles() {
     // for (let style of styles)
     //     style.remove();
 
-    let script = document.querySelector<HTMLScriptElement>(
-        `script[src*="/${packageName}@"], script[src*="/${packageName}/"]`
-    );
-
-    let scriptSrc = script?.getAttribute('src') ?? '';
+    let {scriptSrc, colorScheme} = getConfig();
 
     if (scriptSrc) {
         let style = document.createElement('link');
@@ -22,8 +17,6 @@ export function setStyles() {
 
         document.head.appendChild(style);
     }
-
-    let colorScheme = script?.dataset.colorScheme;
 
     if (colorScheme)
         document.documentElement.setAttribute('style', `--color-scheme: ${colorScheme}`);
