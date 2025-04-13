@@ -1,0 +1,407 @@
+html {
+    --b0: white;
+    --b1: var(--color-scheme, gray);
+
+    --b1-light: color(from var(--b1) srgb r g b / .1);
+    --b1-medium: color(from var(--b1) srgb r g b / .5);
+    --b1-heavy: color(from var(--b1) srgb calc(.35*r) calc(.35*g) calc(.35*b) / .9);
+
+    --c0: oklch(from var(--b0) calc(100*(.8 - l)) 0 0 / .85);
+    --c1: oklch(from var(--b1) calc(100*(.8 - l)) 0 0 / .85);
+
+    --link-color: color(from var(--c0) srgb calc(r + .2) calc(g + .4) calc(b + .8));
+
+    --max-content-width: 60em;
+    --padding-x: 1.75rem;
+    --padding-y: 1.25rem;
+    --space-x: 1rem;
+    --block-margin-y: 1em;
+
+    color: var(--c0);
+    background-color: var(--b1);
+    background-position: 50% 0;
+}
+body {
+    font-size: 120%;
+    font-family: sans-serif;
+    /*
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    */
+    line-height: 1.4;
+    color: inherit;
+    background-color: transparent;
+}
+@media (max-width: 480px) {
+    html {
+        --padding-x: .85rem;
+    }
+    body {
+        font-size: 100%;
+    }
+}
+
+p, ul, ol, table, pre, blockquote {
+    margin-top: var(--block-margin-y);
+    margin-bottom: var(--block-margin-y);
+}
+ul, ol {
+    padding-inline-start: 2em;
+}
+
+a, a:link, a:visited, a:hover, a:active {
+    color: var(--link-color);
+}
+
+h1 {
+    --link-color: var(--c1);
+
+    font-size: 2.4em;
+    line-height: 1;
+    letter-spacing: -.05em;
+    margin: 0;
+    transform: scaleY(.7);
+    transform-origin: left center;
+}
+h1 a, h1 a:link, h1 a:visited, h1 a:hover, h1 a:active {
+    text-decoration: none;
+}
+h2, h3, h4 {
+    line-height: 1.1;
+}
+h2 {
+    font-size: 1.6em;
+    border-bottom: .05em solid var(--b1-medium);
+    padding-bottom: .1em;
+    margin: 1em 0 .65em 0;
+}
+h3 {
+    font-size: 1.3em;
+    margin: 1em 0 .65em 0;
+}
+
+header,
+.body,
+footer {
+    max-width: var(--max-content-width);
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+header, footer {
+    color: var(--c1);
+    padding: 0 var(--padding-x);
+}
+header {
+    padding: .5em var(--padding-x) .35em;
+}
+
+.body {
+    display: flex;
+    align-items: flex-start;
+}
+@media (max-width: 480px) {
+    .body {
+        display: block;
+    }
+}
+/*
+html:not(._cover) .body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+*/
+
+section, ._cover .body > nav {
+    display: none;
+}
+section.active {
+    display: block;
+}
+section {
+    box-sizing: border-box;
+}
+section:not(.cover), .body > nav {
+    background: var(--b0);
+    border-radius: 1em;
+    padding: var(--padding-y) var(--padding-x);
+}
+@media (max-width: 480px) {
+    section:not(.cover) {
+        border-radius: 1em 1em 0 0;
+    }
+    .body > nav {
+        border-radius: 0 0 1em 1em;
+    }
+}
+section.cover {
+    padding: 0 var(--padding-x);
+}
+section h2:first-child {
+    margin-top: 0;
+}
+
+.body > nav {
+    width: 30%;
+    flex: none;
+    font-size: .9em;
+    margin-left: var(--space-x);
+}
+@media (max-width: 480px) {
+    .body > nav {
+        width: auto;
+        font-size: inherit;
+        background: color(from var(--b0) srgb r g b / .8);
+        border-top: .35em solid var(--b1);
+        margin-left: 0;
+    }
+}
+.body > nav ul {
+    padding: 0;
+    padding-inline-start: 1em;
+    margin: .25em 0;
+}
+.body > nav ul ul {
+    margin: .5em 0;
+}
+.body > nav li {
+    margin-top: 0;
+    margin-bottom: .2em;
+}
+.body > nav a.active {
+    font-weight: bold;
+    color: inherit;
+    pointer-events: none;
+}
+.body > nav a.anchorjs-link {
+    display: none;
+}
+
+main {
+    width: calc(70% - var(--space-x));
+}
+@media (max-width: 480px) {
+    main {
+        width: 100%;
+    }
+}
+main ul {
+    padding: 0;
+    padding-inline-start: 1.5em;
+    margin: 1em 0;
+}
+main ul ul {
+    margin: .5em 0;
+}
+main li {
+    margin-top: 0;
+    margin-bottom: .5em;
+}
+
+.highlight {
+    color: inherit;
+    background-color: transparent;
+}
+pre, code {
+    font-size: .9em;
+}
+pre, pre.highlight {
+    line-height: 1.2;
+    color: var(--b1-heavy);
+    background: var(--b1-light);
+    border-radius: 1em;
+    overflow: auto;
+}
+pre > code {
+    display: block;
+    padding: 1.25em;
+}
+.hightlighter-rouge:not(.language-diff) pre {
+    filter: grayscale(1);
+}
+pre .hljs {
+    color: inherit;
+    background: transparent;
+}
+
+.pagenav {
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+    margin: 1.5em 0 0;
+}
+@media (max-width: 480px) {
+    .pagenav {
+        margin: 2em 0 0;
+    }
+}
+.pagenav .prev,
+.pagenav .next {
+    display: inline-block;
+    line-height: 1.2;
+    border: .2em solid var(--b1-light);
+    border-radius: .5em;
+    padding: .6em .75em .75em;
+    position: relative;
+}
+.pagenav .icon {
+    display: inline-block;
+    width: 1.75em;
+    text-align: center;
+    box-sizing: border-box;
+    position: absolute;
+    top: .6em;
+}
+.pagenav .prev {
+    text-align: left;
+}
+.pagenav .prev .icon {
+    left: .25em;
+}
+.pagenav .next {
+    text-align: right;
+}
+.pagenav .next .icon {
+    right: .25em;
+}
+.pagenav .prev {
+    padding-left: 2em;
+}
+.pagenav .next {
+    padding-right: 2em;
+}
+.pagenav .sep,
+.pagenav .anchorjs-link,
+.pagenav hr {
+    display: none;
+}
+
+._cover h1 {
+    font-size: 4.2em;
+    text-shadow: 0 0 3rem var(--b1-heavy);
+    margin: 0;
+}
+@media (max-width: 480px) {
+    ._cover h1 {
+        font-size: 3.6em;
+    }
+}
+._cover h1 a {
+    pointer-events: none;
+}
+._cover header {
+    text-align: center;
+    padding: 6vh var(--padding-x) 2vh;
+}
+._cover .body {
+    color: var(--c1);
+    max-width: var(--max-content-width);
+    margin: 0 auto;
+}
+._cover main {
+    width: auto;
+}
+._cover main .description {
+    font-size: 1.5em;
+    text-align: center;
+    margin: 0;
+    transform: scaleY(.85);
+}
+._cover main .description p {
+    margin-top: 0;
+}
+._cover main .actions {
+    --r: 1em;
+
+    font-size: 1.25em;
+    text-align: center;
+    margin: .5em 0;
+}
+@media (max-width: 480px) {
+    ._cover main .actions {
+        font-size: 1.15em;
+    }
+}
+._cover main .actions .sep {
+    display: inline-block;
+    width: 0;
+    overflow: hidden;
+}
+._cover main .actions a {
+    --bc1: color(from var(--b1) srgb calc(1.1*r) calc(1.1*g) calc(1.1*b) / .7);
+    --bc2: color(from var(--b1) srgb calc(.7*r) calc(.7*g) calc(.7*b) / .8);
+
+    display: inline-block;
+    min-width: 25%;
+    text-decoration: none;
+    font-weight: bold;
+    color: var(--c1);
+    background: var(--b1);
+    border: .075em solid var(--b1);
+    border-color: var(--bc1) var(--bc2) var(--bc2) var(--bc1);
+    border-radius: var(--r);
+    padding: .35em 1.25em;
+    margin: .5em;
+    box-shadow: 0 0 .5em 0 var(--c1);
+    transition: box-shadow .1s;
+    box-sizing: border-box;
+}
+@media (max-width: 480px) {
+    ._cover main .actions a {
+        margin: .5em .15em;
+    }
+}
+._cover main .actions a:hover {
+    box-shadow: 0 0 .75em 0 var(--c1);
+}
+._cover main .features {
+    padding: 0 2.5em;
+    margin: 6vh 0 4vh;
+}
+@media (max-width: 480px) {
+    ._cover main .features {
+        padding: 0;
+        margin: 6vh 0 3vh;
+    }
+}
+._cover main .features h2 {
+    font-size: 1.5em;
+    font-style: italic;
+    text-align: center;
+    border: none;
+    padding: .1em 0;
+    margin: .75em 0 0;
+}
+._cover main .features > ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: .5em 0 0;
+}
+._cover main .features > ul > li {
+    flex: none;
+    width: calc(33% - 1em);
+    background: color(from var(--b1-heavy) srgb r g b / .2);
+    border-radius: .5em;
+    padding: .9em 1.2em;
+    margin: .5em;
+    box-sizing: border-box;
+}
+@media (max-width: 480px) {
+    ._cover main .features > ul > li {
+        width: 100%;
+        margin: .5em 0;
+    }
+}
+._cover main .note {
+    padding: 0 3.5em;
+    margin: 1.5em 0;
+}
+@media (max-width: 480px) {
+    ._cover main .note {
+        padding: 0;
+    }
+}
+._cover footer {
+    text-align: center;
+}
