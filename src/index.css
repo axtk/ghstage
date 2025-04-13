@@ -204,8 +204,8 @@ pre, code {
     font-size: .9em;
 }
 pre, pre.highlight {
-    line-height: 1.2;
-    color: var(--b1-heavy);
+    line-height: 1.25;
+    color: inherit;
     background: var(--b1-light);
     border-radius: 1em;
     overflow: auto;
@@ -214,7 +214,7 @@ pre > code {
     display: block;
     padding: 1.25em;
 }
-.hightlighter-rouge:not(.language-diff) pre {
+.highlighter-rouge:not(.language-diff) pre code {
     filter: grayscale(1);
 }
 pre .hljs {
