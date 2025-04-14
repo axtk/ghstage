@@ -1,4 +1,4 @@
-import {getConfig} from '../getConfig';
+// import {getConfig} from '../getConfig';
 import {append} from './append';
 import {createElement} from './createElement';
 
