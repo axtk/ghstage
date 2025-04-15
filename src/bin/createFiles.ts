@@ -39,8 +39,9 @@ export async function createFiles() {
     }
 
     let version = (await exec(`npm view ${name} version`)).stdout.trim();
+    let majorVersion = version.split('.')[0];
 
-    let htmlContent = `<script src="https://unpkg.com/${name}@${version}/dist/index.js"` +
+    let htmlContent = `<script src="https://unpkg.com/${name}@${majorVersion}/dist/index.js"` +
         `${colorScheme ? ` data-color-scheme="${colorScheme}"` : ''}></script>\n`;
 
     await writeFile('./_includes/head-custom.html', htmlContent);
