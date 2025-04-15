@@ -1,5 +1,5 @@
 import {exec as defaultExec} from 'node:child_process';
-import {access, mkdir, writeFile} from 'node:fs/promises';
+import {access, mkdir, readFile, writeFile} from 'node:fs/promises';
 import {promisify} from 'node:util';
 import {parseArgs} from 'args-json';
 
@@ -10,8 +10,26 @@ type Config = {
     colorScheme?: string;
 };
 
+async function setNpmIgnore() {
+    let content = '';
+
+    try {
+        content = (await readFile('./.npmignore')).toString();
+    }
+    catch {}
+
+    if (!content || !/\b_includes\b/.test(content)) {
+        content = content.trimEnd();
+        content += `${content ? '\n' : ''}_includes\n`;
+    }
+
+    await writeFile('./.npmignore', content);
+}
+
 export async function createFiles() {
     let {colorScheme} = parseArgs<Config>(process.argv.slice(2));
+
+    await setNpmIgnore();
 
     try {
         await access('./_includes');
