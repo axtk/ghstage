@@ -15,11 +15,16 @@ export function getConfig(): ContentConfig {
     if (!script)
         return {};
 
+    let props = script.dataset;
+
     config = {
         scriptSrc: script.getAttribute('src') ?? undefined,
-        colorScheme: script.dataset.colorScheme,
-        repo: script.dataset.repo,
-        npm: script.dataset.npm,
+        colorScheme: props.colorScheme,
+        theme: props.theme as ContentConfig['theme'],
+        name: props.name,
+        version: props.version,
+        repo: props.repo,
+        npm: props.npm,
     };
 
     return config;

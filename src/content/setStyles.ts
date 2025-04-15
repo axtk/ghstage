@@ -7,7 +7,7 @@ export function setStyles() {
     // for (let style of styles)
     //     style.remove();
 
-    let {scriptSrc, colorScheme} = getConfig();
+    let {scriptSrc, colorScheme, theme} = getConfig();
 
     if (scriptSrc) {
         let style = document.createElement('link');
@@ -28,10 +28,12 @@ export function setStyles() {
             errSpan.classList.remove('err');
     }, 0);
 
-    let bgStyle = document.createElement('style');
-    let bgSvg = window.btoa(getBackground());
+    if (theme === 'tiles') {
+        let bgStyle = document.createElement('style');
+        let bgSvg = window.btoa(getBackground());
 
-    bgStyle.textContent = `html{background-image:url("data:image/svg+xml;base64,${bgSvg}");}`;
+        bgStyle.textContent = `html{background-image:url("data:image/svg+xml;base64,${bgSvg}");}`;
 
-    document.body.appendChild(bgStyle);
+        document.body.appendChild(bgStyle);
+    }
 }
