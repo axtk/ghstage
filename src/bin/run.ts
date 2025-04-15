@@ -10,12 +10,6 @@ async function run() {
     let {ghPagesBranch, mainBranch} = await getConfig();
 
     let originalBranch = (await exec('git rev-parse --abbrev-ref HEAD')).stdout.trim();
-    let branchExists = false;
-
-    try {
-        branchExists = (await exec(`git show-ref --quiet refs/heads/${ghPagesBranch}`)).stderr.trim() === '';
-    }
-    catch {}
 
     if (originalBranch === ghPagesBranch) {
         await exec(`git checkout ${mainBranch}`);
@@ -30,7 +24,7 @@ async function run() {
     let updated = (await exec('git diff --cached --name-only')).stdout.trim() !== '';
 
     if (updated)
-        await exec(`git commit -m "${branchExists ? 'update' : 'add'} gh-pages"`);
+        await exec(`git commit -m "release gh-pages"`);
 
     await exec(`git push -u origin ${ghPagesBranch}`);
 
