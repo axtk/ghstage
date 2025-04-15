@@ -24,7 +24,7 @@ async function setNpmIgnore() {
 }
 
 function getDataAttrs(attrs: Record<string, string | undefined>) {
-    let s = Object.entries(attrs)
+    return Object.entries(attrs)
         .map(([name, value]) => value ? ` data-${name}="${value}"` : '')
         .join(' ');
 }
