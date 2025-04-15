@@ -9,7 +9,7 @@ const exec = promisify(defaultExec);
 const scriptName = 'ghstage';
 
 export async function createFiles() {
-    let {colorScheme, name, version, repo, npm} = await getConfig();
+    let {colorScheme, theme, name, version, repo, npm} = await getConfig();
 
     await setNpmIgnore();
 
@@ -26,6 +26,7 @@ export async function createFiles() {
 
     let dataAttrMap = {
         'color-scheme': colorScheme,
+        theme,
         name,
         version,
         repo,
