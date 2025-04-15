@@ -8,10 +8,25 @@ export async function setNpmIgnore() {
     }
     catch {}
 
-    if (!content || !/\b_includes\b/.test(content)) {
-        content = content.trimEnd();
-        content += `${content ? '\n' : ''}_includes\n`;
+    let listed = false;
+
+    if (content) {
+        let lines = content.split(/\r?\n/);
+
+        for (let line of lines) {
+            let k = line.search(/\b_includes\b/);
+
+            if (k !== -1 && line.lastIndexOf('#', k) === -1) {
+                listed = true;
+                break;
+            }
+        }
     }
 
-    await writeFile('./.npmignore', content);
+    if (!listed) {
+        content = content.trimEnd();
+        content += `${content ? '\n' : ''}_includes\n`;
+
+        await writeFile('./.npmignore', content);
+    }
 }
