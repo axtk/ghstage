@@ -10,23 +10,20 @@ async function run() {
     let {ghPagesBranch, mainBranch} = await getConfig();
 
     let originalBranch = (await exec('git rev-parse --abbrev-ref HEAD')).stdout.trim();
-    let branchExists = true;
+    let branchExists = false;
 
-    if (originalBranch !== ghPagesBranch) {
-        try {
-            branchExists = (await exec(`git show-ref --quiet refs/heads/${ghPagesBranch}`)).stderr.trim() === '';
-        }
-        catch {
-            branchExists = false;
-        }
+    try {
+        branchExists = (await exec(`git show-ref --quiet refs/heads/${ghPagesBranch}`)).stderr.trim() === '';
+    }
+    catch {}
 
-        await exec(`git checkout ${branchExists ? '' : '-b '}${ghPagesBranch}`);
-
-        if (branchExists)
-            await exec(`git pull origin ${ghPagesBranch}`);
+    if (originalBranch === ghPagesBranch) {
+        await exec(`git checkout ${mainBranch}`);
+        await exec(`git branch -D ${ghPagesBranch}`);
+        await exec(`git push origin --delete ${ghPagesBranch}`);
     }
 
-    await exec(`git rebase ${mainBranch}`);
+    await exec(`git checkout -b ${ghPagesBranch}`);
     await createFiles();
     await exec('git add *');
 
