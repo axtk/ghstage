@@ -13,7 +13,12 @@ async function run() {
     let branchExists = true;
 
     if (currentBranch !== ghPagesBranch) {
-        branchExists = (await exec(`git show-ref --quiet refs/heads/${ghPagesBranch}`)).stderr.trim() === '';
+        try {
+            branchExists = (await exec(`git show-ref --quiet refs/heads/${ghPagesBranch}`)).stderr.trim() === '';
+        }
+        catch {
+            branchExists = false;
+        }
 
         await exec(`git checkout ${branchExists ? '' : '-b '}${ghPagesBranch}`);
     }
