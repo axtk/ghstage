@@ -315,7 +315,7 @@ pre .hljs {
 }
 ._cover header {
     text-align: center;
-    padding: 6vh var(--padding-x) 2vh;
+    padding: 8vh var(--padding-x) 2vh;
 }
 @media (max-width: 480px) {
     ._cover header {
@@ -388,7 +388,7 @@ pre .hljs {
 }
 ._cover main .features {
     padding: 0 2.5em;
-    margin: 6vh 0 4vh;
+    margin: 8vh 0 3vh;
 }
 @media (max-width: 480px) {
     ._cover main .features {
