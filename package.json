@@ -12,7 +12,8 @@
     "build-css": "node -e \"require('node:fs').copyFileSync('src/content/index.css', 'dist/index.css');\"",
     "build-js": "esbuild index.ts --bundle --outfile=dist/index.js --platform=browser --minify",
     "clean": "node -e \"require('node:fs').rmSync('dist', {force: true, recursive: true});\"",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "preversion": "npm run build"
   },
   "repository": {
     "type": "git",
