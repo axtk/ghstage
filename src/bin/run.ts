@@ -21,6 +21,9 @@ async function run() {
         }
 
         await exec(`git checkout ${branchExists ? '' : '-b '}${ghPagesBranch}`);
+
+        if (branchExists)
+            await exec('git pull');
     }
 
     await exec(`git rebase ${mainBranch}`);
