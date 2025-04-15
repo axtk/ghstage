@@ -1,33 +1,12 @@
 import {exec as defaultExec} from 'node:child_process';
-import {access, mkdir, readFile, writeFile} from 'node:fs/promises';
+import {access, mkdir, writeFile} from 'node:fs/promises';
 import {promisify} from 'node:util';
-import {parseArgs} from 'args-json';
 import {getConfig} from './getConfig';
+import {getDataAttrs} from './getDataAttrs';
+import {setNpmIgnore} from './setNpmIgnore';
 
 const exec = promisify(defaultExec);
 const name = 'ghstage';
-
-async function setNpmIgnore() {
-    let content = '';
-
-    try {
-        content = (await readFile('./.npmignore')).toString();
-    }
-    catch {}
-
-    if (!content || !/\b_includes\b/.test(content)) {
-        content = content.trimEnd();
-        content += `${content ? '\n' : ''}_includes\n`;
-    }
-
-    await writeFile('./.npmignore', content);
-}
-
-function getDataAttrs(attrs: Record<string, string | undefined>) {
-    return Object.entries(attrs)
-        .map(([name, value]) => value ? ` data-${name}="${value}"` : '')
-        .join(' ');
-}
 
 export async function createFiles() {
     let {colorScheme, repo, npm} = getConfig();
