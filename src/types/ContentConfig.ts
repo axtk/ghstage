@@ -1,4 +1,4 @@
-export type ScriptConfig = {
+export type ContentConfig = {
     scriptSrc?: string;
     colorScheme?: string;
     repo?: string;

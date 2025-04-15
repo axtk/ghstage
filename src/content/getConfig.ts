@@ -1,10 +1,10 @@
-import type {ScriptConfig} from '../types/ScriptConfig';
+import type {ContentConfig} from '../types/ContentConfig';
 
 const packageName = 'ghstage';
 
-let config: ScriptConfig | null = null;
+let config: ContentConfig | null = null;
 
-export function getConfig(): ScriptConfig {
+export function getConfig(): ContentConfig {
     if (config)
         return config;
 

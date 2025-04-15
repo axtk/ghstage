@@ -1,16 +1,16 @@
 import {parseArgs} from 'args-json';
-import type {ArgConfig} from '../types/ArgConfig';
+import type {BinConfig} from '../types/BinConfig';
 
-let config: ArgConfig | null = null;
+let config: BinConfig | null = null;
 
-export function getConfig(): ArgConfig {
+export function getConfig(): BinConfig {
     if (config)
         return config;
 
     config = {
         ghPagesBranch: 'gh-pages',
         mainBranch: 'main',
-        ...parseArgs<ArgConfig>(process.argv.slice(2)),
+        ...parseArgs<BinConfig>(process.argv.slice(2)),
     };
 
     return config;
