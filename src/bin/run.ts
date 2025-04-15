@@ -7,7 +7,7 @@ import {getConfig} from './getConfig';
 const exec = promisify(defaultExec);
 
 async function run() {
-    let {ghPagesBranch, mainBranch} = getConfig();
+    let {ghPagesBranch, mainBranch} = await getConfig();
 
     let currentBranch = (await exec('git rev-parse --abbrev-ref HEAD')).stdout.trim();
     let branchExists = true;

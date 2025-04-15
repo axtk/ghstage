@@ -6,10 +6,10 @@ import {getDataAttrs} from './getDataAttrs';
 import {setNpmIgnore} from './setNpmIgnore';
 
 const exec = promisify(defaultExec);
-const name = 'ghstage';
+const scriptName = 'ghstage';
 
 export async function createFiles() {
-    let {colorScheme, repo, npm} = getConfig();
+    let {colorScheme, name, version, repo, npm} = await getConfig();
 
     await setNpmIgnore();
 
@@ -20,16 +20,20 @@ export async function createFiles() {
         await mkdir('./_includes');
     }
 
-    let version = (await exec(`npm view ${name} version`)).stdout.trim();
-    let majorVersion = version.split('.')[0];
+    let scriptVersion = (await exec(`npm view ${scriptName} version`)).stdout
+        .trim()
+        .split('.')[0];
 
     let dataAttrMap = {
         'color-scheme': colorScheme,
+        name,
+        version,
         repo,
         npm,
     };
 
-    let htmlContent = `<script src="https://unpkg.com/${name}@${majorVersion}/dist/index.js"` +
+    let htmlContent = '<script ' +
+        `src="https://unpkg.com/${scriptName}@${scriptVersion}/dist/index.js"` +
         `${getDataAttrs(dataAttrMap)}></script>\n`;
 
     await writeFile('./_includes/head-custom.html', htmlContent);
