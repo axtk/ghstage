@@ -35,7 +35,7 @@ async function run() {
     if (updated)
         await exec(`git commit -m "${branchExists ? 'update' : 'add'} gh-pages"`);
 
-    await exec(`git push origin ${ghPagesBranch}`);
+    await exec(`git push -u origin ${ghPagesBranch}`);
 
     if (originalBranch && originalBranch !== ghPagesBranch)
         await exec(`git checkout ${originalBranch}`);
