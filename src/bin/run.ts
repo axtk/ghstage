@@ -1,0 +1,38 @@
+#!/usr/bin/env node
+import {exec as defaultExec} from 'node:child_process';
+import {promisify} from 'node:util';
+import {createFiles} from './createFiles';
+
+const exec = promisify(defaultExec);
+
+const ghPagesBranch = 'gh-pages';
+const mainBranch = 'main';
+
+async function run() {
+    let currentBranch = (await exec('git rev-parse --abbrev-ref HEAD')).stdout.trim();
+    let branchExists = true;
+
+    if (currentBranch !== ghPagesBranch) {
+        branchExists = (await exec(`git show-ref --quiet refs/heads/${ghPagesBranch}`)).stderr.trim() === '';
+
+        await exec(`git checkout ${branchExists ? '' : '-b '}${ghPagesBranch}`);
+    }
+
+    await exec(`git rebase ${mainBranch}`);
+    await createFiles();
+    await exec('git add *');
+
+    let updated = (await exec('git diff --cached --name-only')).stdout.trim() !== '';
+
+    if (updated)
+        await exec(`git commit -m "${branchExists ? 'update' : 'add'} gh-pages"`);
+
+    await exec(`git push origin ${ghPagesBranch}`);
+
+    if (currentBranch)
+        await exec(`git checkout ${currentBranch}`);
+}
+
+(async () => {
+    await run();
+})();
