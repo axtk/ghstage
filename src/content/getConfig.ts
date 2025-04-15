@@ -1,15 +1,10 @@
+import type {ScriptConfig} from '../types/ScriptConfig';
+
 const packageName = 'ghstage';
 
-export type Config = {
-    scriptSrc?: string;
-    colorScheme?: string;
-    repo?: string;
-    npm?: string;
-};
+let config: ScriptConfig | null = null;
 
-let config: Config | null = null;
-
-export function getConfig(): Config {
+export function getConfig(): ScriptConfig {
     if (config)
         return config;
 

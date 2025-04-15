@@ -2,13 +2,13 @@
 import {exec as defaultExec} from 'node:child_process';
 import {promisify} from 'node:util';
 import {createFiles} from './createFiles';
+import {getConfig} from './getConfig';
 
 const exec = promisify(defaultExec);
 
-const ghPagesBranch = 'gh-pages';
-const mainBranch = 'main';
-
 async function run() {
+    let {ghPagesBranch, mainBranch} = getConfig();
+
     let currentBranch = (await exec('git rev-parse --abbrev-ref HEAD')).stdout.trim();
     let branchExists = true;
 

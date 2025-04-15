@@ -2,13 +2,10 @@ import {exec as defaultExec} from 'node:child_process';
 import {access, mkdir, readFile, writeFile} from 'node:fs/promises';
 import {promisify} from 'node:util';
 import {parseArgs} from 'args-json';
+import {getConfig} from './getConfig';
 
 const exec = promisify(defaultExec);
 const name = 'ghstage';
-
-type Config = {
-    colorScheme?: string;
-};
 
 async function setNpmIgnore() {
     let content = '';
@@ -26,8 +23,14 @@ async function setNpmIgnore() {
     await writeFile('./.npmignore', content);
 }
 
+function getDataAttrs(attrs: Record<string, string | undefined>) {
+    let s = Object.entries(attrs)
+        .map(([name, value]) => value ? ` data-${name}="${value}"` : '')
+        .join(' ');
+}
+
 export async function createFiles() {
-    let {colorScheme} = parseArgs<Config>(process.argv.slice(2));
+    let {colorScheme, repo, npm} = getConfig();
 
     await setNpmIgnore();
 
@@ -41,8 +44,14 @@ export async function createFiles() {
     let version = (await exec(`npm view ${name} version`)).stdout.trim();
     let majorVersion = version.split('.')[0];
 
+    let dataAttrMap = {
+        'color-scheme': colorScheme,
+        repo,
+        npm,
+    };
+
     let htmlContent = `<script src="https://unpkg.com/${name}@${majorVersion}/dist/index.js"` +
-        `${colorScheme ? ` data-color-scheme="${colorScheme}"` : ''}></script>\n`;
+        `${getDataAttrs(dataAttrMap)}></script>\n`;
 
     await writeFile('./_includes/head-custom.html', htmlContent);
 }
