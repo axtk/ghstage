@@ -12,8 +12,9 @@ html {
     --link-color: color(from var(--c0) srgb calc(r + .2) calc(g + .4) calc(b + .8));
 
     --max-content-width: 60em;
-    --padding-x: 1.75rem;
-    --padding-y: 1.25rem;
+    --content-padding-x: 1.75rem;
+    --content-padding-y: 1.25rem;
+    --content-border-radius: 1rem;
     --space-x: 1rem;
     --block-margin-y: 1em;
 
@@ -33,7 +34,7 @@ body {
 }
 @media (max-width: 480px) {
     html {
-        --padding-x: .85rem;
+        --content-padding-x: .85rem;
     }
     body {
         font-size: 100%;
@@ -89,11 +90,11 @@ footer {
 
 header, footer {
     color: var(--c1);
-    padding: 0 var(--padding-x);
+    padding: 0 var(--content-padding-x);
 }
 
 header {
-    padding: .5em var(--padding-x) .35em;
+    padding: .5em var(--content-padding-x) .35em;
 }
 header p.actions {
     font-size: .65rem;
@@ -136,7 +137,7 @@ html:not(._cover) .body {
 }
 */
 
-section, ._cover .body > nav {
+section {
     display: none;
 }
 section.active {
@@ -145,21 +146,8 @@ section.active {
 section {
     box-sizing: border-box;
 }
-section:not(.cover), .body > nav {
-    background: var(--b0);
-    border-radius: 1em;
-    padding: var(--padding-y) var(--padding-x);
-}
-@media (max-width: 480px) {
-    section:not(.cover) {
-        border-radius: 1em 1em 0 0;
-    }
-    .body > nav {
-        border-radius: 0 0 1em 1em;
-    }
-}
 section.cover {
-    padding: 0 var(--padding-x);
+    padding: 0 var(--content-padding-x);
 }
 section h2:first-child {
     margin-top: 0;
@@ -169,6 +157,9 @@ section h2:first-child {
     width: 30%;
     flex: none;
     font-size: .9em;
+    background: var(--b0);
+    border-radius: var(--content-border-radius);
+    padding: var(--content-padding-y) var(--content-padding-x);
     margin-left: var(--space-x);
 }
 @media (max-width: 480px) {
@@ -177,6 +168,7 @@ section h2:first-child {
         font-size: inherit;
         background: color(from var(--b0) srgb r g b / .8);
         border-top: .35em solid var(--b1);
+        border-radius: 0 0 var(--content-border-radius) var(--content-border-radius);
         margin-left: 0;
     }
 }
@@ -207,6 +199,16 @@ main {
 @media (max-width: 480px) {
     main {
         width: 100%;
+    }
+}
+html:not(._cover) main {
+    background: var(--b0);
+    border-radius: var(--content-border-radius);
+    padding: var(--content-padding-y) var(--content-padding-x);
+}
+@media (max-width: 480px) {
+    html:not(._cover) main {
+        border-radius: var(--content-border-radius) var(--content-border-radius) 0 0;
     }
 }
 main ul {
@@ -315,11 +317,11 @@ pre .hljs {
 }
 ._cover header {
     text-align: center;
-    padding: 8vh var(--padding-x) 2vh;
+    padding: 8vh var(--content-padding-x) 2vh;
 }
 @media (max-width: 480px) {
     ._cover header {
-        padding: 8vh var(--padding-x) 2vh;
+        padding: 8vh var(--content-padding-x) 2vh;
     }
 }
 ._cover header .actions {
@@ -329,6 +331,9 @@ pre .hljs {
     color: var(--c1);
     max-width: var(--max-content-width);
     margin: 0 auto;
+}
+._cover .body > nav {
+    display: none;
 }
 ._cover main {
     width: auto;
