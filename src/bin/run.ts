@@ -8,14 +8,23 @@ const exec = promisify(defaultExec);
 
 async function run() {
     let {ghPagesBranch, mainBranch, remove} = await getConfig();
+    let ghPagesBranchExists = false;
 
     let originalBranch = (await exec('git rev-parse --abbrev-ref HEAD')).stdout.trim();
+
+    try {
+        ghPagesBranchExists = originalBranch === ghPagesBranch ||
+            (await exec(`git show-ref --quiet refs/heads/${ghPagesBranch}`)).stderr.trim() === '';
+    }
+    catch {}
 
     if (originalBranch === ghPagesBranch)
         await exec(`git checkout ${mainBranch}`);
 
-    await exec(`git branch -D ${ghPagesBranch}`);
-    await exec(`git push origin --delete ${ghPagesBranch}`);
+    if (ghPagesBranchExists) {
+        await exec(`git branch -D ${ghPagesBranch}`);
+        await exec(`git push origin --delete ${ghPagesBranch}`);
+    }
 
     if (remove)
         return;
