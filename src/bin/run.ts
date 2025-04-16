@@ -7,7 +7,7 @@ import {getConfig} from './getConfig';
 const exec = promisify(defaultExec);
 
 async function run() {
-    let {ghPagesBranch, mainBranch} = await getConfig();
+    let {ghPagesBranch, mainBranch, remove} = await getConfig();
 
     let originalBranch = (await exec('git rev-parse --abbrev-ref HEAD')).stdout.trim();
 
@@ -16,6 +16,10 @@ async function run() {
 
     await exec(`git branch -D ${ghPagesBranch}`);
     await exec(`git push origin --delete ${ghPagesBranch}`);
+
+    if (remove)
+        return;
+
     await exec(`git checkout -b ${ghPagesBranch}`);
     await createFiles();
     await exec('git add *');
