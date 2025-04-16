@@ -15,6 +15,9 @@ export function toRepoURL(x: PackageMetadata['repository']) {
     if (/^git\+https?:\/\/.*\.git$/.test(s))
         return s.replace(/^git\+(https?:\/\/.*)\.git$/, '$1');
 
+    if (/^git:\/\/.*\.git$/.test(s))
+        return s.replace(/^git(:\/\/.*)\.git$/, 'https$1');
+
     if (/^github:/.test(s))
         return `https://github.com/${s.replace(/^github:/, '')}`;
 
