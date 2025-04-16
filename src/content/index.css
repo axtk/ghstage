@@ -124,7 +124,7 @@ header p.actions a {
 
 .body {
     display: flex;
-    align-items: flex-start;
+    align-items: stretch;
 }
 @media (max-width: 480px) {
     .body {
@@ -156,6 +156,7 @@ section h2:first-child {
 .body > nav {
     width: 30%;
     flex: none;
+    align-self: flex-start;
     font-size: .9em;
     background: var(--b0);
     border-radius: var(--content-border-radius);
