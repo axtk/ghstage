@@ -1,9 +1,7 @@
 import {append} from './append';
 import {createElement} from './createElement';
-import {getCover} from './getCover';
-import {getHeader} from './getHeader';
+import {getComponents} from './getComponents';
 import {getNav} from './getNav';
-import {getSections} from './getSections';
 
 export function renderLayout() {
     let container = document.querySelector('body > div');
@@ -11,23 +9,37 @@ export function renderLayout() {
     if (!container)
         return;
 
-    let layout = createElement('div', 'layout');
-    let body = createElement('div', 'body');
-
-    let header = getHeader(container);
-    let footer = createElement('footer');
-
-    let [cover, installation] = getCover(container);
     let nav = getNav(container);
 
-    let bodyMain = createElement('main');
-    let sections = getSections(container);
+    let {
+        header,
+        coverSection,
+        sections,
+        installation,
+    } = getComponents(container);
 
-    append(bodyMain, [cover, ...sections]);
-    append(body, [bodyMain, nav]);
-    append(footer, installation);
-    append(layout, [header, body, footer]);
+    let bodyMain = append(
+        createElement('main'),
+        [coverSection, ...sections],
+    );
 
-    container.remove();
-    document.body.prepend(layout);
+    let body = append(
+        createElement('div', 'body'),
+        [bodyMain, nav],
+    );
+
+    let footer = append(
+        createElement('footer'),
+        installation,
+    );
+
+    let layout = append(
+        createElement('div', 'layout'),
+        [header, body, footer],
+    );
+
+    if (layout?.innerHTML.trim()) {
+        container.remove();
+        document.body.prepend(layout);
+    }
 }

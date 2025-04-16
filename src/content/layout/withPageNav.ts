@@ -1,33 +1,7 @@
 import {append} from './append';
 import {createElement} from './createElement';
 
-export function getSections(container: Element) {
-    let sections: Element[] = [];
-    let currentSection: Element | null = null;
-    let element: Element | null = null;
-
-    while ((element = container.firstElementChild) !== null) {
-        let isTitle = element.matches('h2');
-
-        if (isTitle && currentSection) {
-            sections.push(currentSection);
-            currentSection = null;
-        }
-
-        if (!currentSection)
-            currentSection = document.createElement('section');
-
-        // if (isTitle) {
-        //     currentSection.id = element.id;
-        //     element.removeAttribute('id');
-        // }
-
-        currentSection.appendChild(element);
-    }
-
-    if (currentSection)
-        sections.push(currentSection);
-
+export function withPageNav(sections: Element[]) {
     for (let i = 0; i < sections.length; i++) {
         let pagenav = createElement('p', 'pagenav');
         let prev = '', next = '';
