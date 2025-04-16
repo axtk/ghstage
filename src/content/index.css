@@ -408,7 +408,7 @@ pre .hljs {
 @media (max-width: 480px) {
     ._cover main .features {
         padding: 0;
-        margin: 8vh 0 4vh;
+        margin: 5vh 0 4vh;
     }
 }
 ._cover main .features h2 {
