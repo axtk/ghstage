@@ -11,12 +11,11 @@ async function run() {
 
     let originalBranch = (await exec('git rev-parse --abbrev-ref HEAD')).stdout.trim();
 
-    if (originalBranch === ghPagesBranch) {
+    if (originalBranch === ghPagesBranch)
         await exec(`git checkout ${mainBranch}`);
-        await exec(`git branch -D ${ghPagesBranch}`);
-        await exec(`git push origin --delete ${ghPagesBranch}`);
-    }
 
+    await exec(`git branch -D ${ghPagesBranch}`);
+    await exec(`git push origin --delete ${ghPagesBranch}`);
     await exec(`git checkout -b ${ghPagesBranch}`);
     await createFiles();
     await exec('git add *');
