@@ -319,7 +319,7 @@ pre .hljs {
 }
 @media (max-width: 480px) {
     ._cover header {
-        padding: 8vh var(--padding-x) 4vh;
+        padding: 8vh var(--padding-x) 2vh;
     }
 }
 ._cover header .actions {
