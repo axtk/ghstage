@@ -3,6 +3,7 @@ import {access, mkdir, writeFile} from 'node:fs/promises';
 import {promisify} from 'node:util';
 import {getConfig} from './getConfig';
 import {getDataAttrs} from './getDataAttrs';
+import {setCName} from './setCName';
 import {setNpmIgnore} from './setNpmIgnore';
 
 const exec = promisify(defaultExec);
@@ -12,6 +13,7 @@ export async function createFiles() {
     let {colorScheme, theme, name, version, repo, npm} = await getConfig();
 
     await setNpmIgnore();
+    await setCName();
 
     try {
         await access('./_includes');
