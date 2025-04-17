@@ -2,6 +2,7 @@ import {exec as defaultExec} from 'node:child_process';
 import {access, mkdir, writeFile} from 'node:fs/promises';
 import {promisify} from 'node:util';
 import {getConfig} from './getConfig';
+import {getCounterContent} from './getCounterContent';
 import {getDataAttrs} from './getDataAttrs';
 
 const exec = promisify(defaultExec);
@@ -30,8 +31,8 @@ export async function setContent() {
         npm,
     };
 
-    let htmlContent = '<script ' +
-        `src="https://unpkg.com/${scriptName}@${scriptVersion}/dist/index.js"` +
+    let htmlContent = (await getCounterContent()) +
+        `<script src="https://unpkg.com/${scriptName}@${scriptVersion}/dist/index.js"` +
         `${getDataAttrs(dataAttrMap)}></script>\n`;
 
     await writeFile('./_includes/head-custom.html', htmlContent);
