@@ -4,5 +4,6 @@ export type BinConfig = Omit<ContentConfig, 'scriptSrc'> & {
     ghPagesBranch?: string;
     mainBranch?: string;
     remove?: boolean;
-    cname?: boolean | string;
+    cname?: string;
+    jsorg?: boolean | string;
 };

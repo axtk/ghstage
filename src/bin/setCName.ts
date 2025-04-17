@@ -2,15 +2,14 @@ import {writeFile} from 'node:fs/promises';
 import {getConfig} from './getConfig';
 
 export async function setCName() {
-    let {name, cname} = await getConfig();
+    let {name, cname, jsorg} = await getConfig();
     let domain = '';
 
-    if (cname === undefined)
-        return;
-
-    if (typeof cname === 'string')
+    if (cname)
         domain = cname;
-    else if (cname === true)
+    else if (typeof jsorg === 'string')
+        domain = jsorg ? `${jsorg}.js.org` : '';
+    else if (jsorg === true)
         domain = name ? `${name}.js.org` : '';
 
     if (domain !== '')
