@@ -2,7 +2,7 @@ html {
     --b0: white;
     --b1: var(--color-scheme, gray);
 
-    --b1-light: color(from var(--b1) srgb r g b / .1);
+    --b1-light: color(from var(--b1) srgb r g b / .2);
     --b1-medium: color(from var(--b1) srgb r g b / .5);
     --b1-heavy: color(from var(--b1) srgb calc(.35*r) calc(.35*g) calc(.35*b) / .9);
 
