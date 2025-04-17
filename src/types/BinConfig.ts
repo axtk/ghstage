@@ -16,4 +16,5 @@ export type BinConfig = Omit<ContentConfig, 'scriptSrc'> & {
      * to the './CNAME' file.
      */
     jsorg?: boolean | string;
+    ymid?: number | string;
 };

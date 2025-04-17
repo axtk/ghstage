@@ -34,6 +34,8 @@ function activateCover() {
 function handleHash() {
     let {hash, pathname, search} = window.location;
 
+    window.sendHit?.();
+
     if (!hash || hash === '#') {
         if (window.location.href.endsWith('#'))
             window.history.replaceState({}, '', pathname + search);
