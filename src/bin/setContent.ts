@@ -39,7 +39,7 @@ export async function setContent() {
         colorScheme
             ? `<script>document.documentElement.style.setProperty('--color-scheme', '${colorScheme}');</script>`
             : null,
-        `<script>window._ghst=${JSON.stringify(initData).replace(/</g, '\\x3c')};`,
+        `<script>window._ghst=${JSON.stringify(initData).replace(/</g, '\\x3c')};</script>`,
         '',
         `<link rel="stylesheet" href="${packageUrl}/dist/index.css">`,
         `<script src="${packageUrl}/dist/index.js"></script>`,
