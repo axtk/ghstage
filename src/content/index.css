@@ -431,7 +431,8 @@ pre .hljs {
     flex: none;
     width: calc(33% - 1em);
     background: color(from var(--b1-heavy) srgb r g b / .2);
-    border-radius: .5em;
+    border-top: .35em solid var(--b1);
+    border-radius: 0 0 .5em .5em;
     padding: .9em 1.2em;
     margin: .5em;
     box-sizing: border-box;
