@@ -19,7 +19,9 @@ export async function setContent() {
 
     let packageVersion = (await exec(`npm view ${packageName} version`)).stdout
         .trim()
-        .split('.')[0];
+        .split('.')
+        .slice(0, 2)
+        .join('.');
 
     let packageUrl = `https://unpkg.com/${packageName}@${packageVersion}`;
 
