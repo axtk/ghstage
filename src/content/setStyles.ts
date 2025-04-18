@@ -1,3 +1,4 @@
+import {packageName} from '../const/packageName';
 import {getBackground} from './getBackground';
 import {getConfig} from './getConfig';
 
@@ -9,8 +10,13 @@ export function setStyles() {
 
     let {scriptSrc, colorScheme, theme} = getConfig();
 
-    if (scriptSrc) {
-        let style = document.createElement('link');
+    let style = document.querySelector<HTMLLinkElement>(
+        `link[rel="stylesheet"][href*="/${packageName}@"], ` +
+        `link[rel="stylesheet"][href*="/${packageName}/"]`
+    );
+
+    if (!style && scriptSrc) {
+        style = document.createElement('link');
 
         style.setAttribute('rel', 'stylesheet');
         style.setAttribute('href', scriptSrc.replace(/\.js$/, '.css'));

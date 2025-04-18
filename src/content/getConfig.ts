@@ -1,6 +1,5 @@
+import {packageName} from '../const/packageName';
 import type {ContentConfig} from '../types/ContentConfig';
-
-const packageName = 'ghstage';
 
 let config: ContentConfig | null = null;
 
@@ -18,6 +17,7 @@ export function getConfig(): ContentConfig {
     let props = script.dataset;
 
     config = {
+        ...window._ghst,
         scriptSrc: script.getAttribute('src') ?? undefined,
         colorScheme: props.colorScheme,
         theme: props.theme as ContentConfig['theme'],

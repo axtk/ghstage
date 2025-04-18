@@ -1,12 +1,11 @@
 import {exec as defaultExec} from 'node:child_process';
 import {access, mkdir, writeFile} from 'node:fs/promises';
 import {promisify} from 'node:util';
+import {packageName} from '../const/packageName';
 import {getConfig} from './getConfig';
 import {getCounterContent} from './getCounterContent';
-import {getDataAttrs} from './getDataAttrs';
 
 const exec = promisify(defaultExec);
-const scriptName = 'ghstage';
 
 export async function setContent() {
     let {colorScheme, theme, name, version, repo, npm} = await getConfig();
@@ -18,12 +17,13 @@ export async function setContent() {
         await mkdir('./_includes');
     }
 
-    let scriptVersion = (await exec(`npm view ${scriptName} version`)).stdout
+    let packageVersion = (await exec(`npm view ${packageName} version`)).stdout
         .trim()
         .split('.')[0];
 
-    let dataAttrMap = {
-        'color-scheme': colorScheme,
+    let packageUrl = `https://unpkg.com/${packageName}@${packageVersion}`;
+
+    let initData = {
         theme,
         name,
         version,
@@ -31,9 +31,17 @@ export async function setContent() {
         npm,
     };
 
-    let htmlContent = (await getCounterContent()) +
-        `<script src="https://unpkg.com/${scriptName}@${scriptVersion}/dist/index.js"` +
-        `${getDataAttrs(dataAttrMap)}></script>\n`;
+    let htmlContent = '\n' + [
+        await getCounterContent(),
+        '',
+        colorScheme
+            ? `<script>document.documentElement.style.setProperty('--color-scheme', '${colorScheme}');</script>`
+            : null,
+        `<script>window._ghst=${JSON.stringify(initData).replace(/</g, '\\x3c')};`,
+        '',
+        `<link rel="stylesheet" href="${packageUrl}/dist/index.css">`,
+        `<script src="${packageUrl}/dist/index.js"></script>`,
+    ].filter(s => s !== null).join('\n') + '\n';
 
     await writeFile('./_includes/head-custom.html', htmlContent);
 }

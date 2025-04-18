@@ -1,7 +1,8 @@
-export {};
+import type {ContentConfig} from './ContentConfig';
 
 declare global {
     interface Window {
-        sendHit: () => void;
+        _ghst?: Omit<ContentConfig, 'scriptSrc'>;
+        sendHit?: () => void;
     }
 }
