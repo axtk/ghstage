@@ -26,11 +26,11 @@ export async function setContent() {
     let packageUrl = `https://unpkg.com/${packageName}@${packageVersion}`;
 
     let initData = {
-        theme,
         name,
         version,
         repo,
         npm,
+        theme,
     };
 
     let htmlContent = '\n' + [
