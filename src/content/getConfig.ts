@@ -1,6 +1,17 @@
 import {packageName} from '../const/packageName';
 import type {ContentConfig} from '../types/ContentConfig';
 
+function removeUnset<T extends Record<string, unknown>>(x: T): Partial<T> {
+    let y: Partial<T> = {};
+
+    for (let [k, v] of Object.entries(x)) {
+        if (v !== null && v !== undefined)
+            y[k as keyof T] = v as T[keyof T];
+    }
+
+    return y;
+}
+
 let config: ContentConfig | null = null;
 
 export function getConfig(): ContentConfig {
@@ -18,13 +29,15 @@ export function getConfig(): ContentConfig {
 
     config = {
         ...window._ghst,
-        scriptSrc: script.getAttribute('src') ?? undefined,
-        colorScheme: props.colorScheme,
-        theme: props.theme as ContentConfig['theme'],
-        name: props.name,
-        version: props.version,
-        repo: props.repo,
-        npm: props.npm,
+        ...removeUnset({
+            scriptSrc: script.getAttribute('src') ?? undefined,
+            colorScheme: props.colorScheme,
+            theme: props.theme as ContentConfig['theme'],
+            name: props.name,
+            version: props.version,
+            repo: props.repo,
+            npm: props.npm,
+        }),
     };
 
     return config;
