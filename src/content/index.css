@@ -33,7 +33,7 @@ body {
     color: inherit;
     background-color: transparent;
 }
-@media (max-width: 480px) {
+@media (max-width: 840px) {
     html {
         --content-padding-x: .85rem;
     }
@@ -140,7 +140,7 @@ header, footer {
     display: flex;
     align-items: stretch;
 }
-@media (max-width: 480px) {
+@media (max-width: 840px) {
     .body {
         display: block;
     }
@@ -177,7 +177,7 @@ section h2:first-child {
     padding: var(--content-padding-y) var(--content-padding-x);
     margin-left: var(--space-x);
 }
-@media (max-width: 480px) {
+@media (max-width: 840px) {
     .body > nav {
         width: auto;
         font-size: inherit;
@@ -211,7 +211,7 @@ section h2:first-child {
 main {
     width: calc(70% - var(--space-x));
 }
-@media (max-width: 480px) {
+@media (max-width: 840px) {
     main {
         width: 100%;
     }
@@ -221,7 +221,7 @@ html:not(._cover) main {
     border-radius: var(--content-border-radius);
     padding: var(--content-padding-y) var(--content-padding-x);
 }
-@media (max-width: 480px) {
+@media (max-width: 840px) {
     html:not(._cover) main {
         border-radius: var(--content-border-radius) var(--content-border-radius) 0 0;
     }
@@ -275,7 +275,7 @@ pre .hljs {
     padding: .6em 0 .3em;
     margin: 1.5em 0 0;
 }
-@media (max-width: 480px) {
+@media (max-width: 840px) {
     .pagenav {
         margin: 2em 0 0;
     }
@@ -322,7 +322,7 @@ pre .hljs {
     text-shadow: 0 0 3rem var(--b1-heavy);
     margin: 8vh 0 2vh;
 }
-@media (max-width: 480px) {
+@media (max-width: 840px) {
     ._cover h1 {
         font-size: 3.6em;
     }
@@ -351,7 +351,7 @@ pre .hljs {
     text-align: center;
     margin: .5em 0;
 }
-@media (max-width: 480px) {
+@media (max-width: 840px) {
     ._cover header .actions {
         font-size: 1.15em;
     }
@@ -406,7 +406,7 @@ pre .hljs {
 ._cover main .features {
     margin: 6vh 0 3vh;
 }
-@media (max-width: 480px) {
+@media (max-width: 840px) {
     ._cover main .features {
         padding: 0;
         margin: 5vh 0 4vh;
@@ -438,7 +438,7 @@ pre .hljs {
     margin: .5em;
     box-sizing: border-box;
 }
-@media (max-width: 480px) {
+@media (max-width: 840px) {
     ._cover main .features > ul > li {
         width: 100%;
         margin: .5em 0;
@@ -448,7 +448,7 @@ pre .hljs {
     padding: 0 3.5em;
     margin: 1.5em 0;
 }
-@media (max-width: 480px) {
+@media (max-width: 840px) {
     ._cover main .note {
         padding: 0;
     }
