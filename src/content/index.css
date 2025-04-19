@@ -17,6 +17,7 @@ html {
     --content-border-radius: 1rem;
     --space-x: 1rem;
     --block-margin-y: 1em;
+    --hr-border: .15rem solid var(--b1-medium);
 
     color: var(--c0);
     background-color: var(--b1);
@@ -71,7 +72,7 @@ h2, h3, h4 {
 }
 h2 {
     font-size: 1.6em;
-    border-bottom: .05em solid var(--b1-medium);
+    border-bottom: var(--hr-border);
     padding-bottom: .1em;
     margin: 1em 0 .65em 0;
 }
@@ -265,9 +266,13 @@ pre .hljs {
 }
 
 .pagenav {
+    --icon-width: 1.25em;
+
     display: flex;
     justify-content: space-between;
     gap: 1em;
+    border-top: var(--hr-border);
+    padding: .6em 0 .3em;
     margin: 1.5em 0 0;
 }
 @media (max-width: 480px) {
@@ -279,36 +284,32 @@ pre .hljs {
 .pagenav .next {
     display: inline-block;
     line-height: 1.2;
-    border: .2em solid var(--b1-light);
-    border-radius: .5em;
-    padding: .6em .75em .75em;
     position: relative;
 }
 .pagenav .icon {
     display: inline-block;
-    width: 1.75em;
-    text-align: center;
+    width: var(--icon-width);
     box-sizing: border-box;
     position: absolute;
-    top: .6em;
+    top: 0;
 }
 .pagenav .prev {
     text-align: left;
 }
 .pagenav .prev .icon {
-    left: .25em;
+    left: 0;
 }
 .pagenav .next {
     text-align: right;
 }
 .pagenav .next .icon {
-    right: .25em;
+    right: 0;
 }
 .pagenav .prev {
-    padding-left: 2em;
+    padding-left: var(--icon-width);
 }
 .pagenav .next {
-    padding-right: 2em;
+    padding-right: var(--icon-width);
 }
 .pagenav .sep,
 .pagenav .anchorjs-link,
