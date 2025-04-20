@@ -22,8 +22,11 @@ async function run() {
         await exec(`git checkout ${mainBranch}`);
 
     if (ghPagesBranchExists) {
-        await exec(`git branch -D ${ghPagesBranch}`);
-        await exec(`git push origin --delete ${ghPagesBranch}`);
+        try {
+            await exec(`git branch -D ${ghPagesBranch}`);
+            await exec(`git push origin --delete ${ghPagesBranch}`);
+        }
+        catch {}
     }
 
     if (remove)
