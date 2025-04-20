@@ -1,6 +1,7 @@
 import {packageName} from '../const/packageName';
 import {getBackground} from './getBackground';
 import {getConfig} from './getConfig';
+import {getSVGDataURL} from './getSVGDataURL';
 
 export function setStyles() {
     // let styles = document.querySelectorAll('link[rel="stylesheet"]');
@@ -36,9 +37,8 @@ export function setStyles() {
 
     if (theme === 'tiles') {
         let bgStyle = document.createElement('style');
-        let bgSvg = window.btoa(getBackground());
 
-        bgStyle.textContent = `html{background-image:url("data:image/svg+xml;base64,${bgSvg}");}`;
+        bgStyle.textContent = `html{background-image:url("${getSVGDataURL(getBackground())}");}`;
 
         document.body.appendChild(bgStyle);
     }
