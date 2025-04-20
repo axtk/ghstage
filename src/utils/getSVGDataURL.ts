@@ -4,7 +4,7 @@ export function getSVGDataURL(svg: string) {
     if (typeof window !== 'undefined')
         base64SVG = window.btoa(svg);
     else if (typeof Buffer !== undefined)
-        base64SVG = Buffer.from('Hello World!').toString('base64');
+        base64SVG = Buffer.from(svg).toString('base64');
 
     return `data:image/svg+xml;base64,${base64SVG}`;
 }
