@@ -46,6 +46,7 @@ export async function setContent() {
         '',
         `<link rel="stylesheet" href="${packageUrl}/dist/index.css">`,
         `<script src="${packageUrl}/dist/index.js"></script>`,
+        '',
         `<link rel="icon" href="${getSVGDataURL(getIcon(colorScheme))}">`,
     ].filter(s => s !== null).join('\n') + '\n';
 
