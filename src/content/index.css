@@ -7,7 +7,7 @@ html {
     --b1-heavy: color(from var(--b1) srgb calc(.35*r) calc(.35*g) calc(.35*b) / .9);
 
     --c0: oklch(from var(--b0) calc(100*(.8 - l)) 0 0 / .72);
-    --c1: oklch(from var(--b1) calc(100*(.8 - l)) 0 0 / .82);
+    --c1: oklch(from var(--b1) calc(100*(.78 - l)) 0 0 / .82);
 
     --link-color: color(from var(--c0) srgb calc(r + .2) calc(g + .4) calc(b + .8));
 
