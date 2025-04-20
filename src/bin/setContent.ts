@@ -30,6 +30,7 @@ export async function setContent() {
         version,
         repo,
         npm,
+        colorScheme,
         theme,
     };
 
