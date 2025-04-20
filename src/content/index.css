@@ -2,12 +2,12 @@ html {
     --b0: white;
     --b1: var(--color-scheme, gray);
 
-    --b1-light: color(from var(--b1) srgb r g b / .2);
-    --b1-medium: color(from var(--b1) srgb r g b / .5);
+    --b1-light: color(from var(--b1) srgb calc(.8*r) calc(.8*g) calc(.8*b) / .2);
+    --b1-medium: color(from var(--b1) srgb calc(.8*r) calc(.8*g) calc(.8*b) / .5);
     --b1-heavy: color(from var(--b1) srgb calc(.35*r) calc(.35*g) calc(.35*b) / .9);
 
-    --c0: oklch(from var(--b0) calc(100*(.8 - l)) 0 0 / .85);
-    --c1: oklch(from var(--b1) calc(100*(.8 - l)) 0 0 / .85);
+    --c0: oklch(from var(--b0) calc(100*(.8 - l)) 0 0 / .72);
+    --c1: oklch(from var(--b1) calc(100*(.8 - l)) 0 0 / .82);
 
     --link-color: color(from var(--c0) srgb calc(r + .2) calc(g + .4) calc(b + .8));
 
@@ -432,7 +432,7 @@ pre .hljs {
     flex: none;
     width: calc(33% - 1em);
     background: color(from var(--b1-heavy) srgb r g b / .2);
-    border-top: .35em solid var(--b1);
+    border-top: .35em solid color(from var(--b1) srgb r g b / .7);
     border-radius: 0 0 .5em .5em;
     padding: .9em 1.2em;
     margin: .5em;
