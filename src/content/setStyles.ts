@@ -1,7 +1,7 @@
 import {packageName} from '../const/packageName';
+import {getSVGDataURL} from '../utils/getSVGDataURL';
 import {getBackground} from './getBackground';
 import {getConfig} from './getConfig';
-import {getSVGDataURL} from './getSVGDataURL';
 
 export function setStyles() {
     // let styles = document.querySelectorAll('link[rel="stylesheet"]');
