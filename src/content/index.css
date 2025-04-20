@@ -319,7 +319,7 @@ pre .hljs {
 
 ._cover h1 {
     font-size: 4.2em;
-    text-shadow: 0 0 3rem var(--b1-heavy);
+    /* text-shadow: 0 0 3rem var(--b1-heavy); */
     margin: 8vh 0 2vh;
 }
 @media (max-width: 840px) {
