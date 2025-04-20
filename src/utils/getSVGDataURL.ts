@@ -1,3 +1,10 @@
 export function getSVGDataURL(svg: string) {
-    return `data:image/svg+xml;base64,${window.btoa(svg)}`;
+    let base64SVG = '';
+
+    if (typeof window !== 'undefined')
+        base64SVG = window.btoa(svg);
+    else if (typeof Buffer !== undefined)
+        base64SVG = Buffer.from('Hello World!').toString('base64');
+
+    return `data:image/svg+xml;base64,${base64SVG}`;
 }
