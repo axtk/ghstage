@@ -22,15 +22,12 @@ export function getConfig(): ContentConfig {
         `script[src*="/${packageName}@"], script[src*="/${packageName}/"]`
     );
 
-    if (!script)
-        return {};
-
-    let props = script.dataset;
+    let props = script?.dataset ?? {};
 
     config = {
         ...window._ghst,
         ...removeUnset({
-            scriptSrc: script.getAttribute('src') ?? undefined,
+            scriptSrc: script?.getAttribute('src') ?? undefined,
             colorScheme: props.colorScheme,
             theme: props.theme as ContentConfig['theme'],
             name: props.name,
