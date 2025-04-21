@@ -1,7 +1,7 @@
 export function getIcon(baseColor = 'gray') {
     return `
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-        <style>.b{fill:${baseColor};}.c0{fill:rgba(255,255,255,.7);}.c1{fill:rgba(255,255,255,.3);}.c2{fill:rgba(255,255,255,0);}</style>
+        <style>.b{fill:${baseColor};}.c0{fill:rgba(255,255,255,.6);}.c1{fill:rgba(255,255,255,.3);}.c2{fill:rgba(255,255,255,0);}</style>
         <g stroke="none">
             <path d="M0,15 L50,0 L100,15 L100,78 L50,100 L0,81z" stroke="none" class="b"/>
             <path d="M0,15 L50,30 L100,15 L50,0z" stroke="none" class="c0"/>
