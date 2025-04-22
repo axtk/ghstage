@@ -10,6 +10,7 @@ html {
     --c1: oklch(from var(--b1) calc(100*(.78 - l)) 0 0 / .82);
 
     --link-color: color(from var(--c0) srgb calc(r + .2) calc(g + .4) calc(b + .8));
+    --link-decoration: none;
 
     --max-content-width: 60em;
     --content-padding-x: 1.75rem;
@@ -52,6 +53,7 @@ ul, ol {
 
 a, a:link, a:visited, a:hover, a:active {
     color: var(--link-color);
+    text-decoration: var(--link-decoration);
 }
 
 h1 {
@@ -405,6 +407,7 @@ pre .hljs {
 }
 ._cover main .features {
     --link-color: color(from var(--c1) srgb r g b / .55);
+    --link-decoration: underline;
 
     margin: 6vh 0 3vh;
 }
