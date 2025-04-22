@@ -58,11 +58,9 @@ function handleHash() {
 
     activateSection(targetSection);
 
-    if (!target?.matches('h2'))
-        target?.scrollIntoView();
-    // if the section is active let the browser restore the scroll position
-    else if (!isSectionActive(targetSection))
+    if (target?.matches('h2'))
         window.scrollTo(0, 0);
+    else target?.scrollIntoView();
 
     let navLinks = document.querySelectorAll('.body > nav a');
 
