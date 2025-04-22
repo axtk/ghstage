@@ -203,6 +203,7 @@ section h2:first-child {
 }
 .body > nav a.active {
     font-weight: bold;
+    text-decoration: none;
     color: inherit;
     pointer-events: none;
 }
