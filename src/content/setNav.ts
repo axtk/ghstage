@@ -53,14 +53,14 @@ function handleHash() {
     let target = document.querySelector(hash);
     let targetSection = target?.closest('main section');
 
-    if (!targetSection)
+    if (!target || !targetSection)
         return activateCover();
 
     activateSection(targetSection);
 
-    if (target?.matches('h2'))
+    if (target.matches('h2'))
         window.scrollTo(0, 0);
-    else target?.scrollIntoView();
+    else target.scrollIntoView();
 
     let navLinks = document.querySelectorAll('.body > nav a');
 
