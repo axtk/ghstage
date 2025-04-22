@@ -1,4 +1,5 @@
 import {renderLayout} from './layout/renderLayout';
+import {setExternalLinks} from './setExternalLinks';
 import {setIcon} from './setIcon';
 import {setNav} from './setNav';
 import {setStyles} from './setStyles';
@@ -8,4 +9,8 @@ export function init() {
     renderLayout();
     setNav();
     setIcon();
+
+    requestAnimationFrame(() => {
+        setExternalLinks();
+    });
 }
