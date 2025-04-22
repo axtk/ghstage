@@ -404,6 +404,8 @@ pre .hljs {
     width: auto;
 }
 ._cover main .features {
+    --link-color: color(from var(--c1) srgb r g b / .55);
+
     margin: 6vh 0 3vh;
 }
 @media (max-width: 840px) {
