@@ -10,7 +10,7 @@ html {
     --c1: oklch(from var(--b1) calc(100*(.78 - l)) 0 0 / .82);
 
     --link-color: color(from var(--c0) srgb calc(r + .2) calc(g + .4) calc(b + .8));
-    --link-decoration: none;
+    --link-decoration: underline;
 
     --max-content-width: 60em;
     --content-padding-x: 1.75rem;
