@@ -15,12 +15,16 @@ function deactivateSections() {
         section.classList.remove('active');
 }
 
+function isSectionActive(section: Element | null) {
+    return section?.classList.contains('active');
+}
+
 function activateSection(section: Element | null) {
     document.documentElement.className = section?.classList.contains('cover')
         ? '_cover'
         : '_regular';
 
-    if (!section || section.classList.contains('active'))
+    if (!section || isSectionActive(section))
         return;
 
     deactivateSections();
@@ -49,14 +53,16 @@ function handleHash() {
     let target = document.querySelector(hash);
     let targetSection = target?.closest('main section');
 
-    if (targetSection) {
-        activateSection(targetSection);
+    if (!targetSection)
+        return activateCover();
 
-        if (target?.matches('h2'))
-            window.scrollTo(0, 0);
-        else target?.scrollIntoView();
-    }
-    else activateCover();
+    activateSection(targetSection);
+
+    if (!target?.matches('h2'))
+        target?.scrollIntoView();
+    // if the section is active let the browser restore the scroll position
+    else if (!isSectionActive(targetSection))
+        window.scrollTo(0, 0);
 
     let navLinks = document.querySelectorAll('.body > nav a');
 
