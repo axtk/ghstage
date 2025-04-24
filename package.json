@@ -9,7 +9,7 @@
   "scripts": {
     "build": "npm-run-all clean -p build-js build-bin -s build-css",
     "build-bin": "esbuild ./src/bin/run.ts --bundle --outfile=dist/bin.js --platform=node",
-    "build-css": "node -e \"require('node:fs').copyFileSync('src/content/index.css', 'dist/index.css');\"",
+    "build-css": "node -e \"require('node:fs').cpSync('src/content/styles', 'dist/styles', {force: true, recursive: true});\"",
     "build-js": "esbuild index.ts --bundle --outfile=dist/index.js --platform=browser --minify",
     "clean": "node -e \"require('node:fs').rmSync('dist', {force: true, recursive: true});\"",
     "prepublishOnly": "npm run build",

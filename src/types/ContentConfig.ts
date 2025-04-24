@@ -1,7 +1,9 @@
+import type {Theme} from './Theme';
+
 export type ContentConfig = {
     scriptSrc?: string;
     colorScheme?: string;
-    theme?: 'tiles';
+    theme?: Theme;
     name?: string;
     version?: string;
     repo?: string;

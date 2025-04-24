@@ -1,4 +1,5 @@
 import {packageName} from '../const/packageName';
+import {getStylePath} from '../utils/getStylePath';
 import {getSVGDataURL} from '../utils/getSVGDataURL';
 import {getBackground} from './getBackground';
 import {getConfig} from './getConfig';
@@ -17,10 +18,12 @@ export function setStyles() {
     );
 
     if (!style && scriptSrc) {
+        let styleHref = scriptSrc.replace(/\/index\.js$/, getStylePath(theme));
+
         style = document.createElement('link');
 
         style.setAttribute('rel', 'stylesheet');
-        style.setAttribute('href', scriptSrc.replace(/\.js$/, '.css'));
+        style.setAttribute('href', styleHref);
 
         document.head.appendChild(style);
     }

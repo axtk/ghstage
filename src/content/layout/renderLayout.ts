@@ -2,6 +2,7 @@ import {append} from './append';
 import {createElement} from './createElement';
 import {getComponents} from './getComponents';
 import {getNav} from './getNav';
+import {withContainer} from './withContainer';
 
 export function renderLayout() {
     let container = document.querySelector('body > div');
@@ -35,7 +36,7 @@ export function renderLayout() {
 
     let layout = append(
         createElement('div', 'layout'),
-        [header, body, footer],
+        withContainer([header, body, footer]),
     );
 
     if (layout?.innerHTML.trim()) {
