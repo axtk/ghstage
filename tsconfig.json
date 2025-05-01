@@ -1,6 +1,7 @@
 {
     "include": [
         "index.ts",
+        "src/bin/run.ts",
         "src/types/window.d.ts"
     ],
     "compilerOptions": {
