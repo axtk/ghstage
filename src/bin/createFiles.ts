@@ -1,5 +1,6 @@
 import {setCName} from './setCName';
 import {setContent} from './setContent';
+import {setImages} from './setImages';
 import {setNpmIgnore} from './setNpmIgnore';
 
 export async function createFiles() {
@@ -7,5 +8,6 @@ export async function createFiles() {
         setNpmIgnore(),
         setCName(),
         setContent(),
+        setImages(),
     ]);
 }

@@ -2,9 +2,7 @@ import {exec as defaultExec} from 'node:child_process';
 import {access, mkdir, writeFile} from 'node:fs/promises';
 import {promisify} from 'node:util';
 import {packageName} from '../const/packageName';
-import {getIcon} from '../utils/getIcon';
 import {getStylePath} from '../utils/getStylePath';
-import {getSVGDataURL} from '../utils/getSVGDataURL';
 import {getConfig} from './getConfig';
 import {getCounterContent} from './getCounterContent';
 
@@ -48,7 +46,7 @@ export async function setContent() {
         `<link rel="stylesheet" href="${packageUrl}/dist${getStylePath(theme)}">`,
         `<script src="${packageUrl}/dist/index.js"></script>`,
         '',
-        `<link rel="icon" href="${getSVGDataURL(getIcon(colorScheme))}">`,
+        '<link rel="icon" href="/i/favicon.svg">',
     ].filter(s => s !== null).join('\n') + '\n';
 
     await writeFile('./_includes/head-custom.html', htmlContent);
