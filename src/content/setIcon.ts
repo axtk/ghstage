@@ -1,12 +1,11 @@
-import {getConfig} from './getConfig';
 import {getIcon} from '../utils/getIcon';
 import {getSVGDataURL} from '../utils/getSVGDataURL';
+import {getConfig} from './getConfig';
 
 export function setIcon() {
     let icon = document.querySelector('link[rel="icon"]');
 
-    if (icon)
-        return;
+    if (icon) return;
 
     let {colorScheme} = getConfig();
 

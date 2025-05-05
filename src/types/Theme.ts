@@ -1,5 +1,1 @@
-export type Theme =
-    | 'none'
-    | 'fill'
-    | 'tiles'
-    | undefined;
+export type Theme = 'none' | 'fill' | 'tiles' | undefined;

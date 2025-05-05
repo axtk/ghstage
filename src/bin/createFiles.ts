@@ -4,10 +4,5 @@ import {setImages} from './setImages';
 import {setNpmIgnore} from './setNpmIgnore';
 
 export async function createFiles() {
-    await Promise.all([
-        setNpmIgnore(),
-        setCName(),
-        setContent(),
-        setImages(),
-    ]);
+    await Promise.all([setNpmIgnore(), setCName(), setContent(), setImages()]);
 }

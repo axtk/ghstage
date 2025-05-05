@@ -5,8 +5,7 @@ export async function setNpmIgnore() {
 
     try {
         content = (await readFile('./.npmignore')).toString();
-    }
-    catch {}
+    } catch {}
 
     let listed = false;
 

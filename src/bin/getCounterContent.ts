@@ -3,8 +3,7 @@ import {getConfig} from './getConfig';
 export async function getCounterContent() {
     let {ymid} = await getConfig();
 
-    if (!ymid)
-        return '';
+    if (!ymid) return '';
 
     return `
 <script>

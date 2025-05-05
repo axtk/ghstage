@@ -5,13 +5,9 @@ export async function setCName() {
     let {name, cname, jsorg} = await getConfig();
     let domain = '';
 
-    if (cname)
-        domain = cname;
-    else if (typeof jsorg === 'string')
-        domain = jsorg ? `${jsorg}.js.org` : '';
-    else if (jsorg === true)
-        domain = name ? `${name}.js.org` : '';
+    if (cname) domain = cname;
+    else if (typeof jsorg === 'string') domain = jsorg ? `${jsorg}.js.org` : '';
+    else if (jsorg === true) domain = name ? `${name}.js.org` : '';
 
-    if (domain !== '')
-        await writeFile('./CNAME', domain);
+    if (domain !== '') await writeFile('./CNAME', domain);
 }

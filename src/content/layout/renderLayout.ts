@@ -7,32 +7,18 @@ import {withContainer} from './withContainer';
 export function renderLayout() {
     let container = document.querySelector('body > div');
 
-    if (!container)
-        return;
+    if (!container) return;
 
     let nav = getNav(container);
 
-    let {
-        header,
-        coverSection,
-        sections,
-        installation,
-    } = getComponents(container);
+    let {header, coverSection, sections, installation} =
+        getComponents(container);
 
-    let bodyMain = append(
-        createElement('main'),
-        [coverSection, ...sections],
-    );
+    let bodyMain = append(createElement('main'), [coverSection, ...sections]);
 
-    let body = append(
-        createElement('div', 'body'),
-        [bodyMain, nav],
-    );
+    let body = append(createElement('div', 'body'), [bodyMain, nav]);
 
-    let footer = append(
-        createElement('footer'),
-        installation,
-    );
+    let footer = append(createElement('footer'), installation);
 
     let layout = append(
         createElement('div', 'layout'),

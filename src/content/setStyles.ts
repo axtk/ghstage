@@ -1,6 +1,6 @@
 import {packageName} from '../const/packageName';
-import {getStylePath} from '../utils/getStylePath';
 import {getSVGDataURL} from '../utils/getSVGDataURL';
+import {getStylePath} from '../utils/getStylePath';
 import {getBackground} from './getBackground';
 import {getConfig} from './getConfig';
 
@@ -14,7 +14,7 @@ export function setStyles() {
 
     let style = document.querySelector<HTMLLinkElement>(
         `link[rel="stylesheet"][href*="/${packageName}@"], ` +
-        `link[rel="stylesheet"][href*="/${packageName}/"]`
+            `link[rel="stylesheet"][href*="/${packageName}/"]`,
     );
 
     if (!style && scriptSrc) {
@@ -29,13 +29,15 @@ export function setStyles() {
     }
 
     if (colorScheme)
-        document.documentElement.setAttribute('style', `--color-scheme: ${colorScheme}`);
+        document.documentElement.setAttribute(
+            'style',
+            `--color-scheme: ${colorScheme}`,
+        );
 
     setTimeout(() => {
         let errSpans = document.querySelectorAll('pre .err');
 
-        for (let errSpan of errSpans)
-            errSpan.classList.remove('err');
+        for (let errSpan of errSpans) errSpan.classList.remove('err');
     }, 0);
 
     if (theme === 'tiles') {

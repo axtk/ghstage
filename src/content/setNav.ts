@@ -2,17 +2,16 @@ const startHash = '#~start';
 
 function start() {
     let firstSection = document.querySelector('main section:not(.cover)');
-    let firstSectionId = firstSection?.id || firstSection?.querySelector('h2')?.id;
+    let firstSectionId =
+        firstSection?.id || firstSection?.querySelector('h2')?.id;
 
-    if (firstSectionId)
-        window.location.assign(`#${firstSectionId}`);
+    if (firstSectionId) window.location.assign(`#${firstSectionId}`);
 }
 
 function deactivateSections() {
     let sections = document.querySelectorAll('main section');
 
-    for (let section of sections)
-        section.classList.remove('active');
+    for (let section of sections) section.classList.remove('active');
 }
 
 function isSectionActive(section: Element | null) {
@@ -24,8 +23,7 @@ function activateSection(section: Element | null) {
         ? '_cover'
         : '_regular';
 
-    if (!section || isSectionActive(section))
-        return;
+    if (!section || isSectionActive(section)) return;
 
     deactivateSections();
     section.classList.add('active');
@@ -47,19 +45,16 @@ function handleHash() {
         return activateCover();
     }
 
-    if (hash === startHash)
-        return start();
+    if (hash === startHash) return start();
 
     let target = document.querySelector(hash);
     let targetSection = target?.closest('main section');
 
-    if (!target || !targetSection)
-        return activateCover();
+    if (!target || !targetSection) return activateCover();
 
     activateSection(targetSection);
 
-    if (target.matches('h2'))
-        window.scrollTo(0, 0);
+    if (target.matches('h2')) window.scrollTo(0, 0);
     else target.scrollIntoView();
 
     let navLinks = document.querySelectorAll('.body > nav a');
@@ -74,8 +69,11 @@ export function setNav() {
     document.body.addEventListener('click', event => {
         let {target} = event;
 
-        if (target instanceof HTMLElement && target.matches(`a[href="${startHash}"]`)) {
-            event.preventDefault()
+        if (
+            target instanceof HTMLElement &&
+            target.matches(`a[href="${startHash}"]`)
+        ) {
+            event.preventDefault();
             start();
         }
     });

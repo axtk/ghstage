@@ -10,13 +10,17 @@ async function run() {
     let {ghPagesBranch, mainBranch, remove} = await getConfig();
     let ghPagesBranchExists = false;
 
-    let originalBranch = (await exec('git rev-parse --abbrev-ref HEAD')).stdout.trim();
+    let originalBranch = (
+        await exec('git rev-parse --abbrev-ref HEAD')
+    ).stdout.trim();
 
     try {
-        ghPagesBranchExists = originalBranch === ghPagesBranch ||
-            (await exec(`git show-ref --quiet refs/heads/${ghPagesBranch}`)).stderr.trim() === '';
-    }
-    catch {}
+        ghPagesBranchExists =
+            originalBranch === ghPagesBranch ||
+            (
+                await exec(`git show-ref --quiet refs/heads/${ghPagesBranch}`)
+            ).stderr.trim() === '';
+    } catch {}
 
     if (originalBranch === ghPagesBranch)
         await exec(`git checkout ${mainBranch}`);
@@ -25,21 +29,19 @@ async function run() {
         try {
             await exec(`git branch -D ${ghPagesBranch}`);
             await exec(`git push origin --delete ${ghPagesBranch}`);
-        }
-        catch {}
+        } catch {}
     }
 
-    if (remove)
-        return;
+    if (remove) return;
 
     await exec(`git checkout -b ${ghPagesBranch}`);
     await createFiles();
     await exec('git add *');
 
-    let updated = (await exec('git diff --cached --name-only')).stdout.trim() !== '';
+    let updated =
+        (await exec('git diff --cached --name-only')).stdout.trim() !== '';
 
-    if (updated)
-        await exec(`git commit -m "release gh-pages"`);
+    if (updated) await exec(`git commit -m "release gh-pages"`);
 
     await exec(`git push -u origin ${ghPagesBranch}`);
 

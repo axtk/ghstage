@@ -9,5 +9,8 @@ export function getIcon(baseColor = 'gray') {
             <path d="M50,30 L100,15 L100,78 L50,100z" stroke="none" class="c2"/>
         </g>
         </svg>
-    `.trim().replace(/\s+/g, ' ').replace(/> </g, '><');
+    `
+        .trim()
+        .replace(/\s+/g, ' ')
+        .replace(/> </g, '><');
 }

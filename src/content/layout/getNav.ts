@@ -3,16 +3,14 @@ export function getNav(container: Element) {
     let currentItem: Element | null = null;
 
     for (let element of container.childNodes) {
-        if (!(element instanceof HTMLElement))
-            continue;
+        if (!(element instanceof HTMLElement)) continue;
 
         if (element.matches('h2')) {
             currentItem = document.createElement('li');
             currentItem.innerHTML = `<a href="#${element.id}">${element.innerHTML}</a>`;
 
             list.appendChild(currentItem);
-        }
-        else if (element.matches('h3') && currentItem) {
+        } else if (element.matches('h3') && currentItem) {
             let sublist = currentItem.querySelector('ul');
 
             if (!sublist) {

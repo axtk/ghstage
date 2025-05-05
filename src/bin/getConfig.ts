@@ -7,8 +7,7 @@ import {toConfig} from './toConfig';
 let config: BinConfig | null = null;
 
 export async function getConfig(): Promise<BinConfig> {
-    if (config)
-        return config;
+    if (config) return config;
 
     let metadata: PackageMetadata = {};
 
@@ -16,8 +15,7 @@ export async function getConfig(): Promise<BinConfig> {
         metadata = JSON.parse(
             (await readFile('./package.json')).toString(),
         ) as PackageMetadata;
-    }
-    catch {}
+    } catch {}
 
     config = {
         ghPagesBranch: 'gh-pages',

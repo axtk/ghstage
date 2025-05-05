@@ -13,8 +13,7 @@ export async function setContent() {
 
     try {
         await access('./_includes');
-    }
-    catch {
+    } catch {
         await mkdir('./_includes');
     }
 
@@ -35,7 +34,7 @@ export async function setContent() {
         theme,
     };
 
-    let htmlContent = '\n' + [
+    let htmlContent = [
         await getCounterContent(),
         '',
         colorScheme
@@ -47,7 +46,9 @@ export async function setContent() {
         `<script src="${packageUrl}/dist/index.js"></script>`,
         '',
         '<link rel="icon" href="/i/favicon.svg">',
-    ].filter(s => s !== null).join('\n') + '\n';
+    ]
+        .filter(s => s !== null)
+        .join('\n');
 
-    await writeFile('./_includes/head-custom.html', htmlContent);
+    await writeFile('./_includes/head-custom.html', `\n${htmlContent}\n`);
 }

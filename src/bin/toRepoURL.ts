@@ -1,16 +1,13 @@
 import type {PackageMetadata} from '../types/PackageMetadata';
 
 export function toRepoURL(x: PackageMetadata['repository']) {
-    if (!x)
-        return '';
+    if (!x) return '';
 
     let s = typeof x === 'string' ? x : x.url;
 
-    if (!s)
-        return;
+    if (!s) return;
 
-    if (/^https?:\/\//.test(s))
-        return s;
+    if (/^https?:\/\//.test(s)) return s;
 
     if (/^git\+https?:\/\/.*\.git$/.test(s))
         return s.replace(/^git\+(https?:\/\/.*)\.git$/, '$1');

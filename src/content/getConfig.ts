@@ -5,8 +5,7 @@ function removeUnset<T extends Record<string, unknown>>(x: T): Partial<T> {
     let y: Partial<T> = {};
 
     for (let [k, v] of Object.entries(x)) {
-        if (v !== null && v !== undefined)
-            y[k as keyof T] = v as T[keyof T];
+        if (v !== null && v !== undefined) y[k as keyof T] = v as T[keyof T];
     }
 
     return y;
@@ -15,11 +14,10 @@ function removeUnset<T extends Record<string, unknown>>(x: T): Partial<T> {
 let config: ContentConfig | null = null;
 
 export function getConfig(): ContentConfig {
-    if (config)
-        return config;
+    if (config) return config;
 
     let script = document.querySelector<HTMLScriptElement>(
-        `script[src*="/${packageName}@"], script[src*="/${packageName}/"]`
+        `script[src*="/${packageName}@"], script[src*="/${packageName}/"]`,
     );
 
     let props = script?.dataset ?? {};

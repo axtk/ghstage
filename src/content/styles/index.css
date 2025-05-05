@@ -2,14 +2,22 @@ html {
     --b0: white;
     --b1: var(--color-scheme, gray);
 
-    --b1-light: color(from var(--b1) srgb r g b / .2);
-    --b1-medium: color(from var(--b1) srgb calc(.8*r) calc(.8*g) calc(.8*b) / .5);
-    --b1-heavy: color(from var(--b1) srgb calc(.35*r) calc(.35*g) calc(.35*b) / .9);
+    --b1-light: color(from var(--b1) srgb r g b / 0.2);
+    --b1-medium: color(
+        from var(--b1) srgb calc(0.8 * r) calc(0.8 * g) calc(0.8 * b) /
+        0.5
+    );
+    --b1-heavy: color(
+        from var(--b1) srgb calc(0.35 * r) calc(0.35 * g) calc(0.35 * b) /
+        0.9
+    );
 
-    --c0: oklch(from var(--b0) calc(100*(.8 - l)) 0 0 / .72);
-    --c1: oklch(from var(--b1) calc(100*(.78 - l)) 0 0 / .82);
+    --c0: oklch(from var(--b0) calc(100 * (0.8 - l)) 0 0 / 0.72);
+    --c1: oklch(from var(--b1) calc(100 * (0.78 - l)) 0 0 / 0.82);
 
-    --link-color: color(from var(--c0) srgb calc(r + .2) calc(g + .4) calc(b + .8));
+    --link-color: color(
+        from var(--c0) srgb calc(r + 0.2) calc(g + 0.4) calc(b + 0.8)
+    );
     --link-decoration: underline;
 
     --max-content-width: 60em;
@@ -43,15 +51,25 @@ body {
     }
 }
 
-p, ul, ol, table, pre, blockquote {
+p,
+ul,
+ol,
+table,
+pre,
+blockquote {
     margin-top: var(--block-margin-y);
     margin-bottom: var(--block-margin-y);
 }
-ul, ol {
+ul,
+ol {
     padding-inline-start: 2em;
 }
 
-a, a:link, a:visited, a:hover, a:active {
+a,
+a:link,
+a:visited,
+a:hover,
+a:active {
     color: var(--link-color);
     text-decoration: var(--link-decoration);
 }
@@ -63,13 +81,19 @@ h1 {
     line-height: 1;
     letter-spacing: -.05em;
     margin: 0;
-    transform: scaleY(.7);
+    transform: scaleY(0.7);
     transform-origin: left center;
 }
-h1 a, h1 a:link, h1 a:visited, h1 a:hover, h1 a:active {
+h1 a,
+h1 a:link,
+h1 a:visited,
+h1 a:hover,
+h1 a:active {
     text-decoration: none;
 }
-h2, h3, h4 {
+h2,
+h3,
+h4 {
     line-height: 1.1;
 }
 h2 {
@@ -91,7 +115,8 @@ footer {
     box-sizing: border-box;
 }
 
-header, footer {
+header,
+footer {
     padding: 0 var(--content-padding-x);
 }
 
@@ -188,7 +213,7 @@ section h2:first-child {
     flex: none;
     align-self: flex-start;
     font-size: .9em;
-    background: color(from var(--b1) srgb r g b / .15);
+    background: color(from var(--b1) srgb r g b / 0.15);
     border-radius: var(--content-border-radius);
     padding: var(--content-padding-y) var(--content-padding-x);
     margin-top: var(--content-padding-y);
@@ -199,7 +224,8 @@ section h2:first-child {
         width: auto;
         font-size: inherit;
         border-top: .35em solid var(--b1);
-        border-radius: 0 0 var(--content-border-radius) var(--content-border-radius);
+        border-radius: 0 0 var(--content-border-radius)
+            var(--content-border-radius);
         margin-top: 0;
         margin-left: 0;
     }
@@ -254,10 +280,12 @@ main li {
     color: inherit;
     background-color: transparent;
 }
-pre, code {
+pre,
+code {
     font-size: .9em;
 }
-pre, pre.highlight {
+pre,
+pre.highlight {
     line-height: 1.25;
     color: inherit;
     background: var(--b1-light);
@@ -349,7 +377,7 @@ pre .hljs {
     font-size: 1.5em;
     text-align: center;
     margin: 0;
-    transform: scaleY(.85);
+    transform: scaleY(0.85);
 }
 ._cover header .description p {
     margin-top: 0;
@@ -370,14 +398,17 @@ pre .hljs {
     display: none;
 }
 ._cover header .actions a {
-    --bc1: color(from var(--b1) srgb r g b / .55);
-    --bc2: color(from var(--b1) srgb calc(.8*r) calc(.8*g) calc(.8*b) / .7);
+    --bc1: color(from var(--b1) srgb r g b / 0.55);
+    --bc2: color(
+        from var(--b1) srgb calc(0.8 * r) calc(0.8 * g) calc(0.8 * b) /
+        0.7
+    );
 
     display: inline-block;
     min-width: 20%;
     text-decoration: none;
     color: var(--b1);
-    background: color(from var(--c1) srgb r g b / .8);
+    background: color(from var(--c1) srgb r g b / 0.8);
     border: .075em solid var(--b1);
     border-color: var(--bc1) var(--bc2) var(--bc2) var(--bc1);
     border-radius: var(--r);
@@ -388,8 +419,14 @@ pre .hljs {
     box-sizing: border-box;
 }
 ._cover header .actions a.primary {
-    --bc1: color(from var(--b1) srgb calc(1.1*r) calc(1.1*g) calc(1.1*b) / .7);
-    --bc2: color(from var(--b1) srgb calc(.7*r) calc(.7*g) calc(.7*b) / .8);
+    --bc1: color(
+        from var(--b1) srgb calc(1.1 * r) calc(1.1 * g) calc(1.1 * b) /
+        0.7
+    );
+    --bc2: color(
+        from var(--b1) srgb calc(0.7 * r) calc(0.7 * g) calc(0.7 * b) /
+        0.8
+    );
 
     font-weight: bold;
     color: var(--c1);
@@ -413,7 +450,7 @@ pre .hljs {
     width: auto;
 }
 ._cover main .features {
-    --link-color: color(from var(--c0) srgb r g b / .55);
+    --link-color: color(from var(--c0) srgb r g b / 0.55);
     --link-decoration: underline;
 
     margin: 6vh 0 3vh;
@@ -444,7 +481,7 @@ pre .hljs {
     flex: none;
     width: calc(33% - 1em);
     background: var(--b1-light);
-    border-top: .35em solid color(from var(--b1) srgb r g b / .7);
+    border-top: .35em solid color(from var(--b1) srgb r g b / 0.7);
     border-radius: 0 0 .5em .5em;
     padding: .9em 1.2em;
     margin: .5em;

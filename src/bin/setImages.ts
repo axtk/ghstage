@@ -7,10 +7,9 @@ export async function setImages() {
 
     try {
         await access('./i');
-    }
-    catch {
+    } catch {
         await mkdir('./i');
     }
 
-    await writeFile('./i/favicon.svg', getIcon(colorScheme) + '\n');
+    await writeFile('./i/favicon.svg', `${getIcon(colorScheme)}\n`);
 }
