@@ -41,6 +41,8 @@ body {
     line-height: 1.4;
     color: inherit;
     background-color: transparent;
+    padding: 0;
+    margin: 0;
 }
 @media (max-width: 840px) {
     html {
@@ -213,7 +215,7 @@ section h2:first-child {
     flex: none;
     align-self: flex-start;
     font-size: .9em;
-    background: color(from var(--b1) srgb r g b / 0.15);
+    background: var(--b1-light);
     border-radius: var(--content-border-radius);
     padding: var(--content-padding-y) var(--content-padding-x);
     margin-top: var(--content-padding-y);
@@ -492,6 +494,9 @@ pre .hljs {
         width: 100%;
         margin: .5em 0;
     }
+}
+._cover main .features > ul > li > ul {
+    list-style: disc;
 }
 ._cover main .note {
     padding: 0 3.5em;
