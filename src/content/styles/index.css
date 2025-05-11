@@ -305,6 +305,14 @@ pre .hljs {
     color: inherit;
     background: transparent;
 }
+.highlight .gi {
+    color: #484848;
+    background-color: #afa;
+}
+.highlight .gd {
+    color: #484848;
+    background-color: #fbb;
+}
 
 .pagenav {
     --icon-width: 1.25em;
