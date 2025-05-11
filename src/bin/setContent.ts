@@ -45,7 +45,7 @@ export async function setContent() {
         `<link rel="stylesheet" href="${packageUrl}/dist${getStylePath(theme)}">`,
         `<script src="${packageUrl}/dist/index.js"></script>`,
         '',
-        '<link rel="icon" type="image/svg+xml" href="/i/favicon.svg">',
+        '<link rel="icon" type="image/svg+xml" href="/favicon.svg">',
     ]
         .filter(s => s !== null)
         .join('\n');
