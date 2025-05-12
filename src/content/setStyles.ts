@@ -1,8 +1,19 @@
+import {codeStylePath} from '../const/codeStylePath';
 import {packageName} from '../const/packageName';
 import {getSVGDataURL} from '../utils/getSVGDataURL';
 import {getStylePath} from '../utils/getStylePath';
 import {getBackground} from './getBackground';
 import {getConfig} from './getConfig';
+
+function appendStyleLink(scriptSrc: string, stylePath: string) {
+    let styleHref = scriptSrc.replace(/\/index\.js$/, stylePath);
+    let style = document.createElement('link');
+
+    style.setAttribute('rel', 'stylesheet');
+    style.setAttribute('href', styleHref);
+
+    document.head.appendChild(style);
+}
 
 export function setStyles() {
     // let styles = document.querySelectorAll('link[rel="stylesheet"]');
@@ -18,14 +29,8 @@ export function setStyles() {
     );
 
     if (!style && scriptSrc) {
-        let styleHref = scriptSrc.replace(/\/index\.js$/, getStylePath(theme));
-
-        style = document.createElement('link');
-
-        style.setAttribute('rel', 'stylesheet');
-        style.setAttribute('href', styleHref);
-
-        document.head.appendChild(style);
+        appendStyleLink(scriptSrc, getStylePath(theme));
+        appendStyleLink(scriptSrc, codeStylePath);
     }
 
     if (colorScheme)

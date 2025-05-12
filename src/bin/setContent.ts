@@ -1,6 +1,7 @@
 import {exec as defaultExec} from 'node:child_process';
 import {access, mkdir, writeFile} from 'node:fs/promises';
 import {promisify} from 'node:util';
+import {codeStylePath} from '../const/codeStylePath';
 import {packageName} from '../const/packageName';
 import {getStylePath} from '../utils/getStylePath';
 import {getConfig} from './getConfig';
@@ -43,6 +44,7 @@ export async function setContent() {
         `<script>window._ghst=${JSON.stringify(initData).replace(/</g, '\\x3c')};</script>`,
         '',
         `<link rel="stylesheet" href="${packageUrl}/dist${getStylePath(theme)}">`,
+        `<link rel="stylesheet" href="${packageUrl}/dist${codeStylePath}">`,
         `<script src="${packageUrl}/dist/index.js"></script>`,
         '',
         '<link rel="icon" type="image/svg+xml" href="/favicon.svg">',
