@@ -215,6 +215,7 @@ section h2:first-child {
         font-size: inherit;
         background: color(from var(--b0) srgb r g b / 0.8);
         border-top: .35em solid var(--b1);
+        border-bottom: .1em solid var(--b1);
         border-radius: 0 0 var(--content-border-radius)
             var(--content-border-radius);
         margin-left: 0;

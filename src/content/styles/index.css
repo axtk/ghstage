@@ -226,6 +226,7 @@ section h2:first-child {
         width: auto;
         font-size: inherit;
         border-top: .35em solid var(--b1);
+        border-bottom: .1em solid var(--b1);
         border-radius: 0 0 var(--content-border-radius)
             var(--content-border-radius);
         margin-top: 0;
