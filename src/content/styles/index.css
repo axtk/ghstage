@@ -326,13 +326,15 @@ pre .hljs {
     display: flex;
     justify-content: space-between;
     gap: 1em;
+    background: var(--b1-light);
     border-top: var(--hr-border);
-    padding: .6em 0 .3em;
+    padding: .6em .75em .75em;
     margin: 1.5em 0 0;
 }
 @media (max-width: 840px) {
     .pagenav {
-        margin: 2em 0 0;
+        padding: 1em var(--content-padding-x) 1.1em;
+        margin: 2em calc(-1*var(--content-padding-x)) calc(-1*var(--content-padding-y));
     }
 }
 .pagenav .prev,
