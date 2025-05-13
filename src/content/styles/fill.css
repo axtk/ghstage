@@ -330,7 +330,8 @@ pre .hljs {
 @media (max-width: 840px) {
     .pagenav {
         padding: 1em var(--content-padding-x) 1.1em;
-        margin: 2em calc(-1*var(--content-padding-x)) calc(-1*var(--content-padding-y));
+        margin: 2em calc(-1 * var(--content-padding-x))
+            calc(-1 * var(--content-padding-y));
     }
 }
 .pagenav .prev,
