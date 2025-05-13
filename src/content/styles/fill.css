@@ -275,8 +275,11 @@ main li {
 }
 
 .highlight {
+    /*
     color: inherit;
     background-color: transparent;
+    */
+    border-radius: 1em;
 }
 pre,
 code {
@@ -286,7 +289,7 @@ pre,
 pre.highlight {
     line-height: 1.25;
     color: inherit;
-    background: var(--b1-light);
+    /* background: var(--b1-light); */
     border-radius: 1em;
     overflow: auto;
 }
@@ -294,6 +297,7 @@ pre > code {
     display: block;
     padding: 1.25em;
 }
+/*
 .highlighter-rouge:not(.language-diff) pre code {
     filter: grayscale(1);
 }
@@ -301,6 +305,15 @@ pre .hljs {
     color: inherit;
     background: transparent;
 }
+.highlight .gi {
+    color: #484848;
+    background-color: #afa;
+}
+.highlight .gd {
+    color: #484848;
+    background-color: #fbb;
+}
+*/
 
 .pagenav {
     --icon-width: 1.25em;
