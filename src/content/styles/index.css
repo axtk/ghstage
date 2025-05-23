@@ -38,7 +38,7 @@ body {
     /*
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     */
-    line-height: 1.4;
+    line-height: 1.45;
     color: inherit;
     background-color: transparent;
     padding: 0;
@@ -459,8 +459,16 @@ pre .hljs {
     box-shadow: 0 0 .35em 0 var(--b1);
 }
 ._cover .body {
+    --max-content-width: 36em;
+
+    display: block;
     max-width: var(--max-content-width);
     margin: 0 auto;
+}
+@media (max-width: 840px) {
+    ._cover .body {
+        --max-content-width: 100%;
+    }
 }
 ._cover .body > nav {
     display: none;
@@ -489,21 +497,15 @@ pre .hljs {
     margin: .75em 0 0;
 }
 ._cover main .features > ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
     list-style: none;
     padding: 0;
     margin: .5em 0 0;
 }
 ._cover main .features > ul > li {
-    flex: none;
-    width: calc(33% - 1em);
     background: var(--b1-light);
-    border-top: .35em solid color(from var(--b1) srgb r g b / 0.7);
-    border-radius: 0 0 .5em .5em;
+    border-radius: .5em;
     padding: .9em 1.2em;
-    margin: .5em;
+    margin: 1em 0;
     box-sizing: border-box;
 }
 @media (max-width: 840px) {
@@ -529,5 +531,5 @@ pre .hljs {
 }
 ._cover footer p.installation {
     font-size: 1.25em;
-    margin: .5em 0 1.25em;
+    margin: 6vh 0 10vh;
 }
