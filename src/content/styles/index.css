@@ -20,9 +20,9 @@ html {
     );
     --link-decoration: underline;
 
-    --max-content-width: 60em;
+    --max-content-width: 52em;
     --content-padding-x: 1.75rem;
-    --content-padding-y: 1.25rem;
+    --content-padding-y: 1.75rem;
     --content-border-radius: 1rem;
     --space-x: 1rem;
     --block-margin-y: 1em;
@@ -33,7 +33,7 @@ html {
     background-position: 50% 0;
 }
 body {
-    font-size: 110%;
+    font-size: 100%;
     font-family: sans-serif;
     /*
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
@@ -106,6 +106,10 @@ h2 {
 }
 h3 {
     font-size: 1.3em;
+    margin: 1em 0 .65em 0;
+}
+h4 {
+    font-size: 1.15em;
     margin: 1em 0 .65em 0;
 }
 
@@ -376,7 +380,7 @@ pre .hljs {
 }
 
 ._cover h1 {
-    font-size: 5em;
+    font-size: 4.2em;
     margin: 8vh 0 2vh;
 }
 @media (max-width: 840px) {
@@ -393,10 +397,8 @@ pre .hljs {
     padding: 0 var(--content-padding-x);
 }
 ._cover header .description {
-    font-size: 1.5em;
     text-align: center;
     margin: 0;
-    transform: scaleY(0.85);
 }
 ._cover header .description p {
     margin-top: 0;
@@ -459,7 +461,7 @@ pre .hljs {
     box-shadow: 0 0 .35em 0 var(--b1);
 }
 ._cover .body {
-    --max-content-width: 36em;
+    --max-content-width: 32em;
 
     display: block;
     max-width: var(--max-content-width);
