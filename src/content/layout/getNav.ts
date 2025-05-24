@@ -1,4 +1,10 @@
+import {getConfig} from '../getConfig';
+import {append} from './append';
+import {withTitleLink} from './withTitleLink';
+
 export function getNav(container: Element) {
+    let {repo} = getConfig();
+
     let list = document.createElement('ul');
     let currentItem: Element | null = null;
 
@@ -26,9 +32,33 @@ export function getNav(container: Element) {
         }
     }
 
+    let title = container.querySelector('h1')?.innerHTML;
+    let h1: HTMLHeadingElement | null = null;
+
+    if (title) {
+        h1 = document.createElement('h1');
+        h1.innerHTML = title;
+    }
+
+    let refList = document.createElement('ul');
+
+    refList.className = 'ref';
+
+    if (repo) {
+        let repoRef = document.createElement('li');
+        let repoTitle = /\bgithub\.com\//.test(repo) ? 'GitHub' : 'Repository';
+
+        repoRef.innerHTML = `<a href="${repo}">${repoTitle}</a>`;
+        refList.appendChild(repoRef);
+    }
+
     let nav = document.createElement('nav');
 
-    nav.appendChild(list);
+    append(nav, [
+        withTitleLink(h1),
+        list,
+        refList,
+    ]);
 
     return nav;
 }

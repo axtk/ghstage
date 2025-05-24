@@ -61,19 +61,16 @@ export function getComponents(container: Element) {
 
     if (currentSection) sections.push(currentSection);
 
-    let header = append(createElement('header'), [
+    let coverSection = append(createElement('section', 'active cover'), [
         withTitleLink(title),
         description,
         getActions(),
-    ]);
-
-    let coverSection = append(createElement('section', 'active cover'), [
         features,
         note,
+        installation,
     ]);
 
     return {
-        header,
         coverSection,
         sections: withPageNav(sections),
         installation,

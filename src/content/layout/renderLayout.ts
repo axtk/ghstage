@@ -11,18 +11,16 @@ export function renderLayout() {
 
     let nav = getNav(container);
 
-    let {header, coverSection, sections, installation} =
+    let {coverSection, sections} =
         getComponents(container);
 
     let bodyMain = append(createElement('main'), [coverSection, ...sections]);
 
     let body = append(createElement('div', 'body'), [bodyMain, nav]);
 
-    let footer = append(createElement('footer'), installation);
-
     let layout = append(
         createElement('div', 'layout'),
-        withContainer([header, body, footer]),
+        withContainer([body]),
     );
 
     if (layout?.innerHTML.trim()) {

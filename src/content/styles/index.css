@@ -20,7 +20,7 @@ html {
     );
     --link-decoration: underline;
 
-    --max-content-width: 52em;
+    --max-content-width: 54em;
     --content-padding-x: 1.75rem;
     --content-padding-y: 1.75rem;
     --content-border-radius: 1rem;
@@ -81,10 +81,7 @@ h1 {
 
     font-size: 2.25em;
     line-height: 1;
-    letter-spacing: -.05em;
     margin: 0;
-    transform: scaleY(0.7);
-    transform-origin: left center;
 }
 h1 a,
 h1 a:link,
@@ -221,7 +218,7 @@ section h2:first-child {
     font-size: .9em;
     background: var(--b1-light);
     border-radius: var(--content-border-radius);
-    padding: var(--content-padding-y) var(--content-padding-x);
+    padding: calc(.75*var(--content-padding-y)) var(--content-padding-x) var(--content-padding-y);
     margin-top: var(--content-padding-y);
     margin-left: var(--space-x);
 }
@@ -237,10 +234,22 @@ section h2:first-child {
         margin-left: 0;
     }
 }
+.body > nav h1 {
+    --link-color: var(--b1-medium);
+
+    font-size: 1.6em;
+    text-align: center;
+    margin-bottom: calc(.75*var(--content-padding-y));
+}
 .body > nav ul {
     padding: 0;
     padding-inline-start: 1em;
     margin: .25em 0;
+}
+.body > nav > ul {
+    border-top: .05em solid var(--b1);
+    padding-top: 1.2em;
+    margin-top: 1.5em;
 }
 .body > nav ul ul {
     margin: .5em 0;
@@ -381,6 +390,7 @@ pre .hljs {
 
 ._cover h1 {
     font-size: 4.2em;
+    text-align: center;
     margin: 8vh 0 2vh;
 }
 @media (max-width: 840px) {
@@ -396,14 +406,14 @@ pre .hljs {
     text-align: center;
     padding: 0 var(--content-padding-x);
 }
-._cover header .description {
+._cover .description {
     text-align: center;
     margin: 0;
 }
-._cover header .description p {
+._cover .description p {
     margin-top: 0;
 }
-._cover header .actions {
+._cover .actions {
     --r: 1em;
 
     font-size: 1.25em;
@@ -411,14 +421,14 @@ pre .hljs {
     margin: .5em 0;
 }
 @media (max-width: 840px) {
-    ._cover header .actions {
+    ._cover .actions {
         font-size: 1.15em;
     }
 }
-._cover header .actions .sep {
+._cover .actions .sep {
     display: none;
 }
-._cover header .actions a {
+._cover .actions a {
     --bc1: color(from var(--b1) srgb r g b / 0.55);
     --bc2: color(
         from var(--b1) srgb calc(0.8 * r) calc(0.8 * g) calc(0.8 * b) /
@@ -439,7 +449,7 @@ pre .hljs {
     transition: box-shadow .1s;
     box-sizing: border-box;
 }
-._cover header .actions a.primary {
+._cover .actions a.primary {
     --bc1: color(
         from var(--b1) srgb calc(1.1 * r) calc(1.1 * g) calc(1.1 * b) /
         0.7
@@ -454,10 +464,10 @@ pre .hljs {
     background: var(--b1);
     box-shadow: 0 0 .2em 0 var(--b1);
 }
-._cover header .actions a:hover {
+._cover .actions a:hover {
     box-shadow: 0 0 .25em 0 var(--b1);
 }
-._cover header .actions a.primary:hover {
+._cover .actions a.primary:hover {
     box-shadow: 0 0 .35em 0 var(--b1);
 }
 ._cover .body {
@@ -478,19 +488,19 @@ pre .hljs {
 ._cover main {
     width: auto;
 }
-._cover main .features {
+._cover .features {
     --link-color: color(from var(--c0) srgb r g b / 0.55);
     --link-decoration: underline;
 
     margin: 6vh 0 3vh;
 }
 @media (max-width: 840px) {
-    ._cover main .features {
+    ._cover .features {
         padding: 0;
         margin: 5vh 0 4vh;
     }
 }
-._cover main .features h2 {
+._cover .features h2 {
     font-size: 1.5em;
     font-style: italic;
     text-align: center;
@@ -498,12 +508,12 @@ pre .hljs {
     padding: .1em 0;
     margin: .75em 0 0;
 }
-._cover main .features > ul {
+._cover .features > ul {
     list-style: none;
     padding: 0;
     margin: .5em 0 0;
 }
-._cover main .features > ul > li {
+._cover .features > ul > li {
     background: var(--b1-light);
     border-radius: .5em;
     padding: .9em 1.2em;
@@ -511,27 +521,25 @@ pre .hljs {
     box-sizing: border-box;
 }
 @media (max-width: 840px) {
-    ._cover main .features > ul > li {
+    ._cover .features > ul > li {
         width: 100%;
         margin: .5em 0;
     }
 }
-._cover main .features > ul > li > ul {
+._cover .features > ul > li > ul {
     list-style: disc;
 }
-._cover main .note {
+._cover .note {
     padding: 0 3.5em;
     margin: 1.5em 0;
 }
 @media (max-width: 840px) {
-    ._cover main .note {
+    ._cover .note {
         padding: 0;
     }
 }
-._cover footer {
-    text-align: center;
-}
-._cover footer p.installation {
+._cover p.installation {
     font-size: 1.25em;
+    text-align: center;
     margin: 6vh 0 10vh;
 }
