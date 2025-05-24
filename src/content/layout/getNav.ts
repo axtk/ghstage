@@ -54,11 +54,7 @@ export function getNav(container: Element) {
 
     let nav = document.createElement('nav');
 
-    append(nav, [
-        withTitleLink(h1),
-        list,
-        refList,
-    ]);
+    append(nav, [withTitleLink(h1), list, refList]);
 
     return nav;
 }

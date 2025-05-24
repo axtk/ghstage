@@ -11,17 +11,13 @@ export function renderLayout() {
 
     let nav = getNav(container);
 
-    let {coverSection, sections} =
-        getComponents(container);
+    let {coverSection, sections} = getComponents(container);
 
     let bodyMain = append(createElement('main'), [coverSection, ...sections]);
 
     let body = append(createElement('div', 'body'), [bodyMain, nav]);
 
-    let layout = append(
-        createElement('div', 'layout'),
-        withContainer([body]),
-    );
+    let layout = append(createElement('div', 'layout'), withContainer([body]));
 
     if (layout?.innerHTML.trim()) {
         container.remove();

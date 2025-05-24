@@ -218,7 +218,8 @@ section h2:first-child {
     font-size: .9em;
     background: var(--b1-light);
     border-radius: var(--content-border-radius);
-    padding: calc(.75*var(--content-padding-y)) var(--content-padding-x) var(--content-padding-y);
+    padding: calc(0.75 * var(--content-padding-y)) var(--content-padding-x)
+        var(--content-padding-y);
     margin-top: var(--content-padding-y);
     margin-left: var(--space-x);
 }
@@ -239,7 +240,7 @@ section h2:first-child {
 
     font-size: 1.6em;
     text-align: center;
-    margin-bottom: calc(.75*var(--content-padding-y));
+    margin-bottom: calc(0.75 * var(--content-padding-y));
 }
 .body > nav ul {
     padding: 0;
