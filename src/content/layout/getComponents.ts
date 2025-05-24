@@ -62,12 +62,16 @@ export function getComponents(container: Element) {
     if (currentSection) sections.push(currentSection);
 
     let coverSection = append(createElement('section', 'active cover'), [
-        withTitleLink(title),
-        description,
-        getActions(),
-        features,
-        note,
-        installation,
+        append(createElement('div', 'section-header subsection'), [
+            withTitleLink(title),
+            description,
+            getActions(),
+        ]),
+        append(createElement('div', 'section-body subsection'), [
+            features,
+            note,
+            installation,
+        ]),
     ]);
 
     return {
