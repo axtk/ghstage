@@ -408,6 +408,7 @@ pre .hljs {
     padding: 0 var(--content-padding-x);
 }
 ._cover .description {
+    font-size: 1.2em;
     text-align: center;
     margin: 0;
 }
