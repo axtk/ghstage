@@ -7,7 +7,8 @@ import {withTitleLink} from './withTitleLink';
 
 export function getComponents(container: Element) {
     let titles = Array.from(container.querySelectorAll('h1'));
-    let title = container.querySelector<HTMLHeadingElement>('h1[id]') ?? titles.pop();
+    let title =
+        container.querySelector<HTMLHeadingElement>('h1[id]') ?? titles.pop();
 
     for (let t of titles) t.remove();
 

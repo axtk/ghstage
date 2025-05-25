@@ -15,7 +15,10 @@ export function renderLayout() {
 
     let bodyMain = append(createElement('main'), [coverSection, ...sections]);
 
-    let body = append(createElement('div', `body${nav ? '' : ' no-nav'}`), [bodyMain, nav]);
+    let body = append(createElement('div', `body${nav ? '' : ' no-nav'}`), [
+        bodyMain,
+        nav,
+    ]);
 
     let layout = append(createElement('div', 'layout'), withContainer([body]));
 
