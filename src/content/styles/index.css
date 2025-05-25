@@ -409,7 +409,7 @@ pre .hljs {
 ._cover h1 {
     font-size: 4.2em;
     text-align: center;
-    margin: 8vh 0 2.5vh;
+    margin: 2.5vh 0;
 }
 @media (max-width: 840px) {
     ._cover h1 {
@@ -515,7 +515,8 @@ pre .hljs {
     border-left: .1em solid var(--b1-medium);
 }
 ._cover .subsection:first-child {
-    padding-bottom: 10em;
+    padding-top: 3em;
+    padding-bottom: 5em;
 }
 @media (max-width: 840px) {
     ._cover .subsection {

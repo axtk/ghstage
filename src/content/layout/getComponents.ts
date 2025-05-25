@@ -6,7 +6,10 @@ import {withPageNav} from './withPageNav';
 import {withTitleLink} from './withTitleLink';
 
 export function getComponents(container: Element) {
-    let title = container.querySelector('h1');
+    let titles = Array.from(container.querySelectorAll('h1'));
+    let title = container.querySelector<HTMLHeadingElement>('h1[id]') ?? titles.pop();
+
+    for (let t of titles) t.remove();
 
     let description = createElement('div', 'description');
     let features = createElement('div', 'features');
