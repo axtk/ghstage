@@ -10,7 +10,9 @@ export function getComponents(container: Element) {
     let title =
         container.querySelector<HTMLHeadingElement>('h1[id]') ?? titles.pop();
 
-    for (let t of titles) t.remove();
+    for (let t of titles) {
+        if (t !== title) t.remove();
+    }
 
     let description = createElement('div', 'description');
     let features = createElement('div', 'features');
