@@ -295,6 +295,9 @@ main {
         width: 100%;
     }
 }
+.body.no-nav {
+    --max-content-width: 45em;
+}
 .body.no-nav > main {
     width: auto;
 }
