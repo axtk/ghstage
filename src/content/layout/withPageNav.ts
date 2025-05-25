@@ -1,5 +1,6 @@
 import {append} from './append';
 import {createElement} from './createElement';
+import {getRepoLink} from './getRepoLink';
 
 export function withPageNav(sections: Element[]) {
     for (let i = 0; i < sections.length; i++) {
@@ -28,13 +29,15 @@ export function withPageNav(sections: Element[]) {
                 next = `<a href="#${nextSectionId}">${nextSectionTitle}</a>`;
         }
 
+        let repoLink = getRepoLink()?.outerHTML;
+
         pagenav.innerHTML = [
             prev
                 ? `<span class="prev"><span class="icon">&larr;</span> ${prev}</span>`
                 : null,
             next
                 ? `<span class="next">${next} <span class="icon">&rarr;</span></span>`
-                : null,
+                : (repoLink && `<span class="next repo">${repoLink}</span>`),
         ]
             .filter(item => item !== null)
             .join('<span class="sep"> | </span>');
