@@ -295,7 +295,7 @@ main {
         width: 100%;
     }
 }
-main.no-nav {
+.body.no-nav > main {
     width: auto;
 }
 html:not(._cover) main {
