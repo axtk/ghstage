@@ -3,8 +3,7 @@ import {getConfig} from '../getConfig';
 export function getRepoLink() {
     let {repo} = getConfig();
 
-    if (!repo)
-        return null;
+    if (!repo) return null;
 
     let link = document.createElement('a');
 

@@ -37,7 +37,7 @@ export function withPageNav(sections: Element[]) {
                 : null,
             next
                 ? `<span class="next">${next} <span class="icon">&rarr;</span></span>`
-                : (repoLink && `<span class="next repo">${repoLink}</span>`),
+                : repoLink && `<span class="next repo">${repoLink}</span>`,
         ]
             .filter(item => item !== null)
             .join('<span class="sep"> | </span>');
