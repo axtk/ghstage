@@ -14,12 +14,23 @@ export function getComponents(container: Element) {
         if (t !== title) t.remove();
     }
 
+    let badges = createElement('div', 'badges');
     let description = createElement('div', 'description');
     let features = createElement('div', 'features');
     let installation = createElement('p', 'installation');
     let note = createElement('div', 'note');
 
-    let element = title?.nextElementSibling;
+    let element: Element | null | undefined = null;
+
+    element = title?.previousElementSibling;
+
+    while (element) {
+        badges.appendChild(element);
+        element = element.previousElementSibling;
+    }
+
+    element = title?.nextElementSibling;
+
     let sections: Element[] = [];
     let currentSection: Element | null = null;
 
@@ -69,6 +80,7 @@ export function getComponents(container: Element) {
 
     let coverSection = append(createElement('section', 'active cover'), [
         append(createElement('div', 'section-header subsection'), [
+            badges,
             withTitleLink(title),
             description,
             getActions(),
