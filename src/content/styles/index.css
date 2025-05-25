@@ -288,11 +288,15 @@ section h2:first-child {
 
 main {
     width: calc(70% - var(--space-x));
+    box-sizing: border-box;
 }
 @media (max-width: 840px) {
     main {
         width: 100%;
     }
+}
+main.no-nav {
+    width: auto;
 }
 html:not(._cover) main {
     padding: var(--content-padding-y) var(--content-padding-x);

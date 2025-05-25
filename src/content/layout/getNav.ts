@@ -32,6 +32,9 @@ export function getNav(container: Element) {
         }
     }
 
+    if (list.querySelectorAll(':scope > li').length < 2)
+        return null;
+
     let title = container.querySelector('h1')?.innerHTML;
     let h1: HTMLHeadingElement | null = null;
 
