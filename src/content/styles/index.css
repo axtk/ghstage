@@ -244,6 +244,7 @@ section h2:first-child {
         width: auto;
         font-size: inherit;
         border-top: .35em solid var(--b1);
+        border-radius: 0;
         padding-top: 1.4em;
         margin-top: 0;
         margin-left: 0;
