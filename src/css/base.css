@@ -101,7 +101,7 @@ a.button {
     border-color: var(--bc1) var(--bc2) var(--bc2) var(--bc1);
     border-radius: var(--r);
     padding: .25em 1.25em;
-    margin: .5em;
+    margin: .5em .35em;
     box-shadow: 0 0 .1em 0 var(--c0);
     transition: box-shadow .1s;
     box-sizing: border-box;
