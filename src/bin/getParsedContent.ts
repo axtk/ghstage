@@ -37,11 +37,12 @@ export async function getParsedContent() {
 
     for (let line of lines) {
         if (/^#+\s/.test(line)) {
-            let hash = `#${line.replace(/^#+/, '')}`;
+            let hash = `#${getSlug(line.replace(/^#+/, ''))}`;
+            let keepHash = /^#{3,}\s/.test(line);
 
             if (linkMap[hash] === undefined)
                 linkMap[hash] =
-                    `{{site.github.baseurl}}/${contentDir}/${navItem?.id ?? ''}${hash}`;
+                    `{{site.github.baseurl}}/${contentDir}/${navItem?.id ?? ''}${keepHash ? hash : ''}`;
         }
 
         if (line.startsWith('# ')) {
@@ -121,7 +122,7 @@ export async function getParsedContent() {
         installation,
         sections: sections.map(s => {
             return s.replace(
-                /\]\(#[^\)]+\)/g,
+                /\]\((#[^\)]+)\)/g,
                 (_, hash) => `](${linkMap[hash] ?? hash})`,
             );
         }),
