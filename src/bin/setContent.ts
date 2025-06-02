@@ -93,7 +93,7 @@ export async function setContent() {
             layout: index
             ---
 
-            <section class="intro">
+            <section class="intro-title">
                 <div class="badges">
                     ${md.render(badges)}
                 </div>
@@ -107,7 +107,7 @@ export async function setContent() {
                     ${await getRepoLink('button')}
                 </p>
             </section>
-            <section class="body">
+            <section class="intro">
                 <div class="features">
                     ${md.render(features)}
                 </div>
@@ -130,11 +130,13 @@ export async function setContent() {
             <link rel="icon" type="image/svg+xml" href="{{site.github.baseurl}}/favicon.svg">
             </head>
             <body>
-            <div class="${navContent ? '' : 'no-nav '}layout">
+            <div class="layout">
+            <div class="${navContent ? '' : 'no-nav '}body">
+            ${navContent}
             <main>
+            </div>
             {{content}}
             </main>
-            ${navContent}
             </div>
 
             ${counterContent}
