@@ -37,7 +37,11 @@ export async function getParsedContent() {
 
     for (let line of lines) {
         if (/^#+\s/.test(line)) {
-            let hash = `#${getSlug(line.replace(/^#+/, ''))}`;
+            let hashSlug = getSlug(line.replace(/^#+/, ''))
+                .toLowerCase()
+                .replace(/_/g, '-');
+
+            let hash = `#${hashSlug}`;
             let keepHash = /^#{3,}\s/.test(line);
 
             if (linkMap[hash] === undefined)
