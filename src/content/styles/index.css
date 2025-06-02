@@ -85,7 +85,6 @@ a:active {
     text-decoration: var(--link-decoration);
 }
 
-
 a.button {
     --bc1: color(from var(--c0) srgb r g b / 0.25);
     --bc2: color(
