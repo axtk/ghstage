@@ -3,10 +3,14 @@ export function getSlug(title: string | null) {
 
     let slug = title.trim();
 
-    if (/^(<.*>|`.*`)$/.test(slug)) slug = slug.slice(1, -1);
+    if (
+        (slug.startsWith('<') && slug.endsWith('>')) ||
+        (slug.startsWith('`') && slug.endsWith('`'))
+    )
+        slug = slug.slice(1, -1);
 
     slug = slug
-        .replace(/[<>`:\?!\.,]+/, ' ')
+        .replace(/[<>`:\?!\.,]+/g, ' ')
         .trim()
         .replace(/\s+/g, '_')
         .replace(/'/g, '');
