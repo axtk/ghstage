@@ -21,6 +21,7 @@ main {
 
         display: block;
         padding: 0;
+        margin: 0;
     }
 }
 
@@ -87,7 +88,8 @@ section.intro-title {
         border-left: none;
     }
     section.intro-title {
-        padding-bottom: 0;
+        background: var(--b1-light);
+        padding-bottom: 1em;
     }
 }
 .features {
@@ -99,7 +101,7 @@ section.intro-title {
 @media (max-width: 840px) {
     .features {
         padding: 0;
-        margin: 8vh 0 4vh;
+        margin: 2em 0;
     }
 }
 .features h2 {
@@ -108,7 +110,7 @@ section.intro-title {
     text-align: center;
     border: none;
     padding: .1em 0;
-    margin: .75em 0 0;
+    margin: .75em 0 .5em;
 }
 .features > ul {
     list-style: none;
@@ -150,6 +152,6 @@ p.installation {
 }
 @media (max-width: 840px) {
     p.installation {
-        margin: 6vh 0;
+        margin: 1.5em 0;
     }
 }
