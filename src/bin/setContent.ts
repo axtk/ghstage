@@ -15,29 +15,29 @@ const exec = promisify(defaultExec);
 const md = new Markdown({html: true});
 
 export async function setContent() {
-    let {colorScheme, contentDir, name, description: packageDescription} = await getConfig();
-
     let {
-        badges,
-        description,
-        features,
-        installation,
-        sections,
-        nav,
-    } = await getParsedContent();
+        colorScheme,
+        contentDir,
+        name,
+        description: packageDescription,
+    } = await getConfig();
+
+    let {badges, description, features, installation, sections, nav} =
+        await getParsedContent();
 
     let counterContent = await getCounterContent();
     let navContent = await getNav(nav);
     let escapedName = escapeHTML(name);
 
-    await Promise.all(['./_layouts', `./${contentDir}`].map(async path => {
-        try {
-            await access(path);
-        }
-        catch {
-            await mkdir(path);
-        }
-    }));
+    await Promise.all(
+        ['./_layouts', `./${contentDir}`].map(async path => {
+            try {
+                await access(path);
+            } catch {
+                await mkdir(path);
+            }
+        }),
+    );
 
     let packageVersion = (await exec(`npm view ${packageName} version`)).stdout
         .trim()
@@ -48,16 +48,18 @@ export async function setContent() {
     let packageUrl = `https://unpkg.com/${packageName}@${packageVersion}`;
 
     await Promise.all([
-        ...sections.map((content, i) => writeFile(
-            `./${contentDir}/${nav[i].id ?? `_untitled_${i}`}.md`,
-            toFileContent(`
+        ...sections.map((content, i) =>
+            writeFile(
+                `./${contentDir}/${nav[i].id ?? `_untitled_${i}`}.md`,
+                toFileContent(`
             ---
             layout: section
             ---
 
             ${content}
             `),
-        )),
+            ),
+        ),
         writeFile(
             './_layouts/index.html',
             toFileContent(`

@@ -1,11 +1,9 @@
 export function getSlug(title: string | null) {
-    if (!title)
-        return '';
+    if (!title) return '';
 
     let slug = title.trim();
 
-    if (/^(<.*>|`.*`)$/.test(slug))
-        slug = slug.slice(1, -1);
+    if (/^(<.*>|`.*`)$/.test(slug)) slug = slug.slice(1, -1);
 
     slug = slug
         .replace(/[<>`:\?!\.,]+/, ' ')
@@ -13,8 +11,7 @@ export function getSlug(title: string | null) {
         .replace(/\s+/g, '_')
         .replace(/'/g, '');
 
-    if (/^\w+\(\)$/.test(slug))
-        slug = slug.slice(0, -2);
+    if (/^\w+\(\)$/.test(slug)) slug = slug.slice(0, -2);
 
     return slug;
 }

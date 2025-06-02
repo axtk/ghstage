@@ -40,7 +40,8 @@ export async function getParsedContent() {
             let hash = `#${line.replace(/^#+/, '')}`;
 
             if (linkMap[hash] === undefined)
-                linkMap[hash] = `{{site.github.baseurl}}/${contentDir}/${navItem?.id ?? ''}${hash}`;
+                linkMap[hash] =
+                    `{{site.github.baseurl}}/${contentDir}/${navItem?.id ?? ''}${hash}`;
         }
 
         if (line.startsWith('# ')) {
@@ -50,16 +51,14 @@ export async function getParsedContent() {
         }
 
         if (line.startsWith('## ')) {
-            if (!indexComplete)
-                indexComplete = true;
+            if (!indexComplete) indexComplete = true;
 
             if (section.length !== 0) {
                 sections.push(joinLines(section));
                 section = [];
             }
 
-            if (navItem)
-                nav.push(navItem);
+            if (navItem) nav.push(navItem);
 
             let navItemTitle = line.slice(2).trim();
 
@@ -79,8 +78,7 @@ export async function getParsedContent() {
             });
         }
 
-        if (indexComplete)
-            section.push(line);
+        if (indexComplete) section.push(line);
         else {
             if (!titleComplete) {
                 badges.push(line);
@@ -92,7 +90,10 @@ export async function getParsedContent() {
                 continue;
             }
 
-            if (!featuresComplete && line.startsWith('- ') || line.startsWith('* ')) {
+            if (
+                (!featuresComplete && line.startsWith('- ')) ||
+                line.startsWith('* ')
+            ) {
                 features.push(line);
                 featuresStarted = true;
                 continue;
@@ -100,17 +101,14 @@ export async function getParsedContent() {
 
             let installationMatches = line.match(/`npm (i|install) [^`]+`/);
 
-            if (installationMatches)
-                installation = installationMatches[0];
+            if (installationMatches) installation = installationMatches[0];
             else note.push(line);
         }
     }
 
-    if (section.length !== 0)
-        sections.push(joinLines(section));
+    if (section.length !== 0) sections.push(joinLines(section));
 
-    if (navItem)
-        nav.push(navItem);
+    if (navItem) nav.push(navItem);
 
     return {
         badges: joinLines(badges),
@@ -120,7 +118,10 @@ export async function getParsedContent() {
         note: joinLines(note),
         installation,
         sections: sections.map(s => {
-            return s.replace(/\]\(#[^\)]+\)/g, (_, hash) => `](${linkMap[hash] ?? hash})`);
+            return s.replace(
+                /\]\(#[^\)]+\)/g,
+                (_, hash) => `](${linkMap[hash] ?? hash})`,
+            );
         }),
         nav,
     };

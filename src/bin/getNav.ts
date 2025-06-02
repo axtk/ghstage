@@ -3,8 +3,7 @@ import {getConfig} from './getConfig';
 import {getRepoLink} from './getRepoLink';
 
 export async function getNav(nav: NavItem[]) {
-    if (nav.length < 2)
-        return '';
+    if (nav.length < 2) return '';
 
     let {name, contentDir} = await getConfig();
     let s = '';
@@ -14,9 +13,8 @@ export async function getNav(nav: NavItem[]) {
 
         if (items.length !== 0) {
             s += '\n    <ul>';
-            
-            for (let {title} of items)
-                s += `\n        <li>${title}</a>`;
+
+            for (let {title} of items) s += `\n        <li>${title}</a>`;
 
             s += '\n    </ul>\n';
         }
@@ -24,8 +22,7 @@ export async function getNav(nav: NavItem[]) {
         s += '</li>';
     }
 
-    if (!s)
-        return '';
+    if (!s) return '';
 
     let repoLink = await getRepoLink();
 
