@@ -5,7 +5,7 @@
 }
 @media (max-width: 840px) {
     .body {
-        display: block;
+        flex-direction: column-reverse;
     }
 }
 .body > nav {
@@ -23,7 +23,7 @@
 }
 @media (max-width: 840px) {
     .body > nav {
-        width: auto;
+        width: 100%;
         font-size: inherit;
         border-top: .35em solid var(--b1);
         border-radius: 0;
