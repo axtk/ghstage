@@ -101,9 +101,9 @@ export async function getParsedContent() {
 
             featuresComplete = true;
 
-            let installationMatches = line.match(/`npm (i|install) [^`]+`/);
+            let installationMatches = line.match(/`(npm (i|install) [^`]+)`/);
 
-            if (installationMatches) installation = installationMatches[0];
+            if (installationMatches) installation = installationMatches[1];
             else note.push(line);
         }
     }
