@@ -20,7 +20,7 @@ export async function getNav(nav: NavItem[]) {
             s += '\n    <ul>';
 
             for (let {title} of items)
-                s += `\n        <li>${md.renderInline(title)}</a>`;
+                s += `\n        <li>${md.renderInline(title)}</li>`;
 
             s += '\n    </ul>\n';
         }
