@@ -6,8 +6,7 @@ export function toFileContent(x: string) {
     if (!tab) return `${x.trim()}\n`;
 
     for (let i = 0; i < lines.length; i++) {
-        if (lines[i].startsWith(tab))
-            lines[i] = lines[i].slice(tab.length);
+        if (lines[i].startsWith(tab)) lines[i] = lines[i].slice(tab.length);
     }
 
     return `${lines.join('\n').trim()}\n`;
