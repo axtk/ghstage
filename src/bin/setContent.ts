@@ -20,6 +20,7 @@ export async function setContent() {
         contentDir,
         name,
         description: packageDescription,
+        backstory,
     } = await getConfig();
 
     let {badges, description, features, installation, sections, nav} =
@@ -115,6 +116,7 @@ layout: index
         <span class="sep"> • </span>
         ${await getRepoLink('button')}
     </p>
+    ${backstory ? `<p class="ref"><a href="${backstory}">Backstory</a></p>` : ''}
 </section>
 <section class="intro">
     <div class="features">

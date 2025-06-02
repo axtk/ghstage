@@ -61,6 +61,9 @@ header {
 .actions .sep {
     display: none;
 }
+.ref {
+    font-size: .9em;
+}
 
 section {
     max-width: var(--max-content-width);

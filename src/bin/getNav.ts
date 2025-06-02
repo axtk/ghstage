@@ -8,7 +8,7 @@ const md = new Markdown({html: true});
 export async function getNav(nav: NavItem[]) {
     if (nav.length < 2) return '';
 
-    let {name, contentDir} = await getConfig();
+    let {name, contentDir, backstory} = await getConfig();
     let s = '';
 
     for (let {id, title, items} of nav) {
@@ -33,7 +33,11 @@ export async function getNav(nav: NavItem[]) {
     let repoLink = await getRepoLink();
 
     s = `<ul>${s}\n</ul>`;
-    s = `${s}\n<ul class="ref">\n<li>${repoLink}</li>\n</ul>`;
+    s = `${s}
+<ul class="ref">
+    <li>${repoLink}</li>
+    ${backstory ? `<li><a href="${backstory}">Backstory</a></li>` : ''}
+</ul>`;
     s = `<h1><a href="{{site.github.baseurl}}/">${name}</a></h1>\n${s}`;
 
     return `<nav>\n${s}\n</nav>`;
