@@ -211,3 +211,16 @@ pre > code {
     background: transparent;
     padding: 1.25em;
 }
+
+html.blank h1 {
+    font-size: 10vmin;
+    color: var(--b1-light);
+}
+html.blank .layout {
+    display: flex;
+    height: 90vh;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+

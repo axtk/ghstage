@@ -183,7 +183,6 @@ export async function setContent() {
                 <meta http-equiv="refresh" content="0; URL={{site.github.baseurl}}/${contentDir}/{{page.start_section_id}}">
                 <title>${escapedName}</title>
                 <link rel="stylesheet" href="${packageUrl}/dist/css/base.css">
-                <link rel="stylesheet" href="${packageUrl}/dist/css/blank.css">
                 <link rel="icon" type="image/svg+xml" href="{{site.github.baseurl}}/favicon.svg">
             </head>
             <body>
