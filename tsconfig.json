@@ -1,8 +1,6 @@
 {
     "include": [
-        "index.ts",
-        "src/bin/run.ts",
-        "src/types/window.d.ts"
+        "src/**/*"
     ],
     "compilerOptions": {
         "lib": ["ESNext", "DOM", "DOM.Iterable"],
@@ -10,6 +8,7 @@
         "outDir": "dist",
         "moduleResolution": "node",
         "strict": true,
+        "allowSyntheticDefaultImports": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true
     }

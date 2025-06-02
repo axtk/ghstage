@@ -2,15 +2,14 @@
   "name": "ghstage",
   "version": "1.8.6",
   "description": "",
-  "main": "dist/index.js",
+  "main": "dist/bin.js",
   "bin": {
     "ghshape": "dist/bin.js"
   },
   "scripts": {
-    "build": "npm-run-all clean -p build-js build-bin -s build-css",
+    "build": "npm-run-all clean build-bin -s build-css",
     "build-bin": "esbuild ./src/bin/run.ts --bundle --outfile=dist/bin.js --platform=node",
-    "build-css": "node -e \"require('node:fs').cpSync('src/content/styles', 'dist/styles', {force: true, recursive: true});\"",
-    "build-js": "esbuild index.ts --bundle --outfile=dist/index.js --platform=browser --minify",
+    "build-css": "node -e \"require('node:fs').cpSync('src/css', 'dist/css', {force: true, recursive: true});\"",
     "clean": "node -e \"require('node:fs').rmSync('dist', {force: true, recursive: true});\"",
     "prepublishOnly": "npm run build",
     "preversion": "npm-run-all shape build",
@@ -23,11 +22,14 @@
   "license": "ISC",
   "author": "axtk",
   "devDependencies": {
+    "@types/markdown-it": "^14.1.2",
     "@types/node": "^22.14.1",
     "esbuild": "^0.25.2",
     "npm-run-all": "^4.1.5"
   },
   "dependencies": {
-    "args-json": "^1.2.4"
+    "args-json": "^1.2.4",
+    "markdown-it": "^14.1.0",
+    "stfm": "^0.1.0"
   }
 }

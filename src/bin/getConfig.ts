@@ -20,6 +20,7 @@ export async function getConfig(): Promise<BinConfig> {
     config = {
         ghPagesBranch: 'gh-pages',
         mainBranch: 'main',
+        contentDir: 'x',
         ...toConfig(metadata),
         ...parseArgs<BinConfig>(process.argv.slice(2)),
     };

@@ -1,9 +1,26 @@
-import type {ContentConfig} from './ContentConfig';
+import type {Theme} from './Theme';
 
-export type BinConfig = Omit<ContentConfig, 'scriptSrc'> & {
-    /** GitHub Pages branch */
+export type BinConfig = {
+    colorScheme?: string;
+    theme?: Theme;
+    name?: string;
+    description?: string;
+    version?: string;
+    repo?: string;
+    npm?: string;
+    /**
+     * GitHub Pages branch
+     * @default 'gh-pages'
+     */
     ghPagesBranch?: string;
+    /**
+     * @default 'main'
+     */
     mainBranch?: string;
+    /**
+     * @default 'x'
+     */
+    contentDir?: string;
     /** Whether to remove the GitHub Pages branch and quit */
     remove?: boolean;
     /** Content of the './CNAME' file */

@@ -1,22 +1,43 @@
 import {exec as defaultExec} from 'node:child_process';
 import {access, mkdir, writeFile} from 'node:fs/promises';
 import {promisify} from 'node:util';
-import {codeStylePath} from '../const/codeStylePath';
+import Markdown from 'markdown-it';
+import {escapeHTML} from 'stfm';
 import {packageName} from '../const/packageName';
-import {getStylePath} from '../utils/getStylePath';
 import {getConfig} from './getConfig';
 import {getCounterContent} from './getCounterContent';
+import {getNav} from './getNav';
+import {getParsedContent} from './getParsedContent';
+import {getRepoLink} from './getRepoLink';
+import {toFileContent} from './toFileContent';
 
 const exec = promisify(defaultExec);
+const md = new Markdown({html: true});
 
 export async function setContent() {
-    let {colorScheme, theme, name, version, repo, npm} = await getConfig();
+    let {colorScheme, contentDir, name, description: packageDescription} = await getConfig();
 
-    try {
-        await access('./_includes');
-    } catch {
-        await mkdir('./_includes');
-    }
+    let {
+        badges,
+        description,
+        features,
+        installation,
+        sections,
+        nav,
+    } = await getParsedContent();
+
+    let counterContent = await getCounterContent();
+    let navContent = await getNav(nav);
+    let escapedName = escapeHTML(name);
+
+    await Promise.all(['./_layouts', `./${contentDir}`].map(async path => {
+        try {
+            await access(path);
+        }
+        catch {
+            await mkdir(path);
+        }
+    }));
 
     let packageVersion = (await exec(`npm view ${packageName} version`)).stdout
         .trim()
@@ -26,31 +47,129 @@ export async function setContent() {
 
     let packageUrl = `https://unpkg.com/${packageName}@${packageVersion}`;
 
-    let initData = {
-        name,
-        version,
-        repo,
-        npm,
-        colorScheme,
-        theme,
-    };
+    await Promise.all([
+        ...sections.map((content, i) => writeFile(
+            `./${contentDir}/${nav[i].id ?? `_untitled_${i}`}.md`,
+            toFileContent(`
+            ---
+            layout: section
+            ---
 
-    let htmlContent = [
-        await getCounterContent(),
-        '',
-        colorScheme
-            ? `<script>document.documentElement.style.setProperty('--color-scheme', '${colorScheme}');</script>`
-            : null,
-        `<script>window._ghst=${JSON.stringify(initData).replace(/</g, '\\x3c')};</script>`,
-        '',
-        `<link rel="stylesheet" href="${packageUrl}/dist${getStylePath(theme)}">`,
-        `<link rel="stylesheet" href="${packageUrl}/dist${codeStylePath}">`,
-        `<script src="${packageUrl}/dist/index.js"></script>`,
-        '',
-        '<link rel="icon" type="image/svg+xml" href="/favicon.svg">',
-    ]
-        .filter(s => s !== null)
-        .join('\n');
+            ${content}
+            `),
+        )),
+        writeFile(
+            './_layouts/index.html',
+            toFileContent(`
+            <!DOCTYPE html>
+            <html lang="en"${colorScheme ? ` data-color-scheme="${colorScheme}"` : ''}>
+            <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>${escapedName}${packageDescription ? ` | ${escapeHTML(packageDescription)}` : ''}</title>
+            <link rel="stylesheet" href="${packageUrl}/dist/css/base.css">
+            <link rel="stylesheet" href="${packageUrl}/dist/css/index.css">
+            <link rel="stylesheet" href="${packageUrl}/dist/css/code.lightbulb.css">
+            <link rel="icon" type="image/svg+xml" href="{{site.github.baseurl}}/favicon.svg">
+            </head>
+            <body>
+            <div class="layout">
+            <main>
+            {{content}}
+            </main>
+            </div>
 
-    await writeFile('./_includes/head-custom.html', `\n${htmlContent}\n`);
+            ${counterContent}
+            </body>
+            </html>
+            `),
+        ),
+        writeFile(
+            './index.html',
+            toFileContent(`
+            ---
+            layout: index
+            ---
+
+            <section class="intro">
+                <div class="badges">
+                    ${md.render(badges)}
+                </div>
+                <h1>${name}</h1>
+                <div class="description">
+                    ${md.render(description)}
+                </div>
+                <p class="actions">
+                    <a href="{{site.github.baseurl}}/start" class="primary button">Docs ›››</a>
+                    <span class="sep"> • </span>
+                    ${await getRepoLink('button')}
+                </p>
+            </section>
+            <section class="body">
+                <div class="features">
+                    ${md.render(features)}
+                </div>
+                <p class="installation"><code>${installation}</code></p>
+            </section>
+            `),
+        ),
+        writeFile(
+            './_layouts/section.html',
+            toFileContent(`
+            <!DOCTYPE html>
+            <html lang="en"${colorScheme ? ` data-color-scheme="${colorScheme}"` : ''}>
+            <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>{{page.title}} | ${escapedName}</title>
+            <link rel="stylesheet" href="${packageUrl}/dist/css/base.css">
+            <link rel="stylesheet" href="${packageUrl}/dist/css/section.css">
+            <link rel="stylesheet" href="${packageUrl}/dist/css/code.lightbulb.css">
+            <link rel="icon" type="image/svg+xml" href="{{site.github.baseurl}}/favicon.svg">
+            </head>
+            <body>
+            <div class="${navContent ? '' : 'no-nav '}layout">
+            <main>
+            {{content}}
+            </main>
+            ${navContent}
+            </div>
+
+            ${counterContent}
+            </body>
+            </html>
+            `),
+        ),
+        writeFile(
+            './_layouts/start.html',
+            toFileContent(`
+            <!DOCTYPE html>
+            <html class="blank" lang="en">
+            <head>
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width">
+                <meta http-equiv="refresh" content="0; URL={{site.github.baseurl}}/${contentDir}/{{page.start_section_id}}">
+                <title>${escapedName}</title>
+                <link rel="stylesheet" href="${packageUrl}/dist/css/base.css">
+                <link rel="stylesheet" href="${packageUrl}/dist/css/blank.css">
+                <link rel="icon" type="image/svg+xml" href="{{site.github.baseurl}}/favicon.svg">
+            </head>
+            <body>
+            <div class="layout">
+                <h1>${escapedName}</h1>
+            </div>
+            </body>
+            </html>
+            `),
+        ),
+        writeFile(
+            './start.html',
+            toFileContent(`
+            ---
+            layout: start
+            start_section_id: "${nav[0].id}"
+            ---
+            `),
+        ),
+    ]);
 }
