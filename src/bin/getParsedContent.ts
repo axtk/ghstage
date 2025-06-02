@@ -90,7 +90,10 @@ export async function getParsedContent() {
                 continue;
             }
 
-            if (!featuresComplete && (line.startsWith('- ') || line.startsWith('* '))) {
+            if (
+                !featuresComplete &&
+                (line.startsWith('- ') || line.startsWith('* '))
+            ) {
                 features.push(line);
                 featuresStarted = true;
                 continue;
