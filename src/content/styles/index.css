@@ -12,7 +12,7 @@ html {
         0.9
     );
 
-    --c0: oklch(from var(--b0) calc(100 * (0.8 - l)) 0 0 / 0.72);
+    --c0: oklch(from var(--b0) calc(100 * (0.78 - l)) 0 0 / 0.82);
     --c1: oklch(from var(--b1) calc(100 * (0.78 - l)) 0 0 / 0.82);
 
     --link-color: color(
