@@ -36,19 +36,6 @@ export async function getParsedContent() {
     let indexComplete = false;
 
     for (let line of lines) {
-        if (/^#+\s/.test(line)) {
-            let hashSlug = getSlug(line.replace(/^#+/, ''))
-                .toLowerCase()
-                .replace(/_/g, '-');
-
-            let hash = `#${hashSlug}`;
-            let keepHash = /^#{3,}\s/.test(line);
-
-            if (linkMap[hash] === undefined)
-                linkMap[hash] =
-                    `{{site.github.baseurl}}/${contentDir}/${navItem?.id ?? ''}${keepHash ? hash : ''}`;
-        }
-
         if (line.startsWith('# ')) {
             title = line;
             titleComplete = true;
@@ -81,6 +68,18 @@ export async function getParsedContent() {
                 id: getSlug(navItemSubtitle),
                 title: navItemSubtitle,
             });
+        }
+
+        if (/^#+\s/.test(line)) {
+            let hashSlug = getSlug(line.replace(/^#+/, ''))
+                .toLowerCase()
+                .replace(/_/g, '-');
+
+            let hash = `#${hashSlug}`;
+
+            if (linkMap[hash] === undefined)
+                linkMap[hash] =
+                    `{{site.github.baseurl}}/${contentDir}/${navItem?.id ?? ''}`;
         }
 
         if (indexComplete) section.push(line);
