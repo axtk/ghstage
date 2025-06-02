@@ -118,6 +118,7 @@ layout: index
 </section>
 <section class="intro">
     <div class="features">
+        <h2>Features</h2>
         ${md.render(features)}
     </div>
     <p class="installation"><code>${escapeHTML(installation)}</code></p>
