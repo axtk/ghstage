@@ -576,6 +576,9 @@ pre > code {
     text-align: center;
     margin: 6vh 0;
 }
+.installation code {
+    background: transparent;
+}
 @media (max-width: 840px) {
     ._cover p.installation {
         margin: 6vh 0;
