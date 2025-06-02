@@ -53,7 +53,7 @@ body {
     margin: 0;
 }
 @media (max-width: 840px) {
-    html {
+    :root {
         --content-padding-x: .85rem;
         --content-padding-y: 1rem;
     }

@@ -18,6 +18,9 @@ main {
 @media (max-width: 840px) {
     main {
         --max-content-width: 100%;
+
+        display: block;
+        padding: 0;
     }
 }
 
