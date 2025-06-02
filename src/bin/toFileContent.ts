@@ -5,10 +5,10 @@ export function toFileContent(x: string) {
 
     if (!tab) return `${x.trim()}\n`;
 
-    let tabPattern = new RegExp(`^${tab}`);
+    for (let i = 0; i < lines.length; i++) {
+        if (lines[i].startsWith(tab))
+            lines[i] = lines[i].slice(tab.length);
+    }
 
-    return `${lines
-        .map(s => s.replace(tabPattern, ''))
-        .join('\n')
-        .trim()}\n`;
+    return `${lines.join('\n').trim()}\n`;
 }
