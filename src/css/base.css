@@ -200,10 +200,6 @@ code {
     padding: .15em .35em;
 }
 pre,
-code {
-    font-size: .9em;
-}
-pre,
 pre.highlight {
     line-height: 1.25;
     color: inherit;

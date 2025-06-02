@@ -85,17 +85,18 @@ export async function getParsedContent() {
                 continue;
             }
 
-            if (!featuresStarted) {
-                description.push(line);
-                continue;
-            }
-
             if (
                 !featuresComplete &&
                 (line.startsWith('- ') || line.startsWith('* '))
             ) {
-                features.push(line);
                 featuresStarted = true;
+                features.push(line);
+                continue;
+            }
+
+            if (!featuresStarted) {
+                featuresComplete = true;
+                description.push(line);
                 continue;
             }
 
