@@ -54,6 +54,12 @@ export async function setContent() {
                 toFileContent(`
             ---
             layout: section
+            prev_section:
+                id: "${nav[i - 1]?.id ?? ''}"
+                title: "${md.render(nav[i - 1]?.title ?? '')}"
+            next_section:
+                id: "${nav[i + 1]?.id ?? ''}"
+                title: "${md.render(nav[i + 1]?.title ?? '')}"
             ---
 
             ${content}
@@ -111,7 +117,7 @@ export async function setContent() {
                 <div class="features">
                     ${md.render(features)}
                 </div>
-                <p class="installation"><code>${installation}</code></p>
+                <p class="installation"><code>${escapeHTML(installation)}</code></p>
             </section>
             `),
         ),
@@ -135,6 +141,25 @@ export async function setContent() {
             ${navContent}
             <main>
             {{content}}
+
+            <p class="pagenav">
+                <span class="prev">
+                    <span class="icon">←</span>
+                    {% if page.prev_section.id == "" %}<a href="{{site.github.baseurl}}/">Intro</a>{% else %}<a href="{{site.github.baseurl}}/${contentDir}/{{page.prev_section.id}}">{{page.prev_section.title}}</a>{% endif %}
+                </span>
+                <span class="sep">|</span>
+                {% if page.next_section.id == "" %}
+                <span class="repo next">
+                    ${await getRepoLink()}
+                    <span class="icon">✦</span>
+                </span>
+                {% else %}
+                <span class="next">
+                    <a href="{{site.github.baseurl}}/${contentDir}/{{page.next_section.id}}">{{page.next_section.title}}</a>
+                    <span class="icon">→</span>
+                </span>
+                {% endif %}
+            </p>
             </main>
             </div>
             </div>
