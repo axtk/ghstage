@@ -1,6 +1,9 @@
+import Markdown from 'markdown-it';
 import type {NavItem} from '../types/NavItem';
 import {getConfig} from './getConfig';
 import {getRepoLink} from './getRepoLink';
+
+const md = new Markdown({html: true});
 
 export async function getNav(nav: NavItem[]) {
     if (nav.length < 2) return '';
@@ -9,12 +12,12 @@ export async function getNav(nav: NavItem[]) {
     let s = '';
 
     for (let {id, title, items} of nav) {
-        s += `\n<li><a href="{{site.github.baseurl}}/${contentDir}/${id}">${title}</a>`;
+        s += `\n<li><a href="{{site.github.baseurl}}/${contentDir}/${id}">${md.render(title)}</a>`;
 
         if (items.length !== 0) {
             s += '\n    <ul>';
 
-            for (let {title} of items) s += `\n        <li>${title}</a>`;
+            for (let {title} of items) s += `\n        <li>${md.render(title)}</a>`;
 
             s += '\n    </ul>\n';
         }
