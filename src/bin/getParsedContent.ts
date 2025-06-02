@@ -95,10 +95,11 @@ export async function getParsedContent() {
             }
 
             if (!featuresStarted) {
-                featuresComplete = true;
                 description.push(line);
                 continue;
             }
+
+            featuresComplete = true;
 
             let installationMatches = line.match(/`npm (i|install) [^`]+`/);
 
