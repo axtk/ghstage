@@ -64,7 +64,7 @@ export async function setContent() {
             './_layouts/index.html',
             toFileContent(`
             <!DOCTYPE html>
-            <html lang="en"${colorScheme ? ` data-color-scheme="${colorScheme}"` : ''}>
+            <html lang="en"${colorScheme ? ` style="--color-scheme: ${colorScheme}"` : ''}>
             <head>
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -119,7 +119,7 @@ export async function setContent() {
             './_layouts/section.html',
             toFileContent(`
             <!DOCTYPE html>
-            <html lang="en"${colorScheme ? ` data-color-scheme="${colorScheme}"` : ''}>
+            <html lang="en"${colorScheme ? ` style="--color-scheme: ${colorScheme}"` : ''}>
             <head>
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -148,7 +148,7 @@ export async function setContent() {
             './_layouts/start.html',
             toFileContent(`
             <!DOCTYPE html>
-            <html class="blank" lang="en">
+            <html lang="en" class="blank"${colorScheme ? ` style="--color-scheme: ${colorScheme}"` : ''}>
             <head>
                 <meta charset="utf-8">
                 <meta name="viewport" content="width=device-width">
