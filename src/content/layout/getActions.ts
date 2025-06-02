@@ -6,8 +6,8 @@ export function getActions() {
     let links = createElement('p', 'actions');
 
     links.innerHTML = [
-        '<a href="#~start" data-type="docs" class="primary">Docs ›››</a>',
-        repo ? `<a href="${repo}" data-type="repo">GitHub</a>` : null,
+        '<a href="#~start" data-type="docs" class="primary button">Docs ›››</a>',
+        repo ? `<a href="${repo}" data-type="repo" class="button">GitHub</a>` : null,
         // npm ? `<a href="${npm}" data-type="npm">npm</a>` : null,
     ]
         .filter(link => link !== null)

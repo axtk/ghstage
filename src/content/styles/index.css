@@ -4,6 +4,7 @@
     --b0: light-dark(white, #1a1a1a);
     --b1: var(--color-scheme, gray);
     --link-color: light-dark(royalblue, deepskyblue);
+    --button-color: light-dark(royalblue, royalblue);
 
     --b1-light: color(from var(--b1) srgb r g b / 0.12);
     --b1-medium: color(
@@ -17,7 +18,7 @@
 
     --c0: oklch(from var(--b0) calc(100 * (0.78 - l)) 0 0 / 0.82);
     --c1: oklch(from var(--b1) calc(100 * (0.78 - l)) 0 0 / 0.82);
-    --c2: oklch(from var(--link-color) calc(100 * (0.75 - l)) 0 0 / 0.82);
+    --c2: oklch(from var(--button-color) calc(100 * (0.75 - l)) 0 0 / 0.82);
 
     /*
     --link-color: color(
@@ -82,6 +83,47 @@ a:hover,
 a:active {
     color: var(--link-color);
     text-decoration: var(--link-decoration);
+}
+
+
+a.button {
+    --bc1: color(from var(--c0) srgb r g b / 0.25);
+    --bc2: color(
+        from var(--c0) srgb calc(0.8 * r) calc(0.8 * g) calc(0.8 * b) /
+        0.35
+    );
+
+    display: inline-block;
+    min-width: 20%;
+    text-decoration: none;
+    color: var(--b0);
+    background: color(from var(--c0) srgb r g b / 0.65);
+    border: .075em solid var(--c0);
+    border-color: var(--bc1) var(--bc2) var(--bc2) var(--bc1);
+    border-radius: var(--r);
+    padding: .25em 1.25em;
+    margin: .5em;
+    box-shadow: 0 0 .1em 0 var(--c0);
+    transition: box-shadow .1s;
+    box-sizing: border-box;
+}
+a.button:hover {
+    box-shadow: 0 0 .25em 0 var(--c0);
+}
+a.button.primary {
+    --bc1: color(from var(--button-color) srgb r g b / 0.55);
+    --bc2: color(
+        from var(--button-color) srgb calc(0.8 * r) calc(0.8 * g) calc(0.8 * b) /
+        0.7
+    );
+
+    font-weight: bold;
+    color: var(--c2);
+    background: var(--button-color);
+    box-shadow: 0 0 .2em 0 var(--button-color);
+}
+a.button.primary:hover {
+    box-shadow: 0 0 .35em 0 var(--button-color);
 }
 
 h1 {
@@ -422,45 +464,6 @@ pre > code {
 }
 ._cover .actions .sep {
     display: none;
-}
-._cover .actions a {
-    --bc1: color(from var(--c0) srgb r g b / 0.25);
-    --bc2: color(
-        from var(--c0) srgb calc(0.8 * r) calc(0.8 * g) calc(0.8 * b) /
-        0.35
-    );
-
-    display: inline-block;
-    min-width: 20%;
-    text-decoration: none;
-    color: var(--b0);
-    background: color(from var(--c0) srgb r g b / 0.65);
-    border: .075em solid var(--c0);
-    border-color: var(--bc1) var(--bc2) var(--bc2) var(--bc1);
-    border-radius: var(--r);
-    padding: .25em 1.25em;
-    margin: .5em;
-    box-shadow: 0 0 .1em 0 var(--c0);
-    transition: box-shadow .1s;
-    box-sizing: border-box;
-}
-._cover .actions a.primary {
-    --bc1: color(from var(--link-color) srgb r g b / 0.55);
-    --bc2: color(
-        from var(--link-color) srgb calc(0.8 * r) calc(0.8 * g) calc(0.8 * b) /
-        0.7
-    );
-
-    font-weight: bold;
-    color: var(--c2);
-    background: var(--link-color);
-    box-shadow: 0 0 .2em 0 var(--link-color);
-}
-._cover .actions a:hover {
-    box-shadow: 0 0 .25em 0 var(--c0);
-}
-._cover .actions a.primary:hover {
-    box-shadow: 0 0 .35em 0 var(--link-color);
 }
 ._cover .body {
     --max-content-width: 32em;
