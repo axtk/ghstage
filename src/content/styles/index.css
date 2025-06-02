@@ -159,7 +159,7 @@ h4 {
     margin: 1em 0 .65em 0;
 }
 
-.layout {
+._cover .layout {
     display: flex;
     flex-direction: column;
     min-height: 90vh;
