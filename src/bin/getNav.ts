@@ -12,7 +12,7 @@ export async function getNav(nav: NavItem[]) {
     let s = '';
 
     for (let {id, title, items} of nav) {
-        let itemTitle = md.render(title);
+        let itemTitle = md.renderInline(title);
 
         s += `\n<li>{% if page.section.id == "${id}" %}<strong>${itemTitle}</strong>{% else %}<a href="{{site.github.baseurl}}/${contentDir}/${id}">${itemTitle}</a>{% endif %}`;
 
@@ -20,7 +20,7 @@ export async function getNav(nav: NavItem[]) {
             s += '\n    <ul>';
 
             for (let {title} of items)
-                s += `\n        <li>${md.render(title)}</a>`;
+                s += `\n        <li>${md.renderInline(title)}</a>`;
 
             s += '\n    </ul>\n';
         }

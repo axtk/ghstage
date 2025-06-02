@@ -56,13 +56,13 @@ export async function setContent() {
             layout: section
             section:
                 id: "${nav[i].id ?? ''}"
-                title: "${md.render(nav[i].title ?? '')}"
+                title: "${md.renderInline(nav[i].title ?? '')}"
             prev_section:
                 id: "${nav[i - 1]?.id ?? ''}"
-                title: "${md.render(nav[i - 1]?.title ?? '')}"
+                title: "${md.renderInline(nav[i - 1]?.title ?? '')}"
             next_section:
                 id: "${nav[i + 1]?.id ?? ''}"
-                title: "${md.render(nav[i + 1]?.title ?? '')}"
+                title: "${md.renderInline(nav[i + 1]?.title ?? '')}"
             ---
 
             ${content}
