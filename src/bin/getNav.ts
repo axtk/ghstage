@@ -19,7 +19,8 @@ export async function getNav(nav: NavItem[]) {
         if (items.length !== 0) {
             s += '\n    <ul>';
 
-            for (let {title} of items) s += `\n        <li>${md.render(title)}</a>`;
+            for (let {title} of items)
+                s += `\n        <li>${md.render(title)}</a>`;
 
             s += '\n    </ul>\n';
         }
