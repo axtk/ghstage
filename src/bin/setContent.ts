@@ -54,6 +54,9 @@ export async function setContent() {
                 toFileContent(`
             ---
             layout: section
+            section:
+                id: "${nav[i].id ?? ''}"
+                title: "${md.render(nav[i].title ?? '')}"
             prev_section:
                 id: "${nav[i - 1]?.id ?? ''}"
                 title: "${md.render(nav[i - 1]?.title ?? '')}"
@@ -129,7 +132,7 @@ export async function setContent() {
             <head>
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
-            <title>{{page.title}} | ${escapedName}</title>
+            <title>{{page.section.title | strip_html}} | ${escapedName}</title>
             <link rel="stylesheet" href="${packageUrl}/dist/css/base.css">
             <link rel="stylesheet" href="${packageUrl}/dist/css/section.css">
             <link rel="stylesheet" href="${packageUrl}/dist/css/code.lightbulb.css">

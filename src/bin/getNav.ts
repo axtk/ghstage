@@ -12,7 +12,9 @@ export async function getNav(nav: NavItem[]) {
     let s = '';
 
     for (let {id, title, items} of nav) {
-        s += `\n<li><a href="{{site.github.baseurl}}/${contentDir}/${id}">${md.render(title)}</a>`;
+        let itemTitle = md.render(title);
+
+        s += `\n<li>{% if page.section.id == "${id}" %}<strong>${itemTitle}</strong>{% else %}<a href="{{site.github.baseurl}}/${contentDir}/${id}">${itemTitle}</a>{% endif %}`;
 
         if (items.length !== 0) {
             s += '\n    <ul>';
