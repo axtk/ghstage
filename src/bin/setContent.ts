@@ -134,9 +134,9 @@ export async function setContent() {
             <div class="${navContent ? '' : 'no-nav '}body">
             ${navContent}
             <main>
-            </div>
             {{content}}
             </main>
+            </div>
             </div>
 
             ${counterContent}
