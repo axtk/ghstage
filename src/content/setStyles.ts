@@ -1,8 +1,6 @@
 import {codeStylePath} from '../const/codeStylePath';
 import {packageName} from '../const/packageName';
-import {getSVGDataURL} from '../utils/getSVGDataURL';
 import {getStylePath} from '../utils/getStylePath';
-import {getBackground} from './getBackground';
 import {getConfig} from './getConfig';
 
 function appendStyleLink(scriptSrc: string, stylePath: string) {
@@ -16,11 +14,6 @@ function appendStyleLink(scriptSrc: string, stylePath: string) {
 }
 
 export function setStyles() {
-    // let styles = document.querySelectorAll('link[rel="stylesheet"]');
-
-    // for (let style of styles)
-    //     style.remove();
-
     let {scriptSrc, colorScheme, theme} = getConfig();
 
     let style = document.querySelector<HTMLLinkElement>(
@@ -44,12 +37,4 @@ export function setStyles() {
 
         for (let errSpan of errSpans) errSpan.classList.remove('err');
     }, 0);
-
-    if (theme === 'tiles') {
-        let bgStyle = document.createElement('style');
-
-        bgStyle.textContent = `html{background-image:url("${getSVGDataURL(getBackground())}");}`;
-
-        document.body.appendChild(bgStyle);
-    }
 }
