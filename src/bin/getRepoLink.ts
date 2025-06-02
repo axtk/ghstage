@@ -7,5 +7,5 @@ export async function getRepoLink(className?: string) {
 
     let caption = /\bgithub\.com\//.test(repo) ? 'GitHub' : 'Repository';
 
-    return `<a href="${repo}"${className ? ` class="${className}"` : ''}>${caption}</a>`;
+    return `<a href="${repo}"${className ? ` class="${className}"` : ''} target="_blank">${caption}</a>`;
 }
