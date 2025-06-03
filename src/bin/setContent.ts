@@ -195,6 +195,8 @@ ${counterContent}
 <div class="layout">
     <h1>${escapedName}</h1>
 </div>
+
+${counterContent}
 </body>
 </html>
             `),
