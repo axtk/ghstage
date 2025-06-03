@@ -14,7 +14,6 @@ k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNo
 (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 ym(${ymid}, "init", {clickmap: true, trackLinks: true, accurateTrackBounce: true});
 </script>
-<noscript><div><img src="https://mc.yandex.ru/watch/${ymid}" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<script>(function(){window.sendHit=function(){let h=document.querySelector('main section.active h2');ym(${ymid},'hit',window.location.href,{title:(h?h.textContent.trim():'')||'(Start page)',referer:document.referrer});};})();</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/${ymid}" style="position:absolute;left:-9999px;" alt=""></div></noscript>
         `.trim();
 }
