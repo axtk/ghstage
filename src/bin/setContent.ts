@@ -83,6 +83,7 @@ ${content}
 <link rel="stylesheet" href="${packageUrl}/dist/css/index.css">
 <link rel="stylesheet" href="${packageUrl}/dist/css/code.lightbulb.css">
 <link rel="icon" type="image/svg+xml" href="{{site.github.baseurl}}/favicon.svg">
+${nav[0] ? `<link rel="prefetch" href="{{site.github.baseurl}}/${contentDir}/${nav[0].id}">` : ''}
 </head>
 <body>
 <div class="layout">
@@ -140,6 +141,8 @@ layout: index
 <link rel="stylesheet" href="${packageUrl}/dist/css/section.css">
 <link rel="stylesheet" href="${packageUrl}/dist/css/code.lightbulb.css">
 <link rel="icon" type="image/svg+xml" href="{{site.github.baseurl}}/favicon.svg">
+{% unless page.next_section.id == '' %}<link rel="prefetch" href="{{site.github.baseurl}}/${contentDir}/{{page.next_section.id}}">{% endunless %}
+{% unless page.prev_section.id == '' %}<link rel="prefetch" href="{{site.github.baseurl}}/${contentDir}/{{page.prev_section.id}}">{% endunless %}
 </head>
 <body>
 <div class="layout">
@@ -151,10 +154,10 @@ ${navContent}
 <p class="pagenav">
     <span class="prev">
         <span class="icon">←</span>
-        {% if page.prev_section.id == "" %}<a href="{{site.github.baseurl}}/">Intro</a>{% else %}<a href="{{site.github.baseurl}}/${contentDir}/{{page.prev_section.id}}">{{page.prev_section.title}}</a>{% endif %}
+        {% if page.prev_section.id == '' %}<a href="{{site.github.baseurl}}/">Intro</a>{% else %}<a href="{{site.github.baseurl}}/${contentDir}/{{page.prev_section.id}}">{{page.prev_section.title}}</a>{% endif %}
     </span>
     <span class="sep">|</span>
-    {% if page.next_section.id == "" %}
+    {% if page.next_section.id == '' %}
     <span class="repo next">
         ${await getRepoLink()}
         <span class="icon">✦</span>
