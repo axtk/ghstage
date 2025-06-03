@@ -53,8 +53,8 @@ export async function setContent() {
                 toFileContent(`
 ---
 layout: section
-id: "${nav[i].id ?? ''}"
-title: "${nav[i].title ?? ''}"
+id: "${nav[i]?.id ?? ''}"
+title: "${nav[i]?.title ?? ''}"
 prev:
     id: "${nav[i - 1]?.id ?? ''}"
     title: "${nav[i - 1]?.title ?? ''}"
@@ -80,7 +80,7 @@ ${content}
 <link rel="stylesheet" href="${packageUrl}/dist/css/index.css">
 <link rel="stylesheet" href="${packageUrl}/dist/css/code.lightbulb.css">
 <link rel="icon" type="image/svg+xml" href="{{site.github.baseurl}}/favicon.svg">
-${nav[0] ? `<link rel="prefetch" href="{{site.github.baseurl}}/${contentDir}/${nav[0].id}">` : ''}
+${nav[0] ? `<link rel="prefetch" href="{{site.github.baseurl}}/${contentDir}/${nav[0]?.id ?? ''}">` : ''}
 </head>
 <body>
 <div class="layout">
@@ -203,7 +203,7 @@ ${counterContent}
             toFileContent(`
 ---
 layout: start
-start_id: "${nav[0].id}"
+start_id: "${nav[0]?.id ?? ''}"
 ---
             `),
         ),
