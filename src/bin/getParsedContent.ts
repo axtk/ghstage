@@ -6,7 +6,11 @@ import {getConfig} from './getConfig';
 import {getSlug} from './getSlug';
 
 const contentPath = './README.md';
-const md = new Markdown({html: true});
+
+const md = new Markdown({
+    html: true,
+    highlight: () => '',
+});
 
 function joinLines(x: string[]) {
     return x.join('\n').trim();
@@ -89,6 +93,16 @@ function getSectionPostprocess(linkMap: Record<string, string>) {
                 return `<a href="${linkMap[url] ?? url}">`;
             return `<a href="${url}" target="_blank">`;
         });
+
+        s = s.replace(
+            /<pre><code class="language\-([^"]+)">/g,
+            (_, lang) => `{% highlight ${lang} %}`,
+        );
+
+        s = s.replace(
+            /<\/code><\/pre>/g,
+            '{% endhighlight %}',
+        );
 
         return s;
     };
