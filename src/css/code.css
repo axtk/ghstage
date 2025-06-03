@@ -1,0 +1,12 @@
+.hljs {
+    color: #dbdad6;
+    background: #1d2331;
+}
+.hljs-deletion {
+    color: #f88f7f;
+    background: #3d1e20;
+}
+.hljs-addition {
+    color: #6ad4af;
+    background: #19362c;
+}
