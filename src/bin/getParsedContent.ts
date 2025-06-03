@@ -81,7 +81,9 @@ function getInstallationCode(element: Element) {
 }
 
 function getSectionPostprocess(linkMap: Record<string, string>) {
-    return (s: string) => {
+    return (content: string) => {
+        let s = content;
+
         s = s.replace(/<a href="([^"]+)">/g, (_, url) => {
             if (url?.startsWith('#'))
                 return `<a href="${linkMap[url] ?? url}">`;
@@ -93,10 +95,7 @@ function getSectionPostprocess(linkMap: Record<string, string>) {
             (_, lang) => `{% highlight ${lang} %}`,
         );
 
-        s = s.replace(
-            /<\/code><\/pre>/g,
-            '{% endhighlight %}',
-        );
+        s = s.replace(/<\/code><\/pre>/g, '{% endhighlight %}');
 
         return s;
     };
