@@ -94,15 +94,12 @@ export async function getParsedContent() {
         if (indexComplete) section.push(outerHTML);
         else if (!titleComplete) {
             badges.push(outerHTML);
-        }
-        else if (!featuresComplete && element.matches('ul')) {
+        } else if (!featuresComplete && element.matches('ul')) {
             featuresComplete = true;
             features.push(outerHTML);
-        }
-        else if (!featuresComplete) {
+        } else if (!featuresComplete) {
             description.push(outerHTML);
-        }
-        else {
+        } else {
             let code = element.querySelector('code');
             let installationMatches = code?.innerHTML
                 .trim()
