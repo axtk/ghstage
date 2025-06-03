@@ -34,11 +34,10 @@ export async function getParsedContent() {
     let nav: NavItem[] = [];
 
     let titleComplete = false;
-    let featuresStarted = false;
     let featuresComplete = false;
     let indexComplete = false;
 
-    let element: Element | null = dom.window.document.body.firstElementChild;
+    let element = dom.window.document.body.firstElementChild;
 
     while (element !== null) {
         if (element.matches('h2, h3, h4, h5, h6')) {
@@ -93,23 +92,24 @@ export async function getParsedContent() {
         let {outerHTML} = element;
 
         if (indexComplete) section.push(outerHTML);
+        else if (!titleComplete) {
+            badges.push(outerHTML);
+        }
+        else if (!featuresComplete && element.matches('ul')) {
+            featuresComplete = true;
+            features.push(outerHTML);
+        }
+        else if (!featuresComplete) {
+            description.push(outerHTML);
+        }
         else {
-            if (!titleComplete) badges.push(outerHTML);
-            else if (!featuresComplete && element.matches('ul')) {
-                featuresStarted = true;
-                features.push(outerHTML);
-            } else if (!featuresStarted) description.push(outerHTML);
-            else {
-                featuresComplete = true;
+            let code = element.querySelector('code');
+            let installationMatches = code?.innerHTML
+                .trim()
+                .match(/(\S\s*)?(npm (i|install) .*)/);
 
-                let code = element.querySelector('code');
-                let installationMatches = code?.innerHTML
-                    .trim()
-                    .match(/(\S\s*)?(npm (i|install) .*)/);
-
-                if (installationMatches) installation = installationMatches[2];
-                else note.push(outerHTML);
-            }
+            if (installationMatches) installation = installationMatches[2];
+            else note.push(outerHTML);
         }
 
         element = element.nextElementSibling;

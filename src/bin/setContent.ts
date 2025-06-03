@@ -49,7 +49,7 @@ export async function setContent() {
     await Promise.all([
         ...sections.map((content, i) =>
             writeFile(
-                `./${contentDir}/${nav[i].id ?? `_untitled_${i}`}.html`,
+                `./${contentDir}/${nav[i]?.id ?? `_untitled_${i}`}.html`,
                 toFileContent(`
 ---
 layout: section
