@@ -125,8 +125,12 @@ export async function getParsedContent() {
         installation,
         sections: section.map(s => {
             return s.replace(
-                / href="(#[^"]+)"/,
-                (_, hash) => linkMap[hash] ?? hash,
+                /<a href="([^"]+)">/g,
+                (_, url) => {
+                    if (url?.startsWith('#'))
+                        return `<a href="${linkMap[url] ?? url}">`;
+                    return `<a href="${url}" target="_blank">`;
+                },
             );
         }),
         nav,
