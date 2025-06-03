@@ -13,8 +13,9 @@ function joinLines(x: string[]) {
 }
 
 function getInstallationCode(element: Element) {
-    return element.querySelector('code')?.innerHTML
-        .trim()
+    return element
+        .querySelector('code')
+        ?.innerHTML.trim()
         .match(/(\S\s*)?(npm (i|install) .*)/)?.[2];
 }
 
@@ -90,8 +91,7 @@ export async function getParsedContent() {
     let element = dom.window.document.body.firstElementChild;
 
     while (element !== null) {
-        if (element.matches('h1'))
-            hasTitle = true;
+        if (element.matches('h1')) hasTitle = true;
         else {
             if (element.matches('h2')) {
                 if (!indexComplete) indexComplete = true;
@@ -104,29 +104,23 @@ export async function getParsedContent() {
 
             let {outerHTML} = element;
 
-            if (indexComplete)
-                section.push(outerHTML);
+            if (indexComplete) section.push(outerHTML);
             else if (!hasTitle) {
                 badges.push(outerHTML);
-            }
-            else if (!hasFeatures) {
+            } else if (!hasFeatures) {
                 if (element.matches('ul')) {
                     hasFeatures = true;
                     features.push(outerHTML);
-                }
-                else {
+                } else {
                     let installationCode = getInstallationCode(element);
 
-                    if (installationCode)
-                        installation = installationCode;
+                    if (installationCode) installation = installationCode;
                     else description.push(outerHTML);
                 }
-            }
-            else {
+            } else {
                 let installationCode = getInstallationCode(element);
 
-                if (installationCode)
-                    installation = installationCode;
+                if (installationCode) installation = installationCode;
                 else note.push(outerHTML);
             }
         }
@@ -146,14 +140,11 @@ export async function getParsedContent() {
         note: joinLines(note),
         installation,
         sections: section.map(s => {
-            return s.replace(
-                /<a href="([^"]+)">/g,
-                (_, url) => {
-                    if (url?.startsWith('#'))
-                        return `<a href="${linkMap[url] ?? url}">`;
-                    return `<a href="${url}" target="_blank">`;
-                },
-            );
+            return s.replace(/<a href="([^"]+)">/g, (_, url) => {
+                if (url?.startsWith('#'))
+                    return `<a href="${linkMap[url] ?? url}">`;
+                return `<a href="${url}" target="_blank">`;
+            });
         }),
         nav,
     };
