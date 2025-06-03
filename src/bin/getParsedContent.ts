@@ -12,26 +12,16 @@ function joinLines(x: string[]) {
     return x.join('\n').trim();
 }
 
-function getInstallationCode(element: Element) {
-    return element
-        .querySelector('code')
-        ?.innerHTML.trim()
-        .match(/(\S\s*)?(npm (i|install) .*)/)?.[2];
-}
-
-export async function getParsedContent() {
+async function buildNav(dom: JSDOM) {
     let {contentDir} = await getConfig();
-
-    let content = md.render((await readFile(contentPath)).toString());
-    let dom = new JSDOM(content);
 
     let linkMap: Record<string, string> = {};
     let navItem: NavItem | null = null;
     let nav: NavItem[] = [];
 
-    let h = dom.window.document.body.querySelectorAll('h2, h3, h4, h5, h6');
+    let headings = dom.window.document.body.querySelectorAll('h2, h3, h4, h5, h6');
 
-    for (let element of h) {
+    for (let element of headings) {
         let tagName = element.tagName.toLowerCase();
 
         let isSectionTitle = tagName === 'h2';
@@ -73,6 +63,28 @@ export async function getParsedContent() {
                 });
         }
     }
+
+    if (navItem)
+        nav.push(navItem);
+
+    return {
+        nav,
+        linkMap,
+    };
+}
+
+function getInstallationCode(element: Element) {
+    return element
+        .querySelector('code')
+        ?.innerHTML.trim()
+        .match(/(\S\s*)?(npm (i|install) .*)/)?.[2];
+}
+
+export async function getParsedContent() {
+    let content = md.render((await readFile(contentPath)).toString());
+    let dom = new JSDOM(content);
+
+    let {nav, linkMap} = await buildNav(dom);
 
     let badges: string[] = [];
     let title = '';
@@ -129,8 +141,6 @@ export async function getParsedContent() {
     }
 
     if (section.length !== 0) sections.push(joinLines(section));
-
-    if (navItem) nav.push(navItem);
 
     return {
         badges: joinLines(badges),
