@@ -99,10 +99,7 @@ function getSectionPostprocess(linkMap: Record<string, string>) {
             (_, lang) => `{% highlight ${lang} %}`,
         );
 
-        s = s.replace(
-            /<\/code><\/pre>/g,
-            '{% endhighlight %}',
-        );
+        s = s.replace(/<\/code><\/pre>/g, '{% endhighlight %}');
 
         return s;
     };
