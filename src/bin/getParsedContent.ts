@@ -149,7 +149,7 @@ export async function getParsedContent() {
         features: joinLines(features),
         note: joinLines(note),
         installation,
-        sections: section.map(s => {
+        sections: sections.map(s => {
             return s.replace(/<a href="([^"]+)">/g, (_, url) => {
                 if (url?.startsWith('#'))
                     return `<a href="${linkMap[url] ?? url}">`;
