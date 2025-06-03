@@ -67,10 +67,8 @@ export async function getParsedContent() {
         if (element.matches('h1')) {
             title = element.outerHTML;
             titleComplete = true;
-            continue;
         }
-
-        if (element.matches('h2')) {
+        else if (element.matches('h2')) {
             if (!indexComplete) indexComplete = true;
 
             if (section.length !== 0) {
@@ -86,43 +84,37 @@ export async function getParsedContent() {
                 items: [],
             };
         }
-
-        if (element.matches('h3') && navItem) {
-            navItem.items.push({
-                id: getSlug(element.textContent),
-                title: element.innerHTML.trim(),
-            });
+        else if (element.matches('h3')) {
+            if (navItem)
+                navItem.items.push({
+                    id: getSlug(element.textContent),
+                    title: element.innerHTML.trim(),
+                });
         }
 
         let {outerHTML} = element;
 
         if (indexComplete) section.push(outerHTML);
         else {
-            if (!titleComplete) {
+            if (!titleComplete)
                 badges.push(outerHTML);
-                continue;
-            }
-
-            if (!featuresComplete && element.matches('ul')) {
+            else if (!featuresComplete && element.matches('ul')) {
                 featuresStarted = true;
                 features.push(outerHTML);
-                continue;
             }
-
-            if (!featuresStarted) {
+            else if (!featuresStarted)
                 description.push(outerHTML);
-                continue;
+            else {
+                featuresComplete = true;
+
+                let code = element.querySelector('code');
+                let installationMatches = code?.innerHTML
+                    .trim()
+                    .match(/(\S\s*)?(npm (i|install) .*)/);
+
+                if (installationMatches) installation = installationMatches[2];
+                else note.push(outerHTML);
             }
-
-            featuresComplete = true;
-
-            let code = element.querySelector('code');
-            let installationMatches = code?.innerHTML
-                .trim()
-                .match(/(\S\s*)?(npm (i|install) .*)/);
-
-            if (installationMatches) installation = installationMatches[2];
-            else note.push(outerHTML);
         }
 
         element = element.nextElementSibling;
