@@ -67,8 +67,7 @@ export async function getParsedContent() {
         if (element.matches('h1')) {
             title = element.outerHTML;
             titleComplete = true;
-        }
-        else if (element.matches('h2')) {
+        } else if (element.matches('h2')) {
             if (!indexComplete) indexComplete = true;
 
             if (section.length !== 0) {
@@ -83,8 +82,7 @@ export async function getParsedContent() {
                 title: element.innerHTML.trim(),
                 items: [],
             };
-        }
-        else if (element.matches('h3')) {
+        } else if (element.matches('h3')) {
             if (navItem)
                 navItem.items.push({
                     id: getSlug(element.textContent),
@@ -96,14 +94,11 @@ export async function getParsedContent() {
 
         if (indexComplete) section.push(outerHTML);
         else {
-            if (!titleComplete)
-                badges.push(outerHTML);
+            if (!titleComplete) badges.push(outerHTML);
             else if (!featuresComplete && element.matches('ul')) {
                 featuresStarted = true;
                 features.push(outerHTML);
-            }
-            else if (!featuresStarted)
-                description.push(outerHTML);
+            } else if (!featuresStarted) description.push(outerHTML);
             else {
                 featuresComplete = true;
 
