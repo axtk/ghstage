@@ -43,19 +43,22 @@ export async function getParsedContent() {
     while (element !== null) {
         if (element.matches('h2, h3, h4, h5, h6')) {
             let isSectionTitle = element.matches('h2');
-            let sectionId = isSectionTitle ? getSlug(element.textContent) : navItem?.id ?? '';
+            let sectionId = isSectionTitle
+                ? getSlug(element.textContent)
+                : (navItem?.id ?? '');
             let elementId = element.id;
 
             if (!elementId)
-                elementId = getSlug(element.textContent).toLowerCase().replace(/_/g, '-');
+                elementId = getSlug(element.textContent)
+                    .toLowerCase()
+                    .replace(/_/g, '-');
 
             if (elementId) {
                 element.id = elementId;
 
                 let link = `{{site.github.baseurl}}/${contentDir}/${sectionId}`;
 
-                if (!isSectionTitle)
-                    link += `#${elementId}`;
+                if (!isSectionTitle) link += `#${elementId}`;
 
                 linkMap[`#${elementId}`] = link;
             }
@@ -114,7 +117,9 @@ export async function getParsedContent() {
             featuresComplete = true;
 
             let code = element.querySelector('code');
-            let installationMatches = code?.innerHTML.trim().match(/(\S\s*)?(npm (i|install) .*)/);
+            let installationMatches = code?.innerHTML
+                .trim()
+                .match(/(\S\s*)?(npm (i|install) .*)/);
 
             if (installationMatches) installation = installationMatches[2];
             else note.push(outerHTML);

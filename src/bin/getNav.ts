@@ -14,8 +14,7 @@ export async function getNav(nav: NavItem[]) {
         if (items.length !== 0) {
             s += '\n    <ul>';
 
-            for (let {title} of items)
-                s += `\n        <li>${title}</li>`;
+            for (let {title} of items) s += `\n        <li>${title}</li>`;
 
             s += '\n    </ul>\n';
         }
