@@ -1,6 +1,7 @@
 import {readFile} from 'node:fs/promises';
 import {JSDOM} from 'jsdom';
 import Markdown from 'markdown-it';
+import {unescapeHTML} from 'stfm';
 import type {NavItem} from '../types/NavItem';
 import {getConfig} from './getConfig';
 import {getSlug} from './getSlug';
@@ -9,7 +10,7 @@ const contentPath = './README.md';
 
 const md = new Markdown({
     html: true,
-    highlight: s => s,
+    highlight: s => unescapeHTML(s),
 });
 
 function joinLines(x: string[]) {
