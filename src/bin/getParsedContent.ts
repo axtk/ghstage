@@ -9,7 +9,7 @@ const contentPath = './README.md';
 
 const md = new Markdown({
     html: true,
-    highlight: () => '',
+    highlight: s => s,
 });
 
 function joinLines(x: string[]) {
