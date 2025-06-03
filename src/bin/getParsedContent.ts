@@ -19,7 +19,8 @@ async function buildNav(dom: JSDOM) {
     let navItem: NavItem | null = null;
     let nav: NavItem[] = [];
 
-    let headings = dom.window.document.body.querySelectorAll('h2, h3, h4, h5, h6');
+    let headings =
+        dom.window.document.body.querySelectorAll('h2, h3, h4, h5, h6');
 
     for (let element of headings) {
         let tagName = element.tagName.toLowerCase();
@@ -64,8 +65,7 @@ async function buildNav(dom: JSDOM) {
         }
     }
 
-    if (navItem)
-        nav.push(navItem);
+    if (navItem) nav.push(navItem);
 
     return {
         nav,
