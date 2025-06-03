@@ -12,6 +12,12 @@ function joinLines(x: string[]) {
     return x.join('\n').trim();
 }
 
+function getInstallationCode(element: Element) {
+    return element.querySelector('code')?.innerHTML
+        .trim()
+        .match(/(\S\s*)?(npm (i|install) .*)/)?.[2];
+}
+
 export async function getParsedContent() {
     let {contentDir} = await getConfig();
 
@@ -19,6 +25,53 @@ export async function getParsedContent() {
     let dom = new JSDOM(content);
 
     let linkMap: Record<string, string> = {};
+    let navItem: NavItem | null = null;
+    let nav: NavItem[] = [];
+
+    let h = dom.window.document.body.querySelectorAll('h2, h3, h4, h5, h6');
+
+    for (let element of h) {
+        let tagName = element.tagName.toLowerCase();
+
+        let isSectionTitle = tagName === 'h2';
+        let isSubsectionTitle = tagName === 'h3';
+
+        let sectionId = isSectionTitle
+            ? getSlug(element.textContent)
+            : (navItem?.id ?? '');
+        let elementId = element.id;
+
+        if (!elementId)
+            elementId = getSlug(element.textContent)
+                .toLowerCase()
+                .replace(/_/g, '-');
+
+        if (elementId) {
+            element.id = elementId;
+
+            let link = `{{site.github.baseurl}}/${contentDir}/${sectionId}`;
+
+            if (!isSectionTitle) link += `#${elementId}`;
+
+            linkMap[`#${elementId}`] = link;
+        }
+
+        if (isSectionTitle) {
+            if (navItem) nav.push(navItem);
+
+            navItem = {
+                id: getSlug(element.textContent),
+                title: element.innerHTML.trim(),
+                items: [],
+            };
+        } else if (isSubsectionTitle) {
+            if (navItem)
+                navItem.items.push({
+                    id: getSlug(element.textContent),
+                    title: element.innerHTML.trim(),
+                });
+        }
+    }
 
     let badges: string[] = [];
     let title = '';
@@ -30,83 +83,52 @@ export async function getParsedContent() {
     let section: string[] = [];
     let sections: string[] = [];
 
-    let navItem: NavItem | null = null;
-    let nav: NavItem[] = [];
-
-    let titleComplete = false;
-    let featuresComplete = false;
+    let hasTitle = false;
+    let hasFeatures = false;
     let indexComplete = false;
 
     let element = dom.window.document.body.firstElementChild;
 
     while (element !== null) {
-        if (element.matches('h2, h3, h4, h5, h6')) {
-            let isSectionTitle = element.matches('h2');
-            let sectionId = isSectionTitle
-                ? getSlug(element.textContent)
-                : (navItem?.id ?? '');
-            let elementId = element.id;
+        if (element.matches('h1'))
+            hasTitle = true;
+        else {
+            if (element.matches('h2')) {
+                if (!indexComplete) indexComplete = true;
 
-            if (!elementId)
-                elementId = getSlug(element.textContent)
-                    .toLowerCase()
-                    .replace(/_/g, '-');
-
-            if (elementId) {
-                element.id = elementId;
-
-                let link = `{{site.github.baseurl}}/${contentDir}/${sectionId}`;
-
-                if (!isSectionTitle) link += `#${elementId}`;
-
-                linkMap[`#${elementId}`] = link;
-            }
-        }
-
-        if (element.matches('h1')) {
-            title = element.outerHTML;
-            titleComplete = true;
-        } else if (element.matches('h2')) {
-            if (!indexComplete) indexComplete = true;
-
-            if (section.length !== 0) {
-                sections.push(joinLines(section));
-                section = [];
+                if (section.length !== 0) {
+                    sections.push(joinLines(section));
+                    section = [];
+                }
             }
 
-            if (navItem) nav.push(navItem);
+            let {outerHTML} = element;
 
-            navItem = {
-                id: getSlug(element.textContent),
-                title: element.innerHTML.trim(),
-                items: [],
-            };
-        } else if (element.matches('h3')) {
-            if (navItem)
-                navItem.items.push({
-                    id: getSlug(element.textContent),
-                    title: element.innerHTML.trim(),
-                });
-        }
+            if (indexComplete)
+                section.push(outerHTML);
+            else if (!hasTitle) {
+                badges.push(outerHTML);
+            }
+            else if (!hasFeatures) {
+                if (element.matches('ul')) {
+                    hasFeatures = true;
+                    features.push(outerHTML);
+                }
+                else {
+                    let installationCode = getInstallationCode(element);
 
-        let {outerHTML} = element;
+                    if (installationCode)
+                        installation = installationCode;
+                    else description.push(outerHTML);
+                }
+            }
+            else {
+                let installationCode = getInstallationCode(element);
 
-        if (indexComplete) section.push(outerHTML);
-        else if (!titleComplete) {
-            badges.push(outerHTML);
-        } else if (!featuresComplete && element.matches('ul')) {
-            featuresComplete = true;
-            features.push(outerHTML);
-        } else if (!featuresComplete) {
-            description.push(outerHTML);
-        } else {
-            let code = element.querySelector('code');
-            let installationMatches = code?.innerHTML
-                .trim()
-                .match(/(\S\s*)?(npm (i|install) .*)/);
-
-            if (installationMatches) installation = installationMatches[2];
-            else note.push(outerHTML);
+                if (installationCode)
+                    installation = installationCode;
+                else note.push(outerHTML);
+            }
         }
 
         element = element.nextElementSibling;
