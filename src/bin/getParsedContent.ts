@@ -90,13 +90,6 @@ function getSectionPostprocess(linkMap: Record<string, string>) {
             return `<a href="${url}" target="_blank">`;
         });
 
-        s = s.replace(
-            /<pre><code class="language\-([^"]+)">/g,
-            (_, lang) => `{% highlight ${lang} %}`,
-        );
-
-        s = s.replace(/<\/code><\/pre>/g, '{% endhighlight %}');
-
         return s;
     };
 }
