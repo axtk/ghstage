@@ -88,7 +88,9 @@ ${nav[0] ? `<link rel="prefetch" href="{{site.github.baseurl}}/${contentDir}/${n
 </main>
 </div>
 
-{% if content contains '<pre ' %}<link rel="stylesheet" href="${packageUrl}/dist/css/code.lightbulb.css">
+{% if content contains '<pre><code ' %}<link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.11.1/styles/base16/material.min.css">
+<script src="https://unpkg.com/@highlightjs/cdn-assets@11.11.1/highlight.min.js"></script>
+<script>hljs.highlightAll()</script>{% elsif content contains '<pre ' %}<link rel="stylesheet" href="${packageUrl}/dist/css/code.lightbulb.css">
 {% endif %}
 ${counterContent}
 </body>
@@ -170,7 +172,9 @@ ${navContent}
 </div>
 </div>
 
-{% if content contains '<pre ' %}<link rel="stylesheet" href="${packageUrl}/dist/css/code.lightbulb.css">
+{% if content contains '<pre><code ' %}<link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.11.1/styles/base16/material.min.css">
+<script src="https://unpkg.com/@highlightjs/cdn-assets@11.11.1/highlight.min.js"></script>
+<script>hljs.highlightAll()</script>{% elsif content contains '<pre ' %}<link rel="stylesheet" href="${packageUrl}/dist/css/code.lightbulb.css">
 {% endif %}
 ${counterContent}
 </body>
