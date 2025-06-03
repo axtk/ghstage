@@ -1,9 +1,6 @@
-import Markdown from 'markdown-it';
 import type {NavItem} from '../types/NavItem';
 import {getConfig} from './getConfig';
 import {getRepoLink} from './getRepoLink';
-
-const md = new Markdown({html: true});
 
 export async function getNav(nav: NavItem[]) {
     if (nav.length < 2) return '';
@@ -12,15 +9,13 @@ export async function getNav(nav: NavItem[]) {
     let s = '';
 
     for (let {id, title, items} of nav) {
-        let itemTitle = md.renderInline(title);
-
-        s += `\n<li>{% if page.section.id == "${id}" %}<strong>${itemTitle}</strong>{% else %}<a href="{{site.github.baseurl}}/${contentDir}/${id}">${itemTitle}</a>{% endif %}`;
+        s += `\n<li>{% if page.id == "${id}" %}<strong>${title}</strong>{% else %}<a href="{{site.github.baseurl}}/${contentDir}/${id}">${title}</a>{% endif %}`;
 
         if (items.length !== 0) {
             s += '\n    <ul>';
 
             for (let {title} of items)
-                s += `\n        <li>${md.renderInline(title)}</li>`;
+                s += `\n        <li>${title}</li>`;
 
             s += '\n    </ul>\n';
         }

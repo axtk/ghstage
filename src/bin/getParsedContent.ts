@@ -1,9 +1,12 @@
 import {readFile} from 'node:fs/promises';
+import {JSDOM} from 'jsdom';
+import Markdown from 'markdown-it';
 import type {NavItem} from '../types/NavItem';
 import {getConfig} from './getConfig';
 import {getSlug} from './getSlug';
 
 const contentPath = './README.md';
+const md = new Markdown({html: true});
 
 function joinLines(x: string[]) {
     return x.join('\n').trim();
@@ -12,8 +15,10 @@ function joinLines(x: string[]) {
 export async function getParsedContent() {
     let {contentDir} = await getConfig();
 
-    let content = (await readFile(contentPath)).toString();
-    let lines = content.split(/\r?\n/);
+    let content = md.render((await readFile(contentPath)).toString());
+    let dom = new JSDOM(content);
+
+    let linkMap: Record<string, string> = {};
 
     let badges: string[] = [];
     let title = '';
@@ -28,21 +33,41 @@ export async function getParsedContent() {
     let navItem: NavItem | null = null;
     let nav: NavItem[] = [];
 
-    let linkMap: Record<string, string> = {};
-
     let titleComplete = false;
     let featuresStarted = false;
     let featuresComplete = false;
     let indexComplete = false;
 
-    for (let line of lines) {
-        if (line.startsWith('# ')) {
-            title = line;
+    let element: Element | null = dom.window.document.body.firstElementChild;
+
+    while (element !== null) {
+        if (element.matches('h2, h3, h4, h5, h6')) {
+            let isSectionTitle = element.matches('h2');
+            let sectionId = isSectionTitle ? getSlug(element.textContent) : navItem?.id ?? '';
+            let elementId = element.id;
+
+            if (!elementId)
+                elementId = getSlug(element.textContent).toLowerCase().replace(/_/g, '-');
+
+            if (elementId) {
+                element.id = elementId;
+
+                let link = `{{site.github.baseurl}}/${contentDir}/${sectionId}`;
+
+                if (!isSectionTitle)
+                    link += `#${elementId}`;
+
+                linkMap[`#${elementId}`] = link;
+            }
+        }
+
+        if (element.matches('h1')) {
+            title = element.outerHTML;
             titleComplete = true;
             continue;
         }
 
-        if (line.startsWith('## ')) {
+        if (element.matches('h2')) {
             if (!indexComplete) indexComplete = true;
 
             if (section.length !== 0) {
@@ -52,64 +77,50 @@ export async function getParsedContent() {
 
             if (navItem) nav.push(navItem);
 
-            let navItemTitle = line.slice(2).trim();
-
             navItem = {
-                id: getSlug(navItemTitle),
-                title: navItemTitle,
+                id: getSlug(element.textContent),
+                title: element.innerHTML.trim(),
                 items: [],
             };
         }
 
-        if (line.startsWith('### ') && navItem) {
-            let navItemSubtitle = line.slice(3).trim();
-
+        if (element.matches('h3') && navItem) {
             navItem.items.push({
-                id: getSlug(navItemSubtitle),
-                title: navItemSubtitle,
+                id: getSlug(element.textContent),
+                title: element.innerHTML.trim(),
             });
         }
 
-        if (/^#+\s/.test(line)) {
-            let hashSlug = getSlug(line.replace(/^#+/, ''))
-                .toLowerCase()
-                .replace(/_/g, '-');
+        let {outerHTML} = element;
 
-            let hash = `#${hashSlug}`;
-
-            if (linkMap[hash] === undefined)
-                linkMap[hash] =
-                    `{{site.github.baseurl}}/${contentDir}/${navItem?.id ?? ''}`;
-        }
-
-        if (indexComplete) section.push(line);
+        if (indexComplete) section.push(outerHTML);
         else {
             if (!titleComplete) {
-                badges.push(line);
+                badges.push(outerHTML);
                 continue;
             }
 
-            if (
-                !featuresComplete &&
-                (line.startsWith('- ') || line.startsWith('* '))
-            ) {
+            if (!featuresComplete && element.matches('ul')) {
                 featuresStarted = true;
-                features.push(line);
+                features.push(outerHTML);
                 continue;
             }
 
             if (!featuresStarted) {
-                description.push(line);
+                description.push(outerHTML);
                 continue;
             }
 
             featuresComplete = true;
 
-            let installationMatches = line.match(/`(npm (i|install) [^`]+)`/);
+            let code = element.querySelector('code');
+            let installationMatches = code?.innerHTML.trim().match(/(\S\s*)?(npm (i|install) .*)/);
 
-            if (installationMatches) installation = installationMatches[1];
-            else note.push(line);
+            if (installationMatches) installation = installationMatches[2];
+            else note.push(outerHTML);
         }
+
+        element = element.nextElementSibling;
     }
 
     if (section.length !== 0) sections.push(joinLines(section));
@@ -123,10 +134,10 @@ export async function getParsedContent() {
         features: joinLines(features),
         note: joinLines(note),
         installation,
-        sections: sections.map(s => {
+        sections: section.map(s => {
             return s.replace(
-                /\]\((#[^\)]+)\)/g,
-                (_, hash) => `](${linkMap[hash] ?? hash})`,
+                / href="(#[^"]+)"/,
+                (_, hash) => linkMap[hash] ?? hash,
             );
         }),
         nav,
