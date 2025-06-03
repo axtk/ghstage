@@ -80,6 +80,28 @@ function getInstallationCode(element: Element) {
         .match(/(\S\s*)?(npm (i|install) .*)/)?.[2];
 }
 
+function getSectionPostprocess(linkMap: Record<string, string>) {
+    return (s: string) => {
+        s = s.replace(/<a href="([^"]+)">/g, (_, url) => {
+            if (url?.startsWith('#'))
+                return `<a href="${linkMap[url] ?? url}">`;
+            return `<a href="${url}" target="_blank">`;
+        });
+
+        s = s.replace(
+            /<pre><code class="language\-([^"]+)">/g,
+            (_, lang) => `{% highlight ${lang} %}`,
+        );
+
+        s = s.replace(
+            /<\/code><\/pre>/g,
+            '{% endhighlight %}',
+        );
+
+        return s;
+    };
+}
+
 export async function getParsedContent() {
     let content = md.render((await readFile(contentPath)).toString());
     let dom = new JSDOM(content);
@@ -142,6 +164,8 @@ export async function getParsedContent() {
 
     if (section.length !== 0) sections.push(joinLines(section));
 
+    let postprocess = getSectionPostprocess(linkMap);
+
     return {
         badges: joinLines(badges),
         title,
@@ -149,13 +173,7 @@ export async function getParsedContent() {
         features: joinLines(features),
         note: joinLines(note),
         installation,
-        sections: sections.map(s => {
-            return s.replace(/<a href="([^"]+)">/g, (_, url) => {
-                if (url?.startsWith('#'))
-                    return `<a href="${linkMap[url] ?? url}">`;
-                return `<a href="${url}" target="_blank">`;
-            });
-        }),
+        sections: sections.map(postprocess),
         nav,
     };
 }
