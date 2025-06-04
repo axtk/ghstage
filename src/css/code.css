@@ -7,7 +7,7 @@
 .hljs-selector-tag,
 .hljs-template-variable,
 .hljs-variable {
-  color: #f49466;
+    color: #f49466;
 }
 .hljs-attr,
 .hljs-link,
@@ -15,7 +15,7 @@
 .hljs-number,
 .hljs-symbol,
 .hljs-variable.constant_ {
-  color: #f2af7d;
+    color: #f2af7d;
 }
 .hljs-deletion {
     color: #f88f7f;
