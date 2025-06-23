@@ -33,7 +33,7 @@
     --content-border-radius: 1rem;
     --space-x: 1rem;
     --block-margin-y: 1em;
-    --hr-border: .15rem solid var(--b1-medium);
+    --hr-border: 0.15rem solid var(--b1-medium);
 }
 html {
     color: var(--c0);
@@ -54,7 +54,7 @@ body {
 }
 @media (max-width: 840px) {
     :root {
-        --content-padding-x: .85rem;
+        --content-padding-x: 0.85rem;
         --content-padding-y: 1rem;
     }
     body {
@@ -97,17 +97,17 @@ a.button {
     text-decoration: none;
     color: var(--b0);
     background: color(from var(--c0) srgb r g b / 0.65);
-    border: .075em solid var(--c0);
+    border: 0.075em solid var(--c0);
     border-color: var(--bc1) var(--bc2) var(--bc2) var(--bc1);
     border-radius: var(--r);
-    padding: .25em 1.25em;
-    margin: .5em .35em;
-    box-shadow: 0 0 .1em 0 var(--c0);
-    transition: box-shadow .1s;
+    padding: 0.25em 1.25em;
+    margin: 0.5em 0.35em;
+    box-shadow: 0 0 0.1em 0 var(--c0);
+    transition: box-shadow 0.1s;
     box-sizing: border-box;
 }
 a.button:hover {
-    box-shadow: 0 0 .25em 0 var(--c0);
+    box-shadow: 0 0 0.25em 0 var(--c0);
 }
 a.button.primary {
     --bc1: color(from var(--button-color) srgb r g b / 0.55);
@@ -119,10 +119,10 @@ a.button.primary {
     font-weight: bold;
     color: var(--c2);
     background: var(--button-color);
-    box-shadow: 0 0 .2em 0 var(--button-color);
+    box-shadow: 0 0 0.2em 0 var(--button-color);
 }
 a.button.primary:hover {
-    box-shadow: 0 0 .35em 0 var(--button-color);
+    box-shadow: 0 0 0.35em 0 var(--button-color);
 }
 
 h1 {
@@ -147,16 +147,16 @@ h4 {
 h2 {
     font-size: 1.6em;
     border-bottom: var(--hr-border);
-    padding-bottom: .1em;
-    margin: 1em 0 .65em 0;
+    padding-bottom: 0.1em;
+    margin: 1em 0 0.65em 0;
 }
 h3 {
     font-size: 1.3em;
-    margin: 1em 0 .65em 0;
+    margin: 1em 0 0.65em 0;
 }
 h4 {
     font-size: 1.15em;
-    margin: 1em 0 .65em 0;
+    margin: 1em 0 0.65em 0;
 }
 
 header,
@@ -184,11 +184,11 @@ main ul {
     margin: 1em 0;
 }
 main ul ul {
-    margin: .5em 0;
+    margin: 0.5em 0;
 }
 main li {
     margin-top: 0;
-    margin-bottom: .5em;
+    margin-bottom: 0.5em;
 }
 
 .highlight {
@@ -197,8 +197,8 @@ main li {
 }
 code {
     background: color(from currentColor srgb r g b / 0.12);
-    border-radius: .35em;
-    padding: .15em .35em;
+    border-radius: 0.35em;
+    padding: 0.15em 0.35em;
 }
 pre,
 pre.highlight {

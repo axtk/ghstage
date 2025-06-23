@@ -10,7 +10,7 @@ export function getSlug(title: string | null) {
         slug = slug.slice(1, -1);
 
     slug = slug
-        .replace(/[<>`:\?!\.,]+/g, ' ')
+        .replace(/[<>`:?!.,]+/g, ' ')
         .trim()
         .replace(/\s+/g, '_')
         .replace(/'/g, '');

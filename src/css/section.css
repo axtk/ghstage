@@ -12,7 +12,7 @@
     width: 30%;
     flex: none;
     align-self: flex-start;
-    font-size: .9em;
+    font-size: 0.9em;
     background: var(--b1-light);
     border-radius: var(--content-border-radius);
     padding: calc(0.75 * var(--content-padding-y)) var(--content-padding-x)
@@ -25,7 +25,7 @@
     .body > nav {
         width: 100%;
         font-size: inherit;
-        border-top: .35em solid var(--b1);
+        border-top: 0.35em solid var(--b1);
         border-radius: 0;
         padding-top: 1.4em;
         margin-top: 0;
@@ -42,19 +42,19 @@
     line-height: 1.2;
     padding: 0;
     padding-inline-start: 1em;
-    margin: .25em 0;
+    margin: 0.25em 0;
 }
 .body > nav > ul {
-    border-top: .05em solid var(--b1);
+    border-top: 0.05em solid var(--b1);
     padding-top: 1.2em;
     margin-top: 1.5em;
 }
 .body > nav ul ul {
-    margin: .65em 0 .5em;
+    margin: 0.65em 0 0.5em;
 }
 .body > nav li {
     margin-top: 0;
-    margin-bottom: .5em;
+    margin-bottom: 0.5em;
 }
 .body > nav > ul:last-child,
 .body > nav > ul:last-child > li:last-child {
@@ -95,7 +95,7 @@ main {
     gap: 1em;
     background: var(--b1-light);
     border-top: var(--hr-border);
-    padding: .6em .75em .75em;
+    padding: 0.6em 0.75em 0.75em;
     margin: 1.5em 0 0;
 }
 @media (max-width: 840px) {
