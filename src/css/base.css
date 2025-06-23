@@ -197,8 +197,8 @@ main li {
 }
 code {
     background: light-dark(
-        color(from currentColor srgb r g b / .08),
-        color(from currentColor srgb r g b / .15)
+        color(from currentColor srgb r g b / 0.08),
+        color(from currentColor srgb r g b / 0.15)
     );
     border-radius: 0.35em;
     padding: 0.15em 0.35em;
