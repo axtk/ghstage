@@ -195,6 +195,7 @@ ${counterContent}
     <title>${escapedName}</title>
     <link rel="stylesheet" href="${packageUrl}/dist/css/base.css">
     <link rel="icon" type="image/svg+xml" href="{{site.github.baseurl}}/favicon.svg">
+    <script>window.location.replace("{{site.github.baseurl}}/${contentDir}/{{page.start_id}}");</script>
 </head>
 <body>
 <div class="layout">
