@@ -79,6 +79,7 @@ ${content}
 <link rel="stylesheet" href="${packageUrl}/dist/css/base.css">
 <link rel="stylesheet" href="${packageUrl}/dist/css/index.css">
 <link rel="icon" type="image/svg+xml" href="{{site.github.baseurl}}/favicon.svg">
+<link rel="prefetch" href="{{site.github.baseurl}}/start">
 ${nav[0] ? `<link rel="prefetch" href="{{site.github.baseurl}}/${contentDir}/${nav[0]?.id ?? ''}">` : ''}
 </head>
 <body>
