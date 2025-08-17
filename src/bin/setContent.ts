@@ -150,7 +150,7 @@ layout: index
 <div class="${navContent ? '' : 'no-nav '}body">
 ${navContent}
 <main>
-{{content}}
+{{content | replace: '<hr>', '<p class="sep">~</p>'}}
 
 <p class="pagenav">
     <span class="prev">
