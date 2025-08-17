@@ -77,6 +77,10 @@ section {
     box-sizing: border-box;
 }
 section + section {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    justify-content: center;
     border-left: 0.1em solid var(--b1-medium);
 }
 section.intro-title {
@@ -90,6 +94,7 @@ section.intro-title {
         padding: 0 var(--content-padding-x);
     }
     section + section {
+        display: block;
         border-left: none;
     }
     section.intro-title {
