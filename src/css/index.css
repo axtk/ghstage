@@ -26,12 +26,12 @@ main {
 }
 
 h1 {
-    font-size: 3.2em;
+    font-size: 2.8em;
     margin: 2.5vh 0;
 }
 @media (max-width: 840px) {
     h1 {
-        font-size: 2.6em;
+        font-size: 2.4em;
     }
 }
 h1 a {
