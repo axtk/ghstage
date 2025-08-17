@@ -148,7 +148,9 @@ layout: index
     ${backstory ? `<p class="ref"><a href="${backstory}">Backstory</a></p>` : ''}
     ${features ? '' : `<p class="installation"><code>${installation}</code></p>`}
 </section>
-${features ? `
+${
+    features
+        ? `
 <section class="intro">
     <div class="features">
         <h2>Features</h2>
@@ -156,7 +158,9 @@ ${features ? `
     </div>
     <p class="installation"><code>${installation}</code></p>
 </section>
-` : ''}
+`
+        : ''
+}
             `),
         ),
         writeFile(
