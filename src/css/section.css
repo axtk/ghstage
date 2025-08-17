@@ -86,6 +86,11 @@ main {
 .body.no-nav > main {
     width: auto;
 }
+main p.sep {
+    font-size: 1.5em;
+    text-align: center;
+    margin: 0.5em 0;
+}
 
 .pagenav {
     --icon-width: 1.25em;
