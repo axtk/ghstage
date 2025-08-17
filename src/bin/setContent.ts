@@ -146,7 +146,9 @@ layout: index
         ${await getRepoLink('button')}
     </p>
     ${backstory ? `<p class="ref"><a href="${backstory}">Backstory</a></p>` : ''}
+    ${features ? '' : `<p class="installation"><code>${installation}</code></p>`}
 </section>
+${features ? `
 <section class="intro">
     <div class="features">
         <h2>Features</h2>
@@ -154,6 +156,7 @@ layout: index
     </div>
     <p class="installation"><code>${installation}</code></p>
 </section>
+` : ''}
             `),
         ),
         writeFile(
