@@ -35,7 +35,7 @@
 .body > nav h1 {
     --link-color: var(--c0);
 
-    font-size: 1.6em;
+    font-size: 1.4em;
     margin-bottom: calc(0.75 * var(--content-padding-y));
 }
 .body > nav ul {
