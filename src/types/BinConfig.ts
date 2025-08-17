@@ -22,6 +22,7 @@ export type BinConfig = {
      */
     contentDir?: string;
     backstory?: string;
+    redirect?: string;
     /** Whether to remove the GitHub Pages branch and quit */
     remove?: boolean;
     /** Content of the './CNAME' file */

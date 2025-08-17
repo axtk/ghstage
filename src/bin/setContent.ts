@@ -19,14 +19,48 @@ export async function setContent() {
         name,
         description: packageDescription,
         backstory,
+        redirect,
     } = await getConfig();
+
+    let counterContent = await getCounterContent();
+    let escapedName = escapeHTML(name);
+
+    let packageVersion = (await exec(`npm view ${packageName} version`)).stdout
+        .trim()
+        .split('.')
+        .slice(0, 2)
+        .join('.');
+
+    let packageUrl = `https://unpkg.com/${packageName}@${packageVersion}`;
+
+    if (redirect) {
+        let escapedRedirect = escapeHTML(redirect);
+
+        await writeFile(
+            './index.html',
+            toFileContent(`
+<!DOCTYPE html>
+<html lang="en" class="blank"${colorScheme ? ` style="--color-scheme: ${colorScheme}"` : ''}>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="refresh" content="0; URL=${escapedRedirect}">
+</head>
+<body>
+${counterContent}
+<script>window.location.replace("${escapedRedirect}");</script>
+</body>
+</html>
+            `),
+        );
+
+        return;
+    }
 
     let {badges, description, features, installation, sections, nav} =
         await getParsedContent();
 
-    let counterContent = await getCounterContent();
     let navContent = await getNav(nav);
-    let escapedName = escapeHTML(name);
 
     await Promise.all(
         ['./_layouts', `./${contentDir}`].map(async path => {
@@ -37,14 +71,6 @@ export async function setContent() {
             }
         }),
     );
-
-    let packageVersion = (await exec(`npm view ${packageName} version`)).stdout
-        .trim()
-        .split('.')
-        .slice(0, 2)
-        .join('.');
-
-    let packageUrl = `https://unpkg.com/${packageName}@${packageVersion}`;
 
     await Promise.all([
         ...sections.map((content, i) =>
