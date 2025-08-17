@@ -10,7 +10,7 @@ main {
     --max-content-width: 32em;
 
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     padding: 0 var(--content-padding-x);
     margin: 6vh 0;
@@ -81,8 +81,8 @@ section + section {
 }
 section.intro-title {
     text-align: center;
-    padding-top: 3em;
-    padding-bottom: 5em;
+    padding-top: 4em;
+    padding-bottom: 4em;
 }
 @media (max-width: 840px) {
     section {
@@ -93,6 +93,7 @@ section.intro-title {
         border-left: none;
     }
     section.intro-title {
+        padding-top: 3em;
         padding-bottom: 1em;
     }
 }
@@ -100,7 +101,7 @@ section.intro-title {
     --link-color: color(from var(--c0) srgb r g b / 0.55);
     --link-decoration: underline;
 
-    margin: 6vh 0 3vh;
+    margin: 2em 0;
 }
 @media (max-width: 840px) {
     .features {
@@ -149,13 +150,8 @@ section.intro-title {
 p.installation {
     font-size: 1.25em;
     text-align: center;
-    margin: 6vh 0;
+    margin: 1em 0;
 }
 .installation code {
     background: transparent;
-}
-@media (max-width: 840px) {
-    p.installation {
-        margin: 1.5em 0;
-    }
 }

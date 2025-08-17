@@ -146,7 +146,7 @@ layout: index
         ${await getRepoLink('button')}
     </p>
     ${backstory ? `<p class="ref"><a href="${backstory}">Backstory</a></p>` : ''}
-    ${features ? '' : `<p class="installation"><code>${installation}</code></p>`}
+    <p class="installation"><code>${installation}</code></p>
 </section>
 ${
     features
@@ -156,7 +156,6 @@ ${
         <h2>Features</h2>
         ${features}
     </div>
-    <p class="installation"><code>${installation}</code></p>
 </section>
 `
         : ''
