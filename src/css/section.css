@@ -94,7 +94,7 @@ main p.sep {
 main hr {
     background: none transparent;
     border: none;
-    border-top: .075em solid;
+    border-top: 0.075em solid;
     margin: var(--block-margin-y) 0;
 }
 
