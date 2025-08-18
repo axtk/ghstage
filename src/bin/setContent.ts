@@ -182,7 +182,7 @@ ${
 <div class="${navContent ? '' : 'no-nav '}body">
 ${navContent}
 <main>
-{{content | replace: '<hr>', '<p class="sep">~</p>'}}
+{{content}}
 
 <p class="pagenav">
     <span class="prev">
