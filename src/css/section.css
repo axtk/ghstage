@@ -32,12 +32,6 @@
         margin-left: 0;
     }
 }
-.body > nav h1 {
-    --link-color: var(--c0);
-
-    font-size: 1.4em;
-    margin-bottom: calc(0.75 * var(--content-padding-y));
-}
 .body > nav ul {
     line-height: 1.2;
     padding: 0;
@@ -98,13 +92,13 @@ main hr {
     margin: var(--block-margin-y) 0;
 }
 main h1 {
-    font-size: .8rem;
+    font-size: 0.8rem;
     font-family: monospace;
     line-height: 1.1;
-    margin: -.35rem 0 0;
+    margin: -0.35rem 0 0;
 }
 main h1 + h2 {
-    margin-top: .5rem;
+    margin-top: 0.5rem;
 }
 
 .pagenav {

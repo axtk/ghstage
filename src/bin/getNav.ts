@@ -5,7 +5,7 @@ import {getRepoLink} from './getRepoLink';
 export async function getNav(nav: NavItem[]) {
     if (nav.length < 2) return '';
 
-    let {name, contentDir, backstory} = await getConfig();
+    let {contentDir, backstory} = await getConfig();
     let s = '';
 
     for (let {id, title, items} of nav) {
