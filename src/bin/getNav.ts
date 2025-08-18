@@ -32,7 +32,6 @@ export async function getNav(nav: NavItem[]) {
     <li>${repoLink}</li>
     ${backstory ? `<li><a href="${backstory}">Backstory</a></li>` : ''}
 </ul>`;
-    s = `<h1><a href="{{site.github.baseurl}}/">${name}</a></h1>\n${s}`;
 
     return `<nav>\n${s}\n</nav>`;
 }

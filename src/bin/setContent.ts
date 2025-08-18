@@ -182,6 +182,7 @@ ${
 <div class="${navContent ? '' : 'no-nav '}body">
 ${navContent}
 <main>
+<h1><a href="{{site.github.baseurl}}/">${escapedName}</a></h1>
 {{content}}
 
 <p class="pagenav">

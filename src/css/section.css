@@ -44,7 +44,7 @@
     padding-inline-start: 1em;
     margin: 0.25em 0;
 }
-.body > nav > ul {
+.body > nav > ul + ul {
     border-top: 0.05em solid var(--b1);
     padding-top: 1.2em;
     margin-top: 1.5em;
@@ -96,6 +96,15 @@ main hr {
     border: none;
     border-top: 0.075em solid;
     margin: var(--block-margin-y) 0;
+}
+main h1 {
+    font-size: .8rem;
+    font-family: monospace;
+    line-height: 1.1;
+    margin: -.35rem 0 0;
+}
+main h1 + h2 {
+    margin-top: .5rem;
 }
 
 .pagenav {
