@@ -31,7 +31,7 @@
     --content-padding-x: 1.75rem;
     --content-padding-y: 1.75rem;
     --content-border-radius: 1rem;
-    --space-x: 1rem;
+    --space-x: var(--content-padding-x);
     --block-margin-y: 1em;
     --hr-border: 0.15rem solid var(--b1-medium);
 }
