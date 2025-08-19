@@ -29,7 +29,7 @@
         border-top: 0.35em solid var(--b1);
         border-radius: 0;
         padding: var(--content-padding-y) var(--content-padding-x)
-        calc(1.5*var(--content-padding-y));
+            calc(1.5 * var(--content-padding-y));
         margin: 0;
     }
 }
