@@ -12,7 +12,7 @@ main {
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    padding: 0 var(--content-padding-x);
+    padding: 0;
     margin: 6vh 0;
 }
 @media (max-width: 840px) {
@@ -20,7 +20,6 @@ main {
         --max-content-width: 100%;
 
         display: block;
-        padding: 0;
         margin: 0;
     }
 }
