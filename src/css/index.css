@@ -26,12 +26,12 @@ main {
 }
 
 h1 {
-    font-size: 2.8em;
+    font-size: 2.5em;
     margin: 1.5rem 0;
 }
 @media (max-width: 840px) {
     h1 {
-        font-size: 2.4em;
+        font-size: 2.2em;
     }
 }
 h1 a {
@@ -91,15 +91,15 @@ section.intro-title {
 @media (max-width: 840px) {
     section {
         max-width: 100%;
-        padding: 0 var(--content-padding-x);
+        padding: var(--content-padding-y) var(--content-padding-x);
     }
     section + section {
         display: block;
         border-left: none;
     }
     section.intro-title {
-        padding-top: 3em;
-        padding-bottom: 1em;
+        padding-top: 2em;
+        padding-bottom: 0;
     }
 }
 .features {
@@ -111,7 +111,7 @@ section.intro-title {
 @media (max-width: 840px) {
     .features {
         padding: 0;
-        margin: 2em 0;
+        margin: 0;
     }
 }
 .features h2 {
