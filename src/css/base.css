@@ -49,7 +49,6 @@ html {
 }
 html[data-theme="t8"] {
     --color-scheme: #6e0fcd;
-    font-family: system-ui, sans-serif;
 }
 body {
     color: inherit;
