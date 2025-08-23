@@ -35,8 +35,7 @@ export async function setContent() {
     let packageUrl = `https://unpkg.com/${packageName}@${packageVersion}`;
     let rootAttrs = '';
 
-    if (theme)
-        rootAttrs += ` data-theme="${escapeHTML(theme)}"`;
+    if (theme) rootAttrs += ` data-theme="${escapeHTML(theme)}"`;
 
     if (colorScheme)
         rootAttrs += ` style="--color-scheme: ${escapeHTML(colorScheme)}"`;
