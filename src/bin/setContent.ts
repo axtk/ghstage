@@ -15,6 +15,7 @@ const exec = promisify(defaultExec);
 export async function setContent() {
     let {
         colorScheme,
+        theme,
         contentDir,
         name,
         description: packageDescription,
@@ -32,6 +33,13 @@ export async function setContent() {
         .join('.');
 
     let packageUrl = `https://unpkg.com/${packageName}@${packageVersion}`;
+    let rootAttrs = '';
+
+    if (theme)
+        rootAttrs += ` data-theme="${escapeHTML(theme)}"`;
+
+    if (colorScheme)
+        rootAttrs += ` style="--color-scheme: ${escapeHTML(colorScheme)}"`;
 
     if (redirect) {
         let escapedRedirect = escapeHTML(redirect);
@@ -40,7 +48,7 @@ export async function setContent() {
             './index.html',
             toFileContent(`
 <!DOCTYPE html>
-<html lang="en" class="blank"${colorScheme ? ` style="--color-scheme: ${colorScheme}"` : ''}>
+<html lang="en" class="blank"${rootAttrs}>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
@@ -97,7 +105,7 @@ ${content}
             './_layouts/index.html',
             toFileContent(`
 <!DOCTYPE html>
-<html lang="en"${colorScheme ? ` style="--color-scheme: ${colorScheme}"` : ''}>
+<html lang="en"${rootAttrs}>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -166,7 +174,7 @@ ${
             './_layouts/section.html',
             toFileContent(`
 <!DOCTYPE html>
-<html lang="en"${colorScheme ? ` style="--color-scheme: ${colorScheme}"` : ''}>
+<html lang="en"${rootAttrs}>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -221,7 +229,7 @@ ${counterContent}
             './_layouts/start.html',
             toFileContent(`
 <!DOCTYPE html>
-<html lang="en" class="blank"${colorScheme ? ` style="--color-scheme: ${colorScheme}"` : ''}>
+<html lang="en" class="blank"${rootAttrs}>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">

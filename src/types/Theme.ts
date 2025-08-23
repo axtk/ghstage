@@ -1,1 +1,1 @@
-export type Theme = 'none' | undefined;
+export type Theme = string | undefined;
