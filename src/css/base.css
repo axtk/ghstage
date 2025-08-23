@@ -47,6 +47,10 @@ html {
     background-color: var(--b0);
     background-position: 50% 0;
 }
+html[data-theme="t8"] {
+    --color-scheme: #6e0fcd;
+    font-family: system-ui, sans-serif;
+}
 body {
     color: inherit;
     background-color: transparent;
