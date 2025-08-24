@@ -15,7 +15,7 @@ export async function getTitle({
     if (originalContent && originalContent.trim() !== name)
         return originalContent;
 
-    let scopeMatches = name?.match(/^(@[^\/]+)\/?(.*)/);
+    let scopeMatches = name?.match(/^(@[^/]+)\/?(.*)/);
 
     if (!scope || !scopeMatches) {
         let escapedName = escapeHTML(name);
@@ -25,7 +25,8 @@ export async function getTitle({
             : `<span class="name">${escapedName}</span>`;
     }
 
-    let title = `<a href="${scope}" class="scope">${scopeMatches[1]}</a>` +
+    let title =
+        `<a href="${scope}" class="scope">${scopeMatches[1]}</a>` +
         '<span class="sep">/</span>';
 
     title += withPackageURL

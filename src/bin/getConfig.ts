@@ -25,8 +25,7 @@ export async function getConfig(): Promise<BinConfig> {
         ...parseArgs<BinConfig>(process.argv.slice(2)),
     };
 
-    if (config.theme === 't8')
-        config.scope = '/';
+    if (config.theme === 't8') config.scope = '/';
 
     return config;
 }

@@ -99,7 +99,7 @@ main h1 {
     margin: -0.35rem 0 0;
 }
 h1 .sep {
-    margin: 0 .1em;
+    margin: 0 0.1em;
 }
 @media (max-width: 840px) {
     main h1 {

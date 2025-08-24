@@ -126,8 +126,7 @@ export async function getParsedContent() {
             element.innerHTML = await getTitle({
                 originalContent: element.textContent,
             });
-        }
-        else {
+        } else {
             if (element.matches('h2')) {
                 if (!indexComplete) indexComplete = true;
 

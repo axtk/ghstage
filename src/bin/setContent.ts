@@ -21,7 +21,6 @@ export async function setContent() {
         name,
         description: packageDescription,
         backstory,
-        scope,
         redirect,
     } = await getConfig();
 
