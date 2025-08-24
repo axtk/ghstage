@@ -8,6 +8,7 @@ import {getCounterContent} from './getCounterContent';
 import {getNav} from './getNav';
 import {getParsedContent} from './getParsedContent';
 import {getRepoLink} from './getRepoLink';
+import {getTitle} from './getTitle';
 import {toFileContent} from './toFileContent';
 
 const exec = promisify(defaultExec);
@@ -20,6 +21,7 @@ export async function setContent() {
         name,
         description: packageDescription,
         backstory,
+        scope,
         redirect,
     } = await getConfig();
 
@@ -200,7 +202,7 @@ ${
 <div class="${navContent ? '' : 'no-nav '}body">
 ${navContent}
 <main>
-<h1><a href="{{site.github.baseurl}}/">${escapedName}</a></h1>
+<h1>${await getTitle({withPackageURL: true})}</a></h1>
 {{content}}
 
 <p class="pagenav">

@@ -22,6 +22,8 @@ export type BinConfig = {
      */
     contentDir?: string;
     backstory?: string;
+    /** Scope URL */
+    scope?: string;
     redirect?: string;
     /** Whether to remove the GitHub Pages branch and quit */
     remove?: boolean;
