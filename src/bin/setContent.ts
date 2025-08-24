@@ -155,7 +155,7 @@ layout: index
     <div class="badges">
         ${badges}
     </div>
-    <h1>${name}</h1>
+    <h1>${await getTitle()}</h1>
     <div class="description">
         ${description}
     </div>

@@ -4,7 +4,6 @@ import Markdown from 'markdown-it';
 import type {NavItem} from '../types/NavItem';
 import {getConfig} from './getConfig';
 import {getSlug} from './getSlug';
-import {getTitle} from './getTitle';
 
 const contentPath = './README.md';
 
@@ -121,12 +120,8 @@ export async function getParsedContent() {
     let element = dom.window.document.body.firstElementChild;
 
     while (element !== null) {
-        if (element.matches('h1')) {
-            hasTitle = true;
-            element.innerHTML = await getTitle({
-                originalContent: element.textContent,
-            });
-        } else {
+        if (element.matches('h1')) hasTitle = true;
+        else {
             if (element.matches('h2')) {
                 if (!indexComplete) indexComplete = true;
 
