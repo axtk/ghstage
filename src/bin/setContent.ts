@@ -35,10 +35,21 @@ export async function setContent() {
     let packageUrl = `https://unpkg.com/${packageName}@${packageVersion}`;
     let rootAttrs = '';
 
+    let icon = {
+        url: '{{site.github.baseurl}}/favicon.svg',
+        type: 'image/svg+xml',
+    };
+
     if (theme) rootAttrs += ` data-theme="${escapeHTML(theme)}"`;
 
     if (colorScheme)
         rootAttrs += ` style="--color-scheme: ${escapeHTML(colorScheme)}"`;
+
+    if (theme === 't8')
+        icon = {
+            url: '/assets/logo.png',
+            type: 'image/png',
+        };
 
     if (redirect) {
         let escapedRedirect = escapeHTML(redirect);
@@ -111,7 +122,7 @@ ${content}
 <title>${escapedName}${packageDescription ? ` | ${escapeHTML(packageDescription)}` : ''}</title>
 <link rel="stylesheet" href="${packageUrl}/dist/css/base.css">
 <link rel="stylesheet" href="${packageUrl}/dist/css/index.css">
-<link rel="icon" type="image/svg+xml" href="{{site.github.baseurl}}/favicon.svg">
+<link rel="icon" type="${icon.type}" href="${icon.url}">
 <link rel="prefetch" href="{{site.github.baseurl}}/start">
 ${nav[0] ? `<link rel="prefetch" href="{{site.github.baseurl}}/${contentDir}/${nav[0]?.id ?? ''}">` : ''}
 </head>
@@ -180,7 +191,7 @@ ${
 <title>{{page.title | strip_html}} | ${escapedName}</title>
 <link rel="stylesheet" href="${packageUrl}/dist/css/base.css">
 <link rel="stylesheet" href="${packageUrl}/dist/css/section.css">
-<link rel="icon" type="image/svg+xml" href="{{site.github.baseurl}}/favicon.svg">
+<link rel="icon" type="${icon.type}" href="${icon.url}">
 {% unless page.next.id == '' %}<link rel="prefetch" href="{{site.github.baseurl}}/${contentDir}/{{page.next.id}}">{% endunless %}
 {% unless page.prev.id == '' %}<link rel="prefetch" href="{{site.github.baseurl}}/${contentDir}/{{page.prev.id}}">{% endunless %}
 </head>
@@ -235,7 +246,7 @@ ${counterContent}
     <meta http-equiv="refresh" content="0; URL={{site.github.baseurl}}/${contentDir}/{{page.start_id}}">
     <title>${escapedName}</title>
     <link rel="stylesheet" href="${packageUrl}/dist/css/base.css">
-    <link rel="icon" type="image/svg+xml" href="{{site.github.baseurl}}/favicon.svg">
+    <link rel="icon" type="${icon.type}" href="${icon.url}">
     <script>window.location.replace("{{site.github.baseurl}}/${contentDir}/{{page.start_id}}");</script>
 </head>
 <body>
