@@ -34,9 +34,6 @@ h1 {
         font-size: 2em;
     }
 }
-h1 a {
-    pointer-events: none;
-}
 header {
     display: block;
     text-align: center;
