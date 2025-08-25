@@ -48,7 +48,7 @@ html {
     background-position: 50% 0;
 }
 html[data-theme="t8"] {
-    --color-scheme: #6e0fcd;
+    --color-scheme: #410fcd;
 }
 body {
     color: inherit;
