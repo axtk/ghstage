@@ -5,13 +5,13 @@ import {getRepoLink} from './getRepoLink';
 
 export async function getNav(navItems: NavItem[]) {
     let {name, contentDir, backstory, nav} = await getConfig();
-    let s = '', navContent = '';
+    let s = '',
+        navContent = '';
 
     if (nav) {
         try {
             navContent = await (await fetch(nav)).text();
-        }
-        catch {
+        } catch {
             console.warn(`Failed to fetch content from '${nav}'`);
         }
     }
