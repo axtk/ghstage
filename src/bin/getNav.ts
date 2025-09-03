@@ -57,7 +57,7 @@ export async function getNav(navItems: NavItem[]) {
 
     let repoLink = await getRepoLink();
 
-    s = `<ul>${s}\n</ul>`;
+    s = s.trim() ? `<ul>${s}\n</ul>` : '';
     s = `${s}
 <ul class="ref">
     <li>${repoLink}</li>
