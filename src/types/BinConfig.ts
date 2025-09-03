@@ -22,6 +22,8 @@ export type BinConfig = {
      */
     contentDir?: string;
     backstory?: string;
+    /** URL of an HTML file inserted into the navigation bar */
+    nav?: string;
     /** Scope URL */
     scope?: string;
     redirect?: string;
