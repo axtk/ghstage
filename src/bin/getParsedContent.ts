@@ -16,7 +16,7 @@ function joinLines(x: string[]) {
 }
 
 async function buildNav(dom: JSDOM) {
-    let {contentDir} = await getConfig();
+    let {contentDir, singlePage} = await getConfig();
 
     let linkMap: Record<string, string> = {};
     let navItem: NavItem | null = null;
@@ -28,8 +28,8 @@ async function buildNav(dom: JSDOM) {
     for (let element of headings) {
         let tagName = element.tagName.toLowerCase();
 
-        let isSectionTitle = tagName === 'h2';
-        let isSubsectionTitle = tagName === 'h3';
+        let isSectionTitle = !singlePage && tagName === 'h2';
+        let isSubsectionTitle = !singlePage && tagName === 'h3';
 
         let sectionId = isSectionTitle
             ? getSlug(element.textContent)
@@ -98,6 +98,7 @@ function getSectionPostprocess(linkMap: Record<string, string>) {
 }
 
 export async function getParsedContent() {
+    let {singlePage} = await getConfig();
     let content = md.render((await readFile(contentPath)).toString());
     let dom = new JSDOM(content);
 
@@ -125,7 +126,7 @@ export async function getParsedContent() {
             if (element.matches('h2')) {
                 if (!indexComplete) indexComplete = true;
 
-                if (section.length !== 0) {
+                if (!singlePage && section.length !== 0) {
                     sections.push(joinLines(section));
                     section = [];
                 }

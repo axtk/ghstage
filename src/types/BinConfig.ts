@@ -22,6 +22,7 @@ export type BinConfig = {
      * @default 'x'
      */
     contentDir?: string;
+    singlePage?: boolean;
     backstory?: string;
     /** URL of an HTML file inserted into the navigation bar */
     nav?: string;
