@@ -12,8 +12,9 @@
     "build-css": "node -e \"require('node:fs').cpSync('src/css', 'dist/css', {force: true, recursive: true});\"",
     "clean": "node -e \"require('node:fs').rmSync('dist', {force: true, recursive: true});\"",
     "prepublishOnly": "npm run build",
-    "preversion": "npx npm-run-all shape build",
-    "shape": "npx codeshape"
+    "preversion": "npx npm-run-all typecheck shape build",
+    "shape": "npx codeshape",
+    "typecheck": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
@@ -24,7 +25,8 @@
   "devDependencies": {
     "@types/jsdom": "^21.1.7",
     "@types/markdown-it": "^14.1.2",
-    "@types/node": "^22.14.1"
+    "@types/node": "^22.14.1",
+    "typescript": "^5.9.2"
   },
   "dependencies": {
     "args-json": "^1.2.4",
