@@ -1,4 +1,4 @@
-import {escapeHTML} from 'stfm';
+import {escapeHTML} from '../utils/escapeHTML';
 import {getConfig} from './getConfig';
 
 type GetTitleParams = {

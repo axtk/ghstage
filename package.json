@@ -31,7 +31,6 @@
   "dependencies": {
     "args-json": "^1.2.4",
     "jsdom": "^26.1.0",
-    "markdown-it": "^14.1.0",
-    "stfm": "^0.1.0"
+    "markdown-it": "^14.1.0"
   }
 }

@@ -1,8 +1,8 @@
 import {exec as defaultExec} from 'node:child_process';
 import {access, mkdir, writeFile} from 'node:fs/promises';
 import {promisify} from 'node:util';
-import {escapeHTML} from 'stfm';
 import {packageName} from '../const/packageName';
+import {escapeHTML} from '../utils/escapeHTML';
 import {getConfig} from './getConfig';
 import {getCounterContent} from './getCounterContent';
 import {getNav} from './getNav';
