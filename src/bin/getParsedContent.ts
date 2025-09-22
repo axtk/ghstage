@@ -17,58 +17,66 @@ function joinLines(x: string[]) {
 
 async function buildNav(dom: JSDOM) {
     let {contentDir, singlePage} = await getConfig();
-
     let linkMap: Record<string, string> = {};
+
     let navItem: NavItem | null = null;
     let nav: NavItem[] = [];
 
-    let headings =
-        dom.window.document.body.querySelectorAll('h2, h3, h4, h5, h6');
+    if (singlePage)
+        nav.push({
+            id: 'Overview',
+            title: 'Overview',
+            items: [],
+        });
+    else {
+        let headings =
+            dom.window.document.body.querySelectorAll('h2, h3, h4, h5, h6');
 
-    for (let element of headings) {
-        let tagName = element.tagName.toLowerCase();
+        for (let element of headings) {
+            let tagName = element.tagName.toLowerCase();
 
-        let isSectionTitle = !singlePage && tagName === 'h2';
-        let isSubsectionTitle = !singlePage && tagName === 'h3';
+            let isSectionTitle = tagName === 'h2';
+            let isSubsectionTitle = tagName === 'h3';
 
-        let sectionId = isSectionTitle
-            ? getSlug(element.textContent)
-            : (navItem?.id ?? '');
-        let elementId = element.id;
+            let sectionId = isSectionTitle
+                ? getSlug(element.textContent)
+                : (navItem?.id ?? '');
+            let elementId = element.id;
 
-        if (!elementId)
-            elementId = getSlug(element.textContent)
-                .toLowerCase()
-                .replace(/_/g, '-');
+            if (!elementId)
+                elementId = getSlug(element.textContent)
+                    .toLowerCase()
+                    .replace(/_/g, '-');
 
-        if (elementId) {
-            element.id = elementId;
+            if (elementId) {
+                element.id = elementId;
 
-            let link = `{{site.github.baseurl}}/${contentDir}/${sectionId}`;
+                let link = `{{site.github.baseurl}}/${contentDir}/${sectionId}`;
 
-            if (!isSectionTitle) link += `#${elementId}`;
+                if (!isSectionTitle) link += `#${elementId}`;
 
-            linkMap[`#${elementId}`] = link;
-        }
+                linkMap[`#${elementId}`] = link;
+            }
 
-        if (isSectionTitle) {
-            if (navItem) nav.push(navItem);
+            if (isSectionTitle) {
+                if (navItem) nav.push(navItem);
 
-            navItem = {
-                id: getSlug(element.textContent),
-                title: element.innerHTML.trim(),
-                items: [],
-            };
-        } else if (isSubsectionTitle) {
-            if (navItem)
-                navItem.items.push({
+                navItem = {
                     id: getSlug(element.textContent),
                     title: element.innerHTML.trim(),
-                });
+                    items: [],
+                };
+            } else if (isSubsectionTitle) {
+                if (navItem)
+                    navItem.items.push({
+                        id: getSlug(element.textContent),
+                        title: element.innerHTML.trim(),
+                    });
+            }
         }
-    }
 
-    if (navItem) nav.push(navItem);
+        if (navItem) nav.push(navItem);
+    }
 
     return {
         nav,
