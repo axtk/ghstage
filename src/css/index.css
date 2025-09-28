@@ -1,3 +1,7 @@
+html[data-theme="t8"] {
+    background: linear-gradient(to bottom right, #90eec6, #9a70ce) 50% 50%/cover no-repeat;
+}
+
 .layout {
     display: flex;
     flex-direction: column;
