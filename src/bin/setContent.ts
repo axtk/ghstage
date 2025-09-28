@@ -1,63 +1,63 @@
-import {exec as defaultExec} from 'node:child_process';
-import {access, mkdir, writeFile} from 'node:fs/promises';
-import {promisify} from 'node:util';
-import {packageName} from '../const/packageName';
-import {escapeHTML} from '../utils/escapeHTML';
-import {getConfig} from './getConfig';
-import {getCounterContent} from './getCounterContent';
-import {getNav} from './getNav';
-import {getParsedContent} from './getParsedContent';
-import {getRepoLink} from './getRepoLink';
-import {getTitle} from './getTitle';
-import {toFileContent} from './toFileContent';
+import { exec as defaultExec } from "node:child_process";
+import { access, mkdir, writeFile } from "node:fs/promises";
+import { promisify } from "node:util";
+import { packageName } from "../const/packageName";
+import { escapeHTML } from "../utils/escapeHTML";
+import { getConfig } from "./getConfig";
+import { getCounterContent } from "./getCounterContent";
+import { getNav } from "./getNav";
+import { getParsedContent } from "./getParsedContent";
+import { getRepoLink } from "./getRepoLink";
+import { getTitle } from "./getTitle";
+import { toFileContent } from "./toFileContent";
 
 const exec = promisify(defaultExec);
 
 export async function setContent() {
-    let {
-        colorScheme,
-        theme,
-        contentDir,
-        name,
-        description: packageDescription,
-        backstory,
-        redirect,
-    } = await getConfig();
+  let {
+    colorScheme,
+    theme,
+    contentDir,
+    name,
+    description: packageDescription,
+    backstory,
+    redirect,
+  } = await getConfig();
 
-    let counterContent = await getCounterContent();
-    let escapedName = escapeHTML(name);
+  let counterContent = await getCounterContent();
+  let escapedName = escapeHTML(name);
 
-    let packageVersion = (await exec(`npm view ${packageName} version`)).stdout
-        .trim()
-        .split('.')
-        .slice(0, 2)
-        .join('.');
+  let packageVersion = (await exec(`npm view ${packageName} version`)).stdout
+    .trim()
+    .split(".")
+    .slice(0, 2)
+    .join(".");
 
-    let packageUrl = `https://unpkg.com/${packageName}@${packageVersion}`;
-    let rootAttrs = '';
+  let packageUrl = `https://unpkg.com/${packageName}@${packageVersion}`;
+  let rootAttrs = "";
 
-    let icon = {
-        url: '{{site.github.baseurl}}/favicon.svg',
-        type: 'image/svg+xml',
+  let icon = {
+    url: "{{site.github.baseurl}}/favicon.svg",
+    type: "image/svg+xml",
+  };
+
+  if (theme) rootAttrs += ` data-theme="${escapeHTML(theme)}"`;
+
+  if (colorScheme)
+    rootAttrs += ` style="--color-scheme: ${escapeHTML(colorScheme)}"`;
+
+  if (theme === "t8")
+    icon = {
+      url: "/assets/logo.png",
+      type: "image/png",
     };
 
-    if (theme) rootAttrs += ` data-theme="${escapeHTML(theme)}"`;
+  if (redirect) {
+    let escapedRedirect = escapeHTML(redirect);
 
-    if (colorScheme)
-        rootAttrs += ` style="--color-scheme: ${escapeHTML(colorScheme)}"`;
-
-    if (theme === 't8')
-        icon = {
-            url: '/assets/logo.png',
-            type: 'image/png',
-        };
-
-    if (redirect) {
-        let escapedRedirect = escapeHTML(redirect);
-
-        await writeFile(
-            './index.html',
-            toFileContent(`
+    await writeFile(
+      "./index.html",
+      toFileContent(`
 <!DOCTYPE html>
 <html lang="en" class="blank"${rootAttrs}>
 <head>
@@ -71,61 +71,61 @@ ${counterContent}
 </body>
 </html>
             `),
-        );
-
-        return;
-    }
-
-    let {badges, description, features, installation, sections, nav} =
-        await getParsedContent();
-
-    let navContent = await getNav(nav);
-
-    await Promise.all(
-        ['./_layouts', `./${contentDir}`].map(async path => {
-            try {
-                await access(path);
-            } catch {
-                await mkdir(path);
-            }
-        }),
     );
 
-    await Promise.all([
-        ...sections.map((content, i) =>
-            writeFile(
-                `./${contentDir}/${nav[i]?.id ?? `_untitled_${i}`}.html`,
-                toFileContent(`
+    return;
+  }
+
+  let { badges, description, features, installation, sections, nav } =
+    await getParsedContent();
+
+  let navContent = await getNav(nav);
+
+  await Promise.all(
+    ["./_layouts", `./${contentDir}`].map(async (path) => {
+      try {
+        await access(path);
+      } catch {
+        await mkdir(path);
+      }
+    }),
+  );
+
+  await Promise.all([
+    ...sections.map((content, i) =>
+      writeFile(
+        `./${contentDir}/${nav[i]?.id ?? `_untitled_${i}`}.html`,
+        toFileContent(`
 ---
 layout: section
-id: "${nav[i]?.id ?? ''}"
-title: "${nav[i]?.title ?? ''}"
+id: "${nav[i]?.id ?? ""}"
+title: "${nav[i]?.title ?? ""}"
 prev:
-    id: "${nav[i - 1]?.id ?? ''}"
-    title: "${nav[i - 1]?.title ?? ''}"
+    id: "${nav[i - 1]?.id ?? ""}"
+    title: "${nav[i - 1]?.title ?? ""}"
 next:
-    id: "${nav[i + 1]?.id ?? ''}"
-    title: "${nav[i + 1]?.title ?? ''}"
+    id: "${nav[i + 1]?.id ?? ""}"
+    title: "${nav[i + 1]?.title ?? ""}"
 ---
 
 ${content}
             `),
-            ),
-        ),
-        writeFile(
-            './_layouts/index.html',
-            toFileContent(`
+      ),
+    ),
+    writeFile(
+      "./_layouts/index.html",
+      toFileContent(`
 <!DOCTYPE html>
 <html lang="en"${rootAttrs}>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${escapedName}${packageDescription ? ` | ${escapeHTML(packageDescription)}` : ''}</title>
+<title>${escapedName}${packageDescription ? ` | ${escapeHTML(packageDescription)}` : ""}</title>
 <link rel="stylesheet" href="${packageUrl}/dist/css/base.css">
 <link rel="stylesheet" href="${packageUrl}/dist/css/index.css">
 <link rel="icon" type="${icon.type}" href="${icon.url}">
 <link rel="prefetch" href="{{site.github.baseurl}}/start">
-${nav[0] ? `<link rel="prefetch" href="{{site.github.baseurl}}/${contentDir}/${nav[0]?.id ?? ''}">` : ''}
+${nav[0] ? `<link rel="prefetch" href="{{site.github.baseurl}}/${contentDir}/${nav[0]?.id ?? ""}">` : ""}
 </head>
 <body>
 <div class="layout">
@@ -143,10 +143,10 @@ ${counterContent}
 </body>
 </html>
             `),
-        ),
-        writeFile(
-            './index.html',
-            toFileContent(`
+    ),
+    writeFile(
+      "./index.html",
+      toFileContent(`
 ---
 layout: index
 ---
@@ -162,14 +162,14 @@ layout: index
     <p class="actions">
         <a href="{{site.github.baseurl}}/start" class="primary button">Docs ›››</a>
         <span class="sep"> • </span>
-        ${await getRepoLink('button')}
+        ${await getRepoLink("button")}
     </p>
-    ${backstory ? `<p class="ref"><a href="${backstory}">Backstory</a></p>` : ''}
+    ${backstory ? `<p class="ref"><a href="${backstory}">Backstory</a></p>` : ""}
     <p class="installation"><code>${installation}</code></p>
 </section>
 ${
-    features
-        ? `
+  features
+    ? `
 <section class="intro">
     <div class="features">
         <h2>Features</h2>
@@ -177,13 +177,13 @@ ${
     </div>
 </section>
 `
-        : ''
+    : ""
 }
             `),
-        ),
-        writeFile(
-            './_layouts/section.html',
-            toFileContent(`
+    ),
+    writeFile(
+      "./_layouts/section.html",
+      toFileContent(`
 <!DOCTYPE html>
 <html lang="en"${rootAttrs}>
 <head>
@@ -198,10 +198,10 @@ ${
 </head>
 <body>
 <div class="layout">
-<div class="${navContent ? '' : 'no-nav '}body">
+<div class="${navContent ? "" : "no-nav "}body">
 ${navContent}
 <main>
-<h1>${await getTitle({withPackageURL: true})}</a></h1>
+<h1>${await getTitle({ withPackageURL: true })}</a></h1>
 {{content}}
 
 <p class="pagenav">
@@ -235,10 +235,10 @@ ${counterContent}
 </body>
 </html>
             `),
-        ),
-        writeFile(
-            './_layouts/start.html',
-            toFileContent(`
+    ),
+    writeFile(
+      "./_layouts/start.html",
+      toFileContent(`
 <!DOCTYPE html>
 <html lang="en" class="blank"${rootAttrs}>
 <head>
@@ -259,15 +259,15 @@ ${counterContent}
 </body>
 </html>
             `),
-        ),
-        writeFile(
-            './start.html',
-            toFileContent(`
+    ),
+    writeFile(
+      "./start.html",
+      toFileContent(`
 ---
 layout: start
-start_id: "${nav[0]?.id ?? ''}"
+start_id: "${nav[0]?.id ?? ""}"
 ---
             `),
-        ),
-    ]);
+    ),
+  ]);
 }

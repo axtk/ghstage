@@ -1,11 +1,11 @@
-import {getConfig} from './getConfig';
+import { getConfig } from "./getConfig";
 
 export async function getCounterContent() {
-    let {ymid} = await getConfig();
+  let { ymid } = await getConfig();
 
-    if (!ymid) return '';
+  if (!ymid) return "";
 
-    return `
+  return `
 <script>
 (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
 m[i].l=1*new Date();

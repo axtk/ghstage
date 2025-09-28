@@ -1,69 +1,69 @@
-import {JSDOM} from 'jsdom';
-import type {NavItem} from '../types/NavItem';
-import {getConfig} from './getConfig';
-import {getRepoLink} from './getRepoLink';
+import { JSDOM } from "jsdom";
+import type { NavItem } from "../types/NavItem";
+import { getConfig } from "./getConfig";
+import { getRepoLink } from "./getRepoLink";
 
 export async function getNav(navItems: NavItem[]) {
-    let {name, contentDir, backstory, nav} = await getConfig();
-    let s = '',
-        navContent = '';
+  let { name, contentDir, backstory, nav } = await getConfig();
+  let s = "",
+    navContent = "";
 
-    if (nav) {
-        try {
-            navContent = await (await fetch(nav)).text();
-        } catch {
-            console.warn(`Failed to fetch content from '${nav}'`);
+  if (nav) {
+    try {
+      navContent = await (await fetch(nav)).text();
+    } catch {
+      console.warn(`Failed to fetch content from '${nav}'`);
+    }
+  }
+
+  if (navContent) {
+    let navDom = new JSDOM(navContent).window.document.body;
+
+    for (let link of navDom.querySelectorAll("a")) {
+      if (link.dataset.name === name) {
+        let parent = link.parentElement;
+
+        link.remove();
+
+        while (parent && parent.innerHTML.trim() === "") {
+          let nextParent = parent.parentElement;
+
+          parent.remove();
+          parent = nextParent;
         }
+      }
     }
 
-    if (navContent) {
-        let navDom = new JSDOM(navContent).window.document.body;
+    navContent = navDom.innerHTML;
+  }
 
-        for (let link of navDom.querySelectorAll('a')) {
-            if (link.dataset.name === name) {
-                let parent = link.parentElement;
+  if (navItems.length > 1) {
+    for (let { id, title, items } of navItems) {
+      s += `\n<li>{% if page.id == "${id}" %}<strong>${title}</strong>{% else %}<a href="{{site.github.baseurl}}/${contentDir}/${id}">${title}</a>{% endif %}`;
 
-                link.remove();
+      if (items.length !== 0) {
+        s += "\n    <ul>";
 
-                while (parent && parent.innerHTML.trim() === '') {
-                    let nextParent = parent.parentElement;
+        for (let { title } of items) s += `\n        <li>${title}</li>`;
 
-                    parent.remove();
-                    parent = nextParent;
-                }
-            }
-        }
+        s += "\n    </ul>\n";
+      }
 
-        navContent = navDom.innerHTML;
+      s += "</li>";
     }
+  }
 
-    if (navItems.length > 1) {
-        for (let {id, title, items} of navItems) {
-            s += `\n<li>{% if page.id == "${id}" %}<strong>${title}</strong>{% else %}<a href="{{site.github.baseurl}}/${contentDir}/${id}">${title}</a>{% endif %}`;
+  if (!s && !navContent) return "";
 
-            if (items.length !== 0) {
-                s += '\n    <ul>';
+  let repoLink = await getRepoLink();
 
-                for (let {title} of items) s += `\n        <li>${title}</li>`;
-
-                s += '\n    </ul>\n';
-            }
-
-            s += '</li>';
-        }
-    }
-
-    if (!s && !navContent) return '';
-
-    let repoLink = await getRepoLink();
-
-    s = s.trim() ? `<ul>${s}\n</ul>` : '';
-    s = `${s}
+  s = s.trim() ? `<ul>${s}\n</ul>` : "";
+  s = `${s}
 <ul class="ref">
     <li>${repoLink}</li>
-    ${backstory ? `<li><a href="${backstory}">Backstory</a></li>` : ''}
+    ${backstory ? `<li><a href="${backstory}">Backstory</a></li>` : ""}
 </ul>
 ${navContent}`;
 
-    return `<nav>\n${s}\n</nav>`;
+  return `<nav>\n${s}\n</nav>`;
 }

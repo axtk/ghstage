@@ -1,3 +1,3 @@
 export function toFileContent(x: string) {
-    return `${x.trim()}\n`;
+  return `${x.trim()}\n`;
 }

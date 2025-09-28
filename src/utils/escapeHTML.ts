@@ -1,17 +1,17 @@
 const htmlEntityMap: [string, string][] = [
-    ['&', '&amp;'],
-    ['<', '&lt;'],
-    ['>', '&gt;'],
-    ['"', '&quot;'],
+  ["&", "&amp;"],
+  ["<", "&lt;"],
+  [">", "&gt;"],
+  ['"', "&quot;"],
 ];
 
 export function escapeHTML(x: unknown): string {
-    let s = String(x);
+  let s = String(x);
 
-    if (!x) return '';
+  if (!x) return "";
 
-    for (let [character, htmlEntity] of htmlEntityMap)
-        s = s.replaceAll(character, htmlEntity);
+  for (let [character, htmlEntity] of htmlEntityMap)
+    s = s.replaceAll(character, htmlEntity);
 
-    return s;
+  return s;
 }
