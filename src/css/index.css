@@ -2,6 +2,9 @@ html[data-theme="t8"] {
   background:
     linear-gradient(to bottom right, #90eec6, #9a70ce) 50% 50% / cover no-repeat;
 }
+body {
+  min-height: 100vh;
+}
 
 .layout {
   display: flex;
