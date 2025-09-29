@@ -126,6 +126,9 @@ section.intro-title {
     padding-top: 2em;
     padding-bottom: 0;
   }
+  section.intro {
+    padding-bottom: 2.5em;
+  }
 }
 .features {
   --link-color: color(from var(--c0) srgb r g b / 0.55);
