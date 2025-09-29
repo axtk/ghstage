@@ -2,11 +2,22 @@ html[data-theme="t8"] {
   background:
     linear-gradient(to bottom right, #90eec6, #9a70ce) 50% 50% / cover no-repeat;
 }
+@media (max-width: 840px) {
+  html[data-theme="t8"] {
+    background:
+      linear-gradient(to bottom, #90eec6, #9a70ce) 50% 50% / cover no-repeat;
+  }
+}
 @media (prefers-color-scheme: dark) {
   html[data-theme="t8"] {
     background:
-      linear-gradient(to bottom right, #33c889, #5744df) 50% 50% / cover
-      no-repeat;
+      linear-gradient(to bottom right, #33c889, #5744df) 50% 50% / cover no-repeat;
+  }
+}
+@media (max-width: 840px) and (prefers-color-scheme: dark) {
+  html[data-theme="t8"] {
+    background:
+      linear-gradient(to bottom, #33c889, #5744df) 50% 50% / cover no-repeat;
   }
 }
 body {
