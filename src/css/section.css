@@ -44,7 +44,7 @@
   font-size: 0.7rem;
   font-weight: normal;
   text-transform: uppercase;
-  color: color(from var(--c0) srgb r g b / .6);
+  color: color(from var(--c0) srgb r g b / 0.6);
   margin: 1.1rem 0 0.75rem 0;
 }
 .body > nav h2:first-of-type {
