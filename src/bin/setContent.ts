@@ -199,7 +199,6 @@ ${
 <body>
 <div class="layout">
 <div class="${navContent ? "" : "no-nav "}body">
-${navContent}
 <main>
 <h1>${await getTitle({ withPackageURL: true })}</a></h1>
 {{content}}
@@ -223,6 +222,8 @@ ${navContent}
   {% endif %}
 </p>
 </main>
+${navContent ? '<hr>' : ''}
+${navContent}
 </div>
 </div>
 

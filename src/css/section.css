@@ -1,8 +1,10 @@
 .body {
   display: flex;
-  flex-direction: row-reverse;
   align-items: stretch;
   padding: var(--content-padding-y) var(--content-padding-x);
+}
+.body > hr {
+  display: none;
 }
 @media (max-width: 840px) {
   .body {
