@@ -17,7 +17,7 @@
   font-size: 0.9em;
   background: var(--b1-light);
   border-radius: var(--content-border-radius);
-  padding: .5rem var(--content-padding-x) .65rem;
+  padding: 0.5rem var(--content-padding-x) 0.65rem;
   margin: 0 0 0 var(--space-x);
   box-sizing: border-box;
 }
@@ -27,7 +27,7 @@
     font-size: inherit;
     border-top: 0.35em solid var(--b1);
     border-radius: 0;
-    padding: .25rem var(--content-padding-x) .35rem;
+    padding: 0.25rem var(--content-padding-x) 0.35rem;
     margin: 0;
   }
 }
@@ -38,14 +38,14 @@
   border-top: 0.05rem solid var(--b1);
 }
 .body > nav section.related {
-  border-top: .15rem double var(--b1);
+  border-top: 0.15rem double var(--b1);
 }
 .body > nav h2 {
-  font-size: .7rem;
+  font-size: 0.7rem;
   font-weight: normal;
   text-transform: uppercase;
   color: var(--b1-medium);
-  margin: 1.1rem 0 .75rem 0;
+  margin: 1.1rem 0 0.75rem 0;
 }
 .body > nav h2:first-of-type {
   margin-top: 0;
