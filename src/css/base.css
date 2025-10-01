@@ -150,8 +150,6 @@ h4 {
 }
 h2 {
   font-size: 1.6em;
-  border-bottom: var(--hr-border);
-  padding-bottom: 0.1em;
   margin: 1em 0 0.65em 0;
 }
 h3 {

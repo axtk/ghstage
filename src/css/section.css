@@ -129,6 +129,10 @@ h1 .sep {
 main h1 + h2 {
   margin-top: 0.75rem;
 }
+main h2 {
+  border-bottom: var(--hr-border);
+  padding-bottom: 0.1em;
+}
 
 .pagenav {
   --icon-width: 1.25em;
