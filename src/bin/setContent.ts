@@ -222,7 +222,7 @@ ${
   {% endif %}
 </p>
 </main>
-${navContent ? '<hr>' : ''}
+${navContent ? "<hr>" : ""}
 ${navContent}
 </div>
 </div>
