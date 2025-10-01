@@ -17,8 +17,7 @@
   font-size: 0.9em;
   background: var(--b1-light);
   border-radius: var(--content-border-radius);
-  padding: calc(0.75 * var(--content-padding-y)) var(--content-padding-x)
-    var(--content-padding-y);
+  padding: .5rem var(--content-padding-x) .65rem;
   margin: 0 0 0 var(--space-x);
   box-sizing: border-box;
 }
@@ -28,19 +27,37 @@
     font-size: inherit;
     border-top: 0.35em solid var(--b1);
     border-radius: 0;
-    padding: var(--content-padding-y) var(--content-padding-x)
-      calc(1.5 * var(--content-padding-y));
+    padding: .25rem var(--content-padding-x) .35rem;
     margin: 0;
   }
+}
+.body > nav section {
+  padding: 1rem 0;
+}
+.body > nav section + section {
+  border-top: 0.05rem solid var(--b1);
+}
+.body > nav section.related {
+  border-top: .15rem double var(--b1);
+}
+.body > nav h2 {
+  font-size: .7rem;
+  font-weight: normal;
+  text-transform: uppercase;
+  color: var(--b1-medium);
+  margin: 1.1rem 0 .75rem 0;
+}
+.body > nav h2:first-of-type {
+  margin-top: 0;
 }
 .body > nav ul {
   line-height: 1.2;
   padding: 0;
   padding-inline-start: 1em;
-  margin: 0.25em 0;
+  margin: 0;
 }
 .body > nav > ul + ul {
-  border-top: 0.05em solid var(--b1);
+  border-top: 0.05rem solid var(--b1);
   padding-top: 1.2em;
   margin-top: 1.5em;
 }
@@ -49,7 +66,10 @@
 }
 .body > nav li {
   margin-top: 0;
-  margin-bottom: 0.5em;
+  margin-bottom: 0;
+}
+.body > nav li + li {
+  margin-top: 0.5em;
 }
 .body > nav > ul:last-child,
 .body > nav > ul:last-child > li:last-child {

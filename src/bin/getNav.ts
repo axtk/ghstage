@@ -42,11 +42,11 @@ export async function getNav(navItems: NavItem[]) {
       s += `\n<li>{% if page.id == "${id}" %}<strong>${title}</strong>{% else %}<a href="{{site.github.baseurl}}/${contentDir}/${id}">${title}</a>{% endif %}`;
 
       if (items.length !== 0) {
-        s += "\n    <ul>";
+        s += "\n  <ul>";
 
-        for (let { title } of items) s += `\n        <li>${title}</li>`;
+        for (let { title } of items) s += `\n    <li>${title}</li>`;
 
-        s += "\n    </ul>\n";
+        s += "\n  </ul>\n";
       }
 
       s += "</li>";
@@ -57,12 +57,14 @@ export async function getNav(navItems: NavItem[]) {
 
   let repoLink = await getRepoLink();
 
-  s = s.trim() ? `<ul>${s}\n</ul>` : "";
+  s = s.trim() ? `<section><ul>${s}\n</ul></section>` : "";
   s = `${s}
-<ul class="ref">
+<section class="ref">
+  <ul>
     <li>${repoLink}</li>
     ${backstory ? `<li><a href="${backstory}">Backstory</a></li>` : ""}
-</ul>
+  </ul>
+</section>
 ${navContent}`;
 
   return `<nav>\n${s}\n</nav>`;

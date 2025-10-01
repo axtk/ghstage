@@ -61,9 +61,9 @@ export async function setContent() {
 <!DOCTYPE html>
 <html lang="en" class="blank"${rootAttrs}>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <meta http-equiv="refresh" content="0; URL=${escapedRedirect}">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <meta http-equiv="refresh" content="0; URL=${escapedRedirect}">
 </head>
 <body>
 ${counterContent}
@@ -101,11 +101,11 @@ layout: section
 id: "${nav[i]?.id ?? ""}"
 title: "${nav[i]?.title ?? ""}"
 prev:
-    id: "${nav[i - 1]?.id ?? ""}"
-    title: "${nav[i - 1]?.title ?? ""}"
+  id: "${nav[i - 1]?.id ?? ""}"
+  title: "${nav[i - 1]?.title ?? ""}"
 next:
-    id: "${nav[i + 1]?.id ?? ""}"
-    title: "${nav[i + 1]?.title ?? ""}"
+  id: "${nav[i + 1]?.id ?? ""}"
+  title: "${nav[i + 1]?.title ?? ""}"
 ---
 
 ${content}
@@ -152,29 +152,29 @@ layout: index
 ---
 
 <section class="intro-title">
-    <div class="badges">
-        ${badges}
-    </div>
-    <h1>${await getTitle()}</h1>
-    <div class="description">
-        ${description}
-    </div>
-    <p class="actions">
-        <a href="{{site.github.baseurl}}/start" class="primary button">Docs ›››</a>
-        <span class="sep"> • </span>
-        ${await getRepoLink("button")}
-    </p>
-    ${backstory ? `<p class="ref"><a href="${backstory}">Backstory</a></p>` : ""}
-    <p class="installation"><code>${installation}</code></p>
+  <div class="badges">
+    ${badges}
+  </div>
+  <h1>${await getTitle()}</h1>
+  <div class="description">
+    ${description}
+  </div>
+  <p class="actions">
+    <a href="{{site.github.baseurl}}/start" class="primary button">Docs ›››</a>
+    <span class="sep"> • </span>
+    ${await getRepoLink("button")}
+  </p>
+  ${backstory ? `<p class="ref"><a href="${backstory}">Backstory</a></p>` : ""}
+  <p class="installation"><code>${installation}</code></p>
 </section>
 ${
   features
     ? `
 <section class="intro">
-    <div class="features">
-        <h2>Features</h2>
-        ${features}
-    </div>
+  <div class="features">
+    <h2>Features</h2>
+    ${features}
+  </div>
 </section>
 `
     : ""
@@ -205,22 +205,22 @@ ${navContent}
 {{content}}
 
 <p class="pagenav">
-    <span class="prev">
-        <span class="icon">←</span>
-        {% if page.prev.id == '' %}<a href="{{site.github.baseurl}}/">Intro</a>{% else %}<a href="{{site.github.baseurl}}/${contentDir}/{{page.prev.id}}">{{page.prev.title}}</a>{% endif %}
-    </span>
-    <span class="sep">|</span>
-    {% if page.next.id == '' %}
-    <span class="repo next">
-        ${await getRepoLink()}
-        <span class="icon">✦</span>
-    </span>
-    {% else %}
-    <span class="next">
-        <a href="{{site.github.baseurl}}/${contentDir}/{{page.next.id}}">{{page.next.title}}</a>
-        <span class="icon">→</span>
-    </span>
-    {% endif %}
+  <span class="prev">
+    <span class="icon">←</span>
+    {% if page.prev.id == '' %}<a href="{{site.github.baseurl}}/">Intro</a>{% else %}<a href="{{site.github.baseurl}}/${contentDir}/{{page.prev.id}}">{{page.prev.title}}</a>{% endif %}
+  </span>
+  <span class="sep">|</span>
+  {% if page.next.id == '' %}
+  <span class="repo next">
+    ${await getRepoLink()}
+    <span class="icon">✦</span>
+  </span>
+  {% else %}
+  <span class="next">
+    <a href="{{site.github.baseurl}}/${contentDir}/{{page.next.id}}">{{page.next.title}}</a>
+    <span class="icon">→</span>
+  </span>
+  {% endif %}
 </p>
 </main>
 </div>
@@ -242,17 +242,17 @@ ${counterContent}
 <!DOCTYPE html>
 <html lang="en" class="blank"${rootAttrs}>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <meta http-equiv="refresh" content="0; URL={{site.github.baseurl}}/${contentDir}/{{page.start_id}}">
-    <title>${escapedName}</title>
-    <link rel="stylesheet" href="${packageUrl}/dist/css/base.css">
-    <link rel="icon" type="${icon.type}" href="${icon.url}">
-    <script>window.location.replace("{{site.github.baseurl}}/${contentDir}/{{page.start_id}}");</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <meta http-equiv="refresh" content="0; URL={{site.github.baseurl}}/${contentDir}/{{page.start_id}}">
+  <title>${escapedName}</title>
+  <link rel="stylesheet" href="${packageUrl}/dist/css/base.css">
+  <link rel="icon" type="${icon.type}" href="${icon.url}">
+  <script>window.location.replace("{{site.github.baseurl}}/${contentDir}/{{page.start_id}}");</script>
 </head>
 <body>
 <div class="layout">
-    <h1>${escapedName}</h1>
+  <h1>${escapedName}</h1>
 </div>
 
 ${counterContent}
