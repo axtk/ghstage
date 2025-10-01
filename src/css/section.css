@@ -8,7 +8,7 @@
 }
 @media (max-width: 840px) {
   .body {
-    flex-direction: column-reverse;
+    flex-direction: column;
     padding: 0;
   }
 }
