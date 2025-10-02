@@ -121,10 +121,10 @@ ${content}
 <p class="pagenav">
   <span class="prev">
     <span class="icon">←</span>
-    ${nav[i - 1]?.id ? `<a href="${rootPath}${contentDir}/${nav[i - 1]?.id}">${escapeHTML(nav[i - 1]?.title)}</a>` : `<a href="${rootPath}">Intro</a>`}
+    ${nav[i - 1]?.id ? `<a href="${rootPath}${contentDir}/${nav[i - 1]?.id}">${nav[i - 1]?.title}</a>` : `<a href="${rootPath}">Intro</a>`}
   </span>
   <span class="sep">|</span>
-  ${nav[i + 1]?.id ? `<span class="next"><a href="${rootPath}${contentDir}/${nav[i + 1]?.id}">${escapeHTML(nav[i + 1]?.title)}</a> <span class="icon">→</span></span>` : `<span class="repo next">${await getRepoLink()} <span class="icon">✦</span></span>`}
+  ${nav[i + 1]?.id ? `<span class="next"><a href="${rootPath}${contentDir}/${nav[i + 1]?.id}">${nav[i + 1]?.title}</a> <span class="icon">→</span></span>` : `<span class="repo next">${await getRepoLink()} <span class="icon">✦</span></span>`}
 </p>
 </main>
 ${navContent ? "<hr>" : ""}
