@@ -34,30 +34,21 @@ async function run() {
       (await stdout(`git ls-remote --heads origin ${ghPagesBranch}`)) !== "";
   } catch {}
 
-  if (remove) {
-    if (originalBranch === ghPagesBranch)
-      await exec(`git checkout ${mainBranch}`);
+  if (originalBranch === ghPagesBranch)
+    await exec(`git checkout ${mainBranch}`);
 
-    if (ghPagesBranchExists) {
-      try {
-        await exec(`git branch -D ${ghPagesBranch}`);
-        await exec(`git push origin --delete ${ghPagesBranch}`);
-      } catch {}
-    }
-
-    return;
+  if (ghPagesBranchExists) {
+    try {
+      await exec(`git branch -D ${ghPagesBranch}`);
+    } catch {}
+    try {
+      await exec(`git push origin --delete ${ghPagesBranch}`);
+    } catch {}
   }
 
-  if (originalBranch !== ghPagesBranch)
-    await exec(
-      `git checkout${ghPagesBranchExists ? "" : " -b"} ${ghPagesBranch}`,
-    );
+  if (remove) return;
 
-  await exec("git pull");
-  await exec("git fetch");
-  await exec(`git rebase origin/${mainBranch}`);
-
-  await cleanup();
+  await exec(`git checkout -b ${ghPagesBranch}`);
   await createFiles();
   await exec("git add *");
 
