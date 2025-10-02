@@ -31,8 +31,7 @@ export async function getConfig(): Promise<BinConfig> {
 
     let rootPath = config.name?.split("/").at(-1);
 
-    if (rootPath && config.rootPath === "/")
-      config.rootPath = `/${rootPath}/`;
+    if (rootPath && config.rootPath === "/") config.rootPath = `/${rootPath}/`;
   }
 
   return config;

@@ -14,8 +14,7 @@ async function run() {
   try {
     await access("./.git");
     isGitDir = true;
-  }
-  catch {}
+  } catch {}
 
   if (!isGitDir) {
     await cleanup();

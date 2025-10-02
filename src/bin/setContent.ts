@@ -108,8 +108,8 @@ ${counterContent}
 <link rel="stylesheet" href="${packageUrl}/dist/css/base.css">
 <link rel="stylesheet" href="${packageUrl}/dist/css/section.css">
 <link rel="icon" type="${icon.type}" href="${icon.url}">
-${nav[i + 1]?.id ? `<link rel="prefetch" href="${rootPath}${contentDir}/${nav[i + 1]?.id}">` : ''}
-${nav[i - 1]?.id ? `<link rel="prefetch" href="${rootPath}${contentDir}/${nav[i - 1]?.id}">` : ''}
+${nav[i + 1]?.id ? `<link rel="prefetch" href="${rootPath}${contentDir}/${nav[i + 1]?.id}">` : ""}
+${nav[i - 1]?.id ? `<link rel="prefetch" href="${rootPath}${contentDir}/${nav[i - 1]?.id}">` : ""}
 </head>
 <body>
 <div class="layout">
@@ -129,18 +129,24 @@ ${content}
 </main>
 ${navContent ? "<hr>" : ""}
 ${navContent.replace(
-  new RegExp(`(<li data-id="${escapeRegExp(nav[i]?.id)}">)<a href="[^"]+">([^<]+)</a>(</li>)`),
-  '$1<strong>$2</strong>$3',
+  new RegExp(
+    `(<li data-id="${escapeRegExp(nav[i]?.id)}">)<a href="[^"]+">([^<]+)</a>(</li>)`,
+  ),
+  "$1<strong>$2</strong>$3",
 )}
 </div>
 </div>
 
-${content.includes('<pre><code ') ? `
+${
+  content.includes("<pre><code ")
+    ? `
 <link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.11.1/styles/base16/material.min.css">
 <link rel="stylesheet" href="${packageUrl}/dist/css/code.css">
 <script src="https://unpkg.com/@highlightjs/cdn-assets@11.11.1/highlight.min.js"></script>
 <script>hljs.highlightAll()</script>
-`.trim() : ''}
+`.trim()
+    : ""
+}
 ${counterContent}
 </body>
 </html>
@@ -196,12 +202,16 @@ ${
 </main>
 </div>
 
-${[description, features].some(s => s.includes('<pre><code ')) ? `
+${
+  [description, features].some((s) => s.includes("<pre><code "))
+    ? `
 <link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.11.1/styles/base16/material.min.css">
 <link rel="stylesheet" href="${packageUrl}/dist/css/code.css">
 <script src="https://unpkg.com/@highlightjs/cdn-assets@11.11.1/highlight.min.js"></script>
 <script>hljs.highlightAll()</script>
-`.trim() : ''}
+`.trim()
+    : ""
+}
 ${counterContent}
 </body>
 </html>
