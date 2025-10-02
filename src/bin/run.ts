@@ -63,9 +63,10 @@ async function run() {
 
   let updated = (await stdout("git diff --cached --name-only")) !== "";
 
-  if (updated) await exec('git commit -m "release gh-pages"');
-
-  await exec(`git push -u origin ${ghPagesBranch}`);
+  if (updated) {
+    await exec('git commit -m "release gh-pages"');
+    await exec(`git push -u origin ${ghPagesBranch}`);
+  }
 
   if (originalBranch && originalBranch !== ghPagesBranch)
     await exec(`git checkout ${originalBranch}`);
