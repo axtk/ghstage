@@ -16,7 +16,7 @@ function joinLines(x: string[]) {
 }
 
 async function buildNav(dom: JSDOM) {
-  let { contentDir, singlePage } = await getConfig();
+  let { rootPath, contentDir, singlePage } = await getConfig();
   let linkMap: Record<string, string> = {};
 
   let navItem: NavItem | null = null;
@@ -51,7 +51,7 @@ async function buildNav(dom: JSDOM) {
       if (elementId) {
         element.id = elementId;
 
-        let link = `{{site.github.baseurl}}/${contentDir}/${sectionId}`;
+        let link = `${rootPath}${contentDir}/${sectionId}`;
 
         if (!isSectionTitle) link += `#${elementId}`;
 

@@ -4,7 +4,7 @@ import { getConfig } from "./getConfig";
 import { getRepoLink } from "./getRepoLink";
 
 export async function getNav(navItems: NavItem[]) {
-  let { name, contentDir, backstory, nav } = await getConfig();
+  let { name, rootPath, contentDir, backstory, nav } = await getConfig();
   let s = "",
     navContent = "";
 
@@ -39,7 +39,7 @@ export async function getNav(navItems: NavItem[]) {
 
   if (navItems.length > 1) {
     for (let { id, title, items } of navItems) {
-      s += `\n<li>{% if page.id == "${id}" %}<strong>${title}</strong>{% else %}<a href="{{site.github.baseurl}}/${contentDir}/${id}">${title}</a>{% endif %}`;
+      s += `\n<li data-id="${id}"><a href="${rootPath}${contentDir}/${id}">${title}</a></li>`;
 
       if (items.length !== 0) {
         s += "\n  <ul>";

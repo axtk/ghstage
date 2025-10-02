@@ -10,7 +10,7 @@ export async function getTitle({
   originalContent,
   withPackageURL,
 }: GetTitleParams = {}) {
-  let { name, scope } = await getConfig();
+  let { rootPath, name, scope } = await getConfig();
 
   if (originalContent && originalContent.trim() !== name)
     return originalContent;
@@ -21,7 +21,7 @@ export async function getTitle({
     let escapedName = escapeHTML(name);
 
     return withPackageURL
-      ? `<a href="{{site.github.baseurl}}/" class="name">${escapedName}</a>`
+      ? `<a href="${rootPath}" class="name">${escapedName}</a>`
       : `<span class="name">${escapedName}</span>`;
   }
 
@@ -30,7 +30,7 @@ export async function getTitle({
     '<span class="sep">/</span>';
 
   title += withPackageURL
-    ? `<a href="{{site.github.baseurl}}/" class="name">${scopeMatches[2]}</a>`
+    ? `<a href="${rootPath}" class="name">${scopeMatches[2]}</a>`
     : `<span class="name">${scopeMatches[2]}</span>`;
 
   return title;

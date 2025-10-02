@@ -17,6 +17,7 @@ export type BinConfig = {
    * @default 'main'
    */
   mainBranch?: string;
+  rootPath?: string;
   /**
    * Generated docs content directory.
    * @default 'x'

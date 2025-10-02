@@ -20,12 +20,20 @@ export async function getConfig(): Promise<BinConfig> {
   config = {
     ghPagesBranch: "gh-pages",
     mainBranch: "main",
+    rootPath: "/",
     contentDir: "x",
     ...toConfig(metadata),
     ...parseArgs<BinConfig>(process.argv.slice(2)),
   };
 
-  if (config.theme === "t8") config.scope = "/";
+  if (config.theme === "t8") {
+    config.scope = "/";
+
+    let rootPath = config.name?.split("/").at(-1);
+
+    if (rootPath && config.rootPath === "/")
+      config.rootPath = `/${rootPath}/`;
+  }
 
   return config;
 }
