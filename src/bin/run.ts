@@ -1,12 +1,28 @@
 #!/usr/bin/env node
 import { exec as defaultExec } from "node:child_process";
+import { access } from "node:fs/promises";
 import { promisify } from "node:util";
+import { cleanup } from "./cleanup";
 import { createFiles } from "./createFiles";
 import { getConfig } from "./getConfig";
 
 const exec = promisify(defaultExec);
 
 async function run() {
+  let isGitDir = false;
+
+  try {
+    await access("./.git");
+    isGitDir = true;
+  }
+  catch {}
+
+  if (!isGitDir) {
+    await cleanup();
+    await createFiles();
+    return;
+  }
+
   let { ghPagesBranch, mainBranch, remove } = await getConfig();
   let ghPagesBranchExists = false;
 
