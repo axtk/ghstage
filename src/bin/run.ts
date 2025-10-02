@@ -65,7 +65,7 @@ async function run() {
 
   if (updated) {
     await exec('git commit -m "release gh-pages"');
-    await exec(`git push -u origin ${ghPagesBranch}`);
+    await exec(`git push -u origin ${ghPagesBranch} -f`);
   }
 
   if (originalBranch && originalBranch !== ghPagesBranch)
