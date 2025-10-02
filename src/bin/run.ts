@@ -24,27 +24,18 @@ async function run() {
   }
 
   let { ghPagesBranch, mainBranch, remove } = await getConfig();
-  let ghPagesBranchExists = false;
 
   let originalBranch = await stdout("git rev-parse --abbrev-ref HEAD");
-
-  try {
-    ghPagesBranchExists =
-      originalBranch === ghPagesBranch ||
-      (await stdout(`git ls-remote --heads origin ${ghPagesBranch}`)) !== "";
-  } catch {}
 
   if (originalBranch === ghPagesBranch)
     await exec(`git checkout ${mainBranch}`);
 
-  if (ghPagesBranchExists) {
-    try {
-      await exec(`git branch -D ${ghPagesBranch}`);
-    } catch {}
-    try {
-      await exec(`git push origin --delete ${ghPagesBranch}`);
-    } catch {}
-  }
+  try {
+    await exec(`git branch -D ${ghPagesBranch}`);
+  } catch {}
+  try {
+    await exec(`git push origin ${ghPagesBranch} --delete`);
+  } catch {}
 
   if (remove) return;
 
