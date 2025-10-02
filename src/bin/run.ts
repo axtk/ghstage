@@ -52,6 +52,10 @@ async function run() {
     await exec(
       `git checkout${ghPagesBranchExists ? "" : " -b"} ${ghPagesBranch}`,
     );
+  
+  await exec("git pull");
+  await exec("git fetch");
+  await exec(`git rebase origin/${mainBranch}`);
 
   await cleanup();
   await createFiles();
