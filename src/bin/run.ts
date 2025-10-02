@@ -29,7 +29,8 @@ async function run() {
   let originalBranch = await stdout("git rev-parse --abbrev-ref HEAD");
 
   try {
-    ghPagesBranchExists = originalBranch === ghPagesBranch ||
+    ghPagesBranchExists =
+      originalBranch === ghPagesBranch ||
       (await stdout(`git ls-remote --heads origin ${ghPagesBranch}`)) !== "";
   } catch {}
 
@@ -48,7 +49,9 @@ async function run() {
   }
 
   if (originalBranch !== ghPagesBranch)
-    await exec(`git checkout${ghPagesBranchExists ? "" : " -b"} ${ghPagesBranch}`);
+    await exec(
+      `git checkout${ghPagesBranchExists ? "" : " -b"} ${ghPagesBranch}`,
+    );
 
   await cleanup();
   await createFiles();
@@ -56,7 +59,7 @@ async function run() {
 
   let updated = (await stdout("git diff --cached --name-only")) !== "";
 
-  if (updated) await exec("git commit -m \"release gh-pages\"");
+  if (updated) await exec('git commit -m "release gh-pages"');
 
   await exec(`git push -u origin ${ghPagesBranch}`);
 
