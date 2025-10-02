@@ -7,6 +7,7 @@ import { createFiles } from "./createFiles";
 import { getConfig } from "./getConfig";
 
 const exec = promisify(defaultExec);
+const stdout = async (cmd: string) => (await exec(cmd)).stdout.trim();
 
 async function run() {
   let isGitDir = false;
@@ -25,38 +26,37 @@ async function run() {
   let { ghPagesBranch, mainBranch, remove } = await getConfig();
   let ghPagesBranchExists = false;
 
-  let originalBranch = (
-    await exec("git rev-parse --abbrev-ref HEAD")
-  ).stdout.trim();
+  let originalBranch = await stdout("git rev-parse --abbrev-ref HEAD");
 
   try {
-    ghPagesBranchExists =
-      originalBranch === ghPagesBranch ||
-      (
-        await exec(`git show-ref --quiet refs/heads/${ghPagesBranch}`)
-      ).stderr.trim() === "";
+    ghPagesBranchExists = originalBranch === ghPagesBranch ||
+      (await stdout(`git ls-remote --heads origin ${ghPagesBranch}`)) !== "";
   } catch {}
 
-  if (originalBranch === ghPagesBranch)
-    await exec(`git checkout ${mainBranch}`);
+  if (remove) {
+    if (originalBranch === ghPagesBranch)
+      await exec(`git checkout ${mainBranch}`);
 
-  if (ghPagesBranchExists) {
-    try {
-      await exec(`git branch -D ${ghPagesBranch}`);
-      await exec(`git push origin --delete ${ghPagesBranch}`);
-    } catch {}
+    if (ghPagesBranchExists) {
+      try {
+        await exec(`git branch -D ${ghPagesBranch}`);
+        await exec(`git push origin --delete ${ghPagesBranch}`);
+      } catch {}
+    }
+
+    return;
   }
 
-  if (remove) return;
+  if (originalBranch !== ghPagesBranch)
+    await exec(`git checkout${ghPagesBranchExists ? "" : " -b"} ${ghPagesBranch}`);
 
-  await exec(`git checkout -b ${ghPagesBranch}`);
+  await cleanup();
   await createFiles();
   await exec("git add *");
 
-  let updated =
-    (await exec("git diff --cached --name-only")).stdout.trim() !== "";
+  let updated = (await stdout("git diff --cached --name-only")) !== "";
 
-  if (updated) await exec(`git commit -m "release gh-pages"`);
+  if (updated) await exec("git commit -m \"release gh-pages\"");
 
   await exec(`git push -u origin ${ghPagesBranch}`);
 
