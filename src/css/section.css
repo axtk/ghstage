@@ -74,6 +74,11 @@
 .body > nav li + li {
   margin-top: 0.5em;
 }
+@media (max-width: 840px) {
+  .body > nav li + li {
+    margin-top: 0.65em;
+  }
+}
 .body > nav > ul:last-child,
 .body > nav > ul:last-child > li:last-child {
   margin-bottom: 0;
