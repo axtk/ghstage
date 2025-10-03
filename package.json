@@ -1,6 +1,6 @@
 {
   "name": "ghstage",
-  "version": "2.5.8",
+  "version": "2.5.9",
   "description": "",
   "main": "dist/bin.js",
   "bin": {
