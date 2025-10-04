@@ -52,13 +52,13 @@ main {
 }
 
 h1 {
-  font-size: 2.25em;
-  font-family: "Arial Black", Gadget, sans-serif;
+  font-size: 2.5em;
+  font-weight: 900;
   margin: 1.5rem 0;
 }
 @media (max-width: 840px) {
   h1 {
-    font-size: 2em;
+    font-size: 2.35em;
   }
 }
 header {
